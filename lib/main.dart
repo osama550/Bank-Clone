@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/bloc_observer.dart';
-import 'package:project/modules/layout/layout_screen.dart';
-import 'package:project/modules/layout/servise_screen.dart';
+import 'package:project/modules/payment/electricity_bill.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -19,8 +19,17 @@ class MyApp extends StatelessWidget {
     return Sizer(
       builder: (BuildContext context, Orientation orientation, DeviceType deviceType) {
         return MaterialApp(
+          theme: ThemeData(
+            scaffoldBackgroundColor: Colors.white,
+            appBarTheme: const AppBarTheme(
+              systemOverlayStyle: SystemUiOverlayStyle(
+                statusBarColor: Colors.white,
+                statusBarIconBrightness: Brightness.dark,
+              ),
+            ),
+          ),
           debugShowCheckedModeBanner: false,
-          home: ServiseScreen(),
+          home: ElectricitytBill(),
         );
       },
     );
