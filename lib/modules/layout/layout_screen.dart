@@ -8,7 +8,7 @@ class LayoutScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Update Testing screen',
+          'second update on title of appBar',
         ),
       ),
       body: Container(),
