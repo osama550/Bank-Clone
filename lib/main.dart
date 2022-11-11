@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/bloc_observer.dart';
-import 'package:project/modules/layout/layout_screen.dart';
+import 'package:project/modules/payment/payment_bill.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context, Orientation orientation, DeviceType deviceType) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: LayoutScreen(),
+          home: PaymentBill(),
         );
       },
     );
