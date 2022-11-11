@@ -9,10 +9,10 @@ class ServiseScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Column(
-          children: [
-            Expanded(
-              child: Column(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Column(
                 children: [
                   paymentBill(
                       context: context,
@@ -45,6 +45,10 @@ class ServiseScreen extends StatelessWidget {
                     child: Container(
                       height: 50,
                       child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        onFieldSubmitted: (value){
+                          print(value);
+                        },
 
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -55,11 +59,14 @@ class ServiseScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            Container(
-              color: HexColor('#c8abb3'),
-
-              child: Expanded(
+              SizedBox(
+                height: 10.w,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: HexColor('#c8abb3'),
+                ),
                 child: Column(
                   children: [
                     Row(
@@ -184,7 +191,7 @@ class ServiseScreen extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {},
-                          child: Text('9',
+                          child: Text('0',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 25,
@@ -196,64 +203,88 @@ class ServiseScreen extends StatelessWidget {
                         TextButton(
                           onPressed: () {},
                           child: Icon(
-                            Icons.arrow_back,
+                            Icons.arrow_back,size: 40,
                             color: Colors.white,
                           ),
                         ),
                       ],
                     ),
                     ////////////////////////////////////
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
+
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                      Container(
+                                       decoration: BoxDecoration(
+                                        color: HexColor('#9E6F2236'),
+                                        borderRadius: BorderRadiusDirectional.circular(15.0),
+                                       ),
+                                       clipBehavior: Clip.antiAliasWithSaveLayer,
+                                       child:  Padding(
+                                         padding: EdgeInsets.symmetric(
+                                           horizontal: 20.0,
+                                           vertical: 12.0,
+                                         ),
+                                         child: Text(
+                                           'X',
+                                           style: TextStyle(
+                                             color: HexColor('#6F2236'),
+                                             fontWeight: FontWeight.w400,
+                                             fontSize: 20.0,)))),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(
+                              left: 30,
+                              right: 30,
+                            ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: HexColor('#9E6F2236'),
+                              color: HexColor('#6F2236'),
                             ),
-                            child: IconButton(
+                            child: TextButton(
                               onPressed: () {},
-                              icon: Text(
-                                'x',
+                              child: Text(
+                                'Continue',
                                 style: TextStyle(
-                                  color: HexColor('#6F2236'),
-                                  fontSize: 25.sp,
+                                  color: Colors.white,
+                                  fontSize: 16.sp,
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(
-                            left: 30,
-                            right: 30,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: HexColor('#6F2236'),
-                          ),
-                          child: TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              'Continue',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16.sp,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
+//Padding(
+//                             padding: const EdgeInsets.all(8.0),
+//                             child: Container(
+//                               decoration: BoxDecoration(
+//                                 borderRadius: BorderRadius.circular(20),
+//                                 color: HexColor('#9E6F2236'),
+//                               ),
+//                               child: IconButton(
+//                                 onPressed: () {},
+//                                 icon: Text(
+//                                   'x',
+//                                   style: TextStyle(
+//                                     color: HexColor('#6F2236'),
+//                                     fontSize: 20.sp,
+//                                   ),
+//                                 ),
+//                               ),
+//                             ),
+//                           ),
