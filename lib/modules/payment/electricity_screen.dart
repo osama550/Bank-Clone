@@ -9,60 +9,72 @@ class ServiseScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Column(
-                children: [
-                  paymentBill(
-                      context: context,
-                      screenTitle: ('Electricity'),
-                      imagePath: 'images/Picture2.png',
-                      imageHeader: 'Pay Electricity Bill',
-                      payType: ('Electricity')),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  Container(
-                    alignment: AlignmentDirectional.topStart,
-                    padding: EdgeInsets.only(left: 7.w),
-                    child: Text(
-                      'Bank Account',
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    paymentBill(
+                        context: context,
+                        screenTitle: ('Electricity'),
+                        imagePath: 'images/Picture2.png',
+                        imageHeader: 'Pay Electricity Bill',
+                        payType: ('Electricity')),
+                    SizedBox(
+                      height: 4.h,
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: 10.w,
-                      right: 10.w,
-                      top: 2.w,
-                      bottom: 2.w,
-                    ),
-
-                    child: Container(
-                      height: 50,
-                      child: TextFormField(
-                        keyboardType: TextInputType.number,
-                        onFieldSubmitted: (value){
-                          print(value);
-                        },
-
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(18)),
+                    Container(
+                      alignment: AlignmentDirectional.topStart,
+                      padding: EdgeInsets.only(left: 7.w),
+                      child: Text(
+                        'Bank Account',
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding:  EdgeInsetsDirectional.only(
+                        start:25,
+                        end: 25,
+                        top: 5,
+
+                      ),
+                      child: Container(
+                        width: double.infinity,
+                        padding: EdgeInsetsDirectional.only(
+                            top: 7,
+                          bottom: 10,
+                          start: 13,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+
+                        ),
+                        child: Text(
+                          '1234',style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w400,
+
+                        ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              SizedBox(
-                height: 10.w,
-              ),
-              Container(
+            ),
+            //SizedBox(
+             // height: 15.w,
+           // ),
+            SingleChildScrollView(
+              child: Container(
+                //width: 250.w,
+                //height: 100.w,
+
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: HexColor('#c8abb3'),
@@ -77,29 +89,29 @@ class ServiseScreen extends StatelessWidget {
                           child: Text('1',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 25,
+                                  fontSize: 20.sp,
                                   fontWeight: FontWeight.bold)),
                         ),
                         SizedBox(
-                          width: 12.w,
+                          width: 8.w,
                         ),
                         TextButton(
                           onPressed: () {},
                           child: Text('2',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 25,
+                                  fontSize: 20.sp,
                                   fontWeight: FontWeight.bold)),
                         ),
                         SizedBox(
-                          width: 12.w,
+                          width: 8.w,
                         ),
                         TextButton(
                           onPressed: () {},
                           child: Text('3',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 25,
+                                  fontSize: 20.sp,
                                   fontWeight: FontWeight.bold)),
                         ),
                       ],
@@ -112,29 +124,29 @@ class ServiseScreen extends StatelessWidget {
                           child: Text('4',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 25,
+                                  fontSize: 20.sp,
                                   fontWeight: FontWeight.bold)),
                         ),
                         SizedBox(
-                          width: 12.w,
+                          width: 8.w,
                         ),
                         TextButton(
                           onPressed: () {},
                           child: Text('5',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 25,
+                                  fontSize: 20.sp,
                                   fontWeight: FontWeight.bold)),
                         ),
                         SizedBox(
-                          width: 12.w,
+                          width: 8.w,
                         ),
                         TextButton(
                           onPressed: () {},
                           child: Text('6',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 25,
+                                  fontSize: 20.sp,
                                   fontWeight: FontWeight.bold)),
                         ),
                       ],
@@ -148,29 +160,29 @@ class ServiseScreen extends StatelessWidget {
                           child: Text('7',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 25,
+                                  fontSize: 20.sp,
                                   fontWeight: FontWeight.bold)),
                         ),
                         SizedBox(
-                          width: 12.w,
+                          width: 8.w,
                         ),
                         TextButton(
                           onPressed: () {},
                           child: Text('8',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 25,
+                                  fontSize: 20.sp,
                                   fontWeight: FontWeight.bold)),
                         ),
                         SizedBox(
-                          width: 12.w,
+                          width: 8.w,
                         ),
                         TextButton(
                           onPressed: () {},
                           child: Text('9',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 25,
+                                  fontSize: 20.sp,
                                   fontWeight: FontWeight.bold)),
                         ),
                       ],
@@ -183,27 +195,27 @@ class ServiseScreen extends StatelessWidget {
                           child: Text('.',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 25,
+                                  fontSize: 20.sp,
                                   fontWeight: FontWeight.bold)),
                         ),
                         SizedBox(
-                          width: 12.w,
+                          width: 8.w,
                         ),
                         TextButton(
                           onPressed: () {},
                           child: Text('0',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 25,
+                                  fontSize: 20.sp,
                                   fontWeight: FontWeight.bold)),
                         ),
                         SizedBox(
-                          width: 12.w,
+                          width: 8.w,
                         ),
                         TextButton(
                           onPressed: () {},
                           child: Icon(
-                            Icons.arrow_back,size: 40,
+                            Icons.arrow_back,size: 35.sp,
                             color: Colors.white,
                           ),
                         ),
@@ -211,80 +223,66 @@ class ServiseScreen extends StatelessWidget {
                     ),
                     ////////////////////////////////////
 
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                      Container(
-                                       decoration: BoxDecoration(
-                                        color: HexColor('#9E6F2236'),
-                                        borderRadius: BorderRadiusDirectional.circular(15.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                    Container(
+                                     decoration: BoxDecoration(
+                                      color: HexColor('#9E6F2236'),
+                                      borderRadius: BorderRadiusDirectional.circular(15.0),
+                                     ),
+                                     clipBehavior: Clip.antiAliasWithSaveLayer,
+                                     child:  Padding(
+                                       padding: EdgeInsets.symmetric(
+                                         horizontal: 20.0,
+                                         vertical: 12.0,
                                        ),
-                                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                                       child:  Padding(
-                                         padding: EdgeInsets.symmetric(
-                                           horizontal: 20.0,
-                                           vertical: 12.0,
-                                         ),
-                                         child: Text(
-                                           'X',
-                                           style: TextStyle(
-                                             color: HexColor('#6F2236'),
-                                             fontWeight: FontWeight.w400,
-                                             fontSize: 20.0,)))),
-                          SizedBox(
-                            width: 5.w,
+                                       child: Text(
+                                         'X',
+                                         style: TextStyle(
+                                           color: HexColor('#6F2236'),
+                                           fontWeight: FontWeight.bold,
+                                           fontSize: 20.sp,)))),
+                        SizedBox(
+                          width: 5.w,
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(
+                            left: 30,
+                            right: 30,
                           ),
-                          Container(
-                            padding: EdgeInsets.only(
-                              left: 30,
-                              right: 30,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: HexColor('#6F2236'),
-                            ),
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                'Continue',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16.sp,
-                                ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: HexColor('#6F2236'),
+                          ),
+                          child: TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'Continue',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18.sp,
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
-//Padding(
-//                             padding: const EdgeInsets.all(8.0),
-//                             child: Container(
-//                               decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(20),
-//                                 color: HexColor('#9E6F2236'),
-//                               ),
-//                               child: IconButton(
-//                                 onPressed: () {},
-//                                 icon: Text(
-//                                   'x',
-//                                   style: TextStyle(
-//                                     color: HexColor('#6F2236'),
-//                                     fontSize: 20.sp,
-//                                   ),
-//                                 ),
-//                               ),
-//                             ),
-//                           ),
+//       boxShadow: [
+//         BoxShadow(
+//           color: Colors.grey.withOpacity(0.3),
+//           spreadRadius: 3,
+//           blurRadius: 6,
+//           offset: Offset(4, 5), // changes position of shadow
+//         ),
+//       ],
