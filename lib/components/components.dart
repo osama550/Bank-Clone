@@ -1,8 +1,26 @@
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:project/cubit/app_cubit.dart';
+import 'package:project/modules/payment/electricity_bill.dart';
 import 'package:sizer/sizer.dart';
 import 'colors/colors.dart';
+
+void navigateTo(context, Widget screen) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => screen),
+  );
+}
+
+void navigateAndFinish(context, Widget screen) {
+  Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(builder: (context) => screen),
+        (Route<dynamic> route) => false,
+  );
+
+}
 
 Widget paymentBill({
   required BuildContext context,
@@ -139,7 +157,7 @@ Widget paymentButton({
     width: double.infinity,
     decoration: BoxDecoration(
       borderRadius: BorderRadiusDirectional.circular(30.0),
-      color: color== null ? primaryColor : color,
+      color: color?? primaryColor,
     ),
     clipBehavior: Clip.antiAliasWithSaveLayer,
     child: MaterialButton(
@@ -269,5 +287,92 @@ Widget bill({
       ),
     ),
   ),
+);
+
+//------------------------------------------------------------
+
+Widget defaultIconButton({
+  required BuildContext context,
+  Color? color,
+  IconData icon = Icons.arrow_back_ios_rounded,
+  VoidCallback? onPressed,
+})=> IconButton(
+  onPressed: onPressed,
+  icon: Icon(
+    icon,
+    color: color ?? primaryColor,
+  ),
+);
+
+//------------------------------------------------------------
+Widget buildBillType({
+  required BuildContext context,
+  required int index,
+  required String image,
+  required String title,
+  // required VoidCallback onpPressed,
+}) =>Expanded(
+  child: InkWell(
+    onTap: (){
+      AppCubit.get(context).selectBillScreen(index);
+      navigateTo(context, ElectricitytBillScreen());
+    },
+    child: Container(
+      child: Column(
+        children: [
+          Image.asset(
+            image,
+            height: 8.h,
+            // fit: BoxFit.fill,
+          ),
+          const SizedBox(
+            height: 8.0,
+          ),
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 12.0.sp,
+            ),
+          ),
+        ],
+      ),
+    ),
+  ),
+);
+
+//------------------------------------------------------------
+
+Widget buildAppBar({
+  required BuildContext context,
+})=> Stack(
+  alignment: AlignmentDirectional.topEnd,
+  children: [
+    Stack(
+      alignment: AlignmentDirectional.topStart,
+      children: [
+        Container(
+          height: 20.0.h,
+          width: double.infinity,
+          child: Image.asset(
+            'images/Picture20.png',
+            fit: BoxFit.fill,
+          ),
+        ),
+        defaultIconButton(
+          context: context,
+          color: Colors.white,
+          onPressed: (){
+            Navigator.pop(context);
+          },
+        ),
+      ],
+    ),
+    defaultIconButton(
+        context: context,
+        color: Colors.white,
+        icon: Icons.menu_rounded,
+      onPressed: (){},
+    ),
+  ],
 );
 
