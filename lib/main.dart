@@ -8,7 +8,7 @@ import 'package:project/in_out_payment/layout.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
-  // to change status bar and icon color
+  //  to change status bar and icon color
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
         statusBarColor: Colors.white,
