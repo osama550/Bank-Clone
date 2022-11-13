@@ -6,12 +6,15 @@ import 'package:project/modules/payment/electricity_bill.dart';
 import 'package:sizer/sizer.dart';
 import 'colors/colors.dart';
 
+
 void navigateTo(context, Widget screen) {
   Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => screen),
   );
 }
+
+//----------------------------------------------------
 
 void navigateAndFinish(context, Widget screen) {
   Navigator.pushAndRemoveUntil(
@@ -22,12 +25,55 @@ void navigateAndFinish(context, Widget screen) {
 
 }
 
-Widget paymentBill({
+//----------------------------------------------------
+
+Widget buildAppBar({
   required BuildContext context,
   required String screenTitle,
+}) => Row(
+  children: [
+    IconButton(
+      onPressed: (){
+        Navigator.pop(context);
+      },
+      icon: Icon(
+        Icons.arrow_back_ios_rounded,
+        color: primaryColor,
+      ),
+    ),
+    const SizedBox(
+      width: 5.0,
+    ),
+    Text(
+      screenTitle,
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 15.sp,
+      ),
+    ),
+    const Spacer(),
+    Padding(
+      padding: const EdgeInsets.only(
+        right: 10.0,
+      ),
+      child: Image.asset(
+        'images/Picture14.png',
+        width: 18.w,
+        height: 7.h,
+        fit: BoxFit.fill,
+      ),
+    ),
+  ],
+);
+
+//----------------------------------------------------
+
+Widget paymentBill({
+  required BuildContext context,
   required String imagePath,
   required String imageHeader,
   required String payType,
+  required String screenTitle,
 
 }) => Column(
   crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,40 +81,9 @@ Widget paymentBill({
     const SizedBox(
       height: 10.0,
     ),
-    Row(
-      children: [
-        IconButton(
-          onPressed: (){
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back_ios_rounded,
-            color: primaryColor,
-          ),
-        ),
-        const SizedBox(
-          width: 5.0,
-        ),
-        Text(
-          screenTitle,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 15.sp,
-          ),
-        ),
-        const Spacer(),
-        Padding(
-          padding: const EdgeInsets.only(
-            right: 10.0,
-          ),
-          child: Image.asset(
-            'images/Picture14.png',
-            width: 18.w,
-            height: 7.h,
-            fit: BoxFit.fill,
-          ),
-        ),
-      ],
+    buildAppBar(
+      context: context,
+      screenTitle: screenTitle,
     ),
     const SizedBox(
       height: 20.0,
@@ -161,9 +176,7 @@ Widget paymentButton({
     ),
     clipBehavior: Clip.antiAliasWithSaveLayer,
     child: MaterialButton(
-      onPressed: (){
-
-      },
+      onPressed: (){},
       child: Text(
         'Confirm Payment',
         style: TextStyle(
@@ -315,7 +328,7 @@ Widget buildBillType({
   child: InkWell(
     onTap: (){
       AppCubit.get(context).selectBillScreen(index);
-      navigateTo(context, ElectricitytBillScreen());
+      navigateTo(context, ElectricityBillScreen());
     },
     child: Container(
       child: Column(
@@ -342,7 +355,7 @@ Widget buildBillType({
 
 //------------------------------------------------------------
 
-Widget buildAppBar({
+Widget buildLogo({
   required BuildContext context,
 })=> Stack(
   alignment: AlignmentDirectional.topEnd,
@@ -376,3 +389,17 @@ Widget buildAppBar({
   ],
 );
 
+// ------------------------------------------------------
+
+Widget buildBottomSheet() => Container(
+  height: 50.0,
+  width: double.infinity,
+  decoration: BoxDecoration(
+    color: primaryColor,
+    borderRadius: const BorderRadiusDirectional.only(
+      topStart: Radius.circular(12.0),
+      topEnd: Radius.circular(12.0),
+    ),
+  ),
+  clipBehavior: Clip.antiAliasWithSaveLayer,
+);

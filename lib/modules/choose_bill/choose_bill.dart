@@ -22,7 +22,7 @@ class ChoosingBill extends StatelessWidget {
               child: Column(
                 children: [
                   // appBar
-                  buildAppBar(context: context),
+                  buildLogo(context: context),
                   // Screen Body
                   SingleChildScrollView(
                     primary: true,
@@ -180,11 +180,7 @@ class ChoosingBill extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            bottomSheet: Container(
-              height: 50.0,
-              width: double.infinity,
-              color: primaryColor,
-            ),
+            bottomSheet: buildBottomSheet(),
           ),
         );
       },

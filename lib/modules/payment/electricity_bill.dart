@@ -4,8 +4,8 @@ import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
 
-class ElectricitytBillScreen extends StatelessWidget {
-  const ElectricitytBillScreen({Key? key}) : super(key: key);
+class ElectricityBillScreen extends StatelessWidget {
+  const ElectricityBillScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
