@@ -62,10 +62,20 @@ class AppCubit extends Cubit<AppStates> {
   void selectBillScreen(int index){
     emit(ChangePaymentBillScreenState());
     billIndex = index;
-    print(index);
-    print(billIndex);
-
   }
+
+
+  int numberOfInOutScreen = 0;
+  void selectInOutPayment({
+  required int index,
+}){
+    emit(ChangeInOutPaymentScreenState());
+    numberOfInOutScreen = index;
+    print(numberOfInOutScreen);
+  }
+
+
+
   // List images = ['images/Picture2.png','images/Picture3.png','images/Picture4.png','images/Picture5.png',
   //   'images/Picture6.png','images/Picture7.png','images/Picture8.png','images/Picture9.png',
   //   'images/Picture10.png','images/Picture11.png','images/Picture12.png','images/Picture13.png'];

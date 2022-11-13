@@ -1,7 +1,9 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:project/components/colors/colors.dart';
+import 'package:project/cubit/app_cubit.dart';
 import 'package:sizer/sizer.dart';
 
 Widget inOutButton({
@@ -9,17 +11,17 @@ Widget inOutButton({
   required String text,
   Color? background,
   Color textColor = Colors.white,
-}) => Container(
-  height: 45.0,
-  decoration: BoxDecoration(
-    borderRadius: BorderRadiusDirectional.circular(30.0,),
-    color: background?? primaryColor,
-    border: Border.all(
-      color: primaryColor,
-      width: 2.5,
+}) => Expanded(
+  child:   Container(
+    height: 45.0,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadiusDirectional.circular(30.0,),
+      color: background?? primaryColor,
+      border: Border.all(
+        color: primaryColor,
+        width: 2.5,
+      ),
     ),
-  ),
-  child: Expanded(
     child: MaterialButton(
       onPressed: onPressed,
       child: Text(
@@ -27,7 +29,7 @@ Widget inOutButton({
         style: TextStyle(
           color: textColor,
           fontWeight: FontWeight.w400,
-          fontSize: 12.sp,
+          fontSize: 11.sp,
         ),
       ),
     ),
@@ -37,6 +39,7 @@ Widget inOutButton({
 // -------------------------------------------------------------
 
 Widget buildHistoryItem({
+  required BuildContext context,
   required String image,
   required String name,
   required String date,
@@ -133,7 +136,9 @@ Widget buildHistoryItem({
             const SizedBox(
               height: 5.0,
             ),
-            Row(
+
+            if(AppCubit.get(context).numberOfInOutScreen == 0)
+              Row(
               children: [
                 Icon(
                   Icons.outbox,
@@ -151,9 +156,128 @@ Widget buildHistoryItem({
                 ),
               ],
             ),
+            if(AppCubit.get(context).numberOfInOutScreen == 1)
+              Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadiusDirectional.circular(6.0,),
+                color: Colors.blue.withOpacity(0.2,),
+              ),
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 5.0,
+                  horizontal: 8.0,
+                ),
+                child: Text(
+                  'Scheduled',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12.0,
+                  ),
+                ),
+              ),
+            ),
+            if(AppCubit.get(context).numberOfInOutScreen == 2)
+              Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadiusDirectional.circular(6.0,),
+                color: Colors.blue,
+              ),
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 5.0,
+                  horizontal: 8.0,
+                ),
+                child: Text(
+                  'Completed',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12.0,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ],
     ),
   ),
 );
+
+// -------------------------------------------------------------
+
+
+Widget defaultTextFormFaild({
+  required TextEditingController controller,
+}) => Padding(
+  padding: const EdgeInsets.symmetric(
+    horizontal: 40.0,
+  ),
+  child: Container(
+    height: 40.0,
+    child: TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20.0),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20.0),
+          borderSide: BorderSide.none,
+        ),
+        contentPadding: const EdgeInsets.only(
+          bottom: 5.0,
+        ),
+        filled: true,
+        fillColor: HexColor('#D9D9D9').withOpacity(0.5,),
+        prefixIcon: Icon(
+          Icons.search,
+          color: HexColor('#292D32').withOpacity(0.8),
+          size: 30.0,
+        ),
+      ),
+    ),
+  ),
+);
+
+//----------------------------------------------------------------------
+
+Widget buildInOutButtons({
+  required BuildContext context,
+}) => Row(
+  children: [
+    inOutButton(
+      onPressed: () {
+        AppCubit.get(context).selectInOutPayment(index: 0,);
+      },
+      text: 'History',
+    ),
+    const SizedBox(
+      width: 5.0,
+    ),
+    inOutButton(
+      onPressed: () {
+        AppCubit.get(context).selectInOutPayment(index: 1,);
+      },
+      text: 'Scheduled',
+      textColor: primaryColor,
+      background: Colors.white,
+    ),
+    const SizedBox(
+      width: 5.0,
+    ),
+    inOutButton(
+      onPressed: () {
+        AppCubit.get(context).selectInOutPayment(index: 2,);
+      },
+      text: 'Requested',
+      textColor: primaryColor,
+      background: Colors.white,
+    ),
+  ],
+);
+

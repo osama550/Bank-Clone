@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project/cubit/app_cubit.dart';
-import 'package:project/modules/payment/electricity_bill.dart';
+import 'package:project/modules/payment/bill_services.dart';
 import 'package:sizer/sizer.dart';
 import 'colors/colors.dart';
 
@@ -328,7 +328,7 @@ Widget buildBillType({
   child: InkWell(
     onTap: (){
       AppCubit.get(context).selectBillScreen(index);
-      navigateTo(context, ElectricityBillScreen());
+      navigateTo(context, ServiseScreen());
     },
     child: Container(
       child: Column(

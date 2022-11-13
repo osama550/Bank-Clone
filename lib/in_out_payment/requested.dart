@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:project/components/colors/colors.dart';
 import 'package:project/components/components.dart';
 import 'package:project/components/in_out_components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
+import 'package:project/in_out_payment/history.dart';
+import 'package:project/in_out_payment/scheduled.dart';
 
-
-class LayoutInOutScreen extends StatelessWidget {
-  LayoutInOutScreen({Key? key}) : super(key: key);
+class RequestedScreen extends StatelessWidget {
+  RequestedScreen({Key? key}) : super(key: key);
 
   var searchController = TextEditingController();
 
@@ -18,6 +18,7 @@ class LayoutInOutScreen extends StatelessWidget {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
+        var cubit = AppCubit.get(context);
         return SafeArea(
           child: Scaffold(
             body: Column(
@@ -32,36 +33,8 @@ class LayoutInOutScreen extends StatelessWidget {
                 const SizedBox(
                   height: 25.0,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0,
-                  ),
-                  child: Container(
-                    height: 40.0,
-                    child: TextFormField(
-                      controller: searchController,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                          borderSide: BorderSide.none,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                          borderSide: BorderSide.none,
-                        ),
-                        contentPadding: const EdgeInsets.only(
-                          bottom: 5.0,
-                        ),
-                        filled: true,
-                        fillColor: HexColor('#D9D9D9').withOpacity(0.5,),
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: HexColor('#292D32').withOpacity(0.8),
-                          size: 30.0,
-                        ),
-                      ),
-                    ),
-                  ),
+                defaultTextFormFaild(
+                  controller: searchController,
                 ),
                 Expanded(
                   child: Padding(
@@ -77,39 +50,23 @@ class LayoutInOutScreen extends StatelessWidget {
                         // 3 Buttons
                         Row(
                           children: [
-                            // Expanded(
-                            //   child: Container(
-                            //     height: 45.0,
-                            //     decoration: BoxDecoration(
-                            //       borderRadius: BorderRadiusDirectional.circular(30.0,),
-                            //       color: primaryColor,
-                            //         border: Border.all(
-                            //           color: primaryColor,
-                            //           width: 2.5,
-                            //         ),
-                            //     ),
-                            //     child: MaterialButton(
-                            //       onPressed: (){},
-                            //       child: Text(
-                            //         'History',
-                            //         style: TextStyle(
-                            //           color: Colors.white,
-                            //           fontWeight: FontWeight.w400,
-                            //           fontSize: 15.sp,
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
                             inOutButton(
-                              onPressed: (){},
+                              onPressed: () {
+                                cubit.selectInOutPayment(index: 0,);
+                                navigateTo(context, HistoryScreen());
+                              },
                               text: 'History',
+                              textColor: primaryColor,
+                              background: Colors.white,
                             ),
                             const SizedBox(
                               width: 5.0,
                             ),
                             inOutButton(
-                              onPressed: (){},
+                              onPressed: () {
+                                cubit.selectInOutPayment(index: 1,);
+                                navigateTo(context, ScheduledScreen());
+                              },
                               text: 'Scheduled',
                               textColor: primaryColor,
                               background: Colors.white,
@@ -118,10 +75,10 @@ class LayoutInOutScreen extends StatelessWidget {
                               width: 5.0,
                             ),
                             inOutButton(
-                              onPressed: (){},
+                              onPressed: () {
+                                cubit.selectInOutPayment(index: 2,);
+                              },
                               text: 'Requested',
-                              textColor: primaryColor,
-                              background: Colors.white,
                             ),
                           ],
                         ),
@@ -133,19 +90,19 @@ class LayoutInOutScreen extends StatelessWidget {
                           child: ListView.separated(
                             physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) => buildHistoryItem(
+                              context: context,
                               image: 'images/${index+1}.jpg',
                               name: 'Anime World',
-                              date: 'Dec 24, 2024',
+                              date: 'Dec 24,2024',
                               time: '12.30 PM',
                               price: '\$25',
-                              ),
+                            ),
                             separatorBuilder: (context, index) => const SizedBox(
                               height: 10.0,
                             ),
                             itemCount: 10,
                           ),
                         ),
-
                       ],
                     ),
                   ),
