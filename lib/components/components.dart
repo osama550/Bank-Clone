@@ -5,7 +5,7 @@ import 'package:project/cubit/app_cubit.dart';
 import 'package:project/modules/payment/bill_services.dart';
 import 'package:sizer/sizer.dart';
 import 'colors/colors.dart';
-
+import 'package:cool_alert/cool_alert.dart';
 
 void navigateTo(context, Widget screen) {
   Navigator.push(
@@ -13,8 +13,6 @@ void navigateTo(context, Widget screen) {
     MaterialPageRoute(builder: (context) => screen),
   );
 }
-
-//----------------------------------------------------
 
 void navigateAndFinish(context, Widget screen) {
   Navigator.pushAndRemoveUntil(
@@ -25,7 +23,7 @@ void navigateAndFinish(context, Widget screen) {
 
 }
 
-//----------------------------------------------------
+// ---------------------------------------
 
 Widget buildAppBar({
   required BuildContext context,
@@ -66,14 +64,15 @@ Widget buildAppBar({
   ],
 );
 
-//----------------------------------------------------
+//-----------------------------------------
+
 
 Widget paymentBill({
   required BuildContext context,
+  required String screenTitle,
   required String imagePath,
   required String imageHeader,
   required String payType,
-  required String screenTitle,
 
 }) => Column(
   crossAxisAlignment: CrossAxisAlignment.center,
@@ -81,9 +80,40 @@ Widget paymentBill({
     const SizedBox(
       height: 10.0,
     ),
-    buildAppBar(
-      context: context,
-      screenTitle: screenTitle,
+    Row(
+      children: [
+        IconButton(
+          onPressed: (){
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_rounded,
+            color: primaryColor,
+          ),
+        ),
+        const SizedBox(
+          width: 5.0,
+        ),
+        Text(
+          screenTitle,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 15.sp,
+          ),
+        ),
+        const Spacer(),
+        Padding(
+          padding: const EdgeInsets.only(
+            right: 10.0,
+          ),
+          child: Image.asset(
+            'images/Picture14.png',
+            width: 18.w,
+            height: 7.h,
+            fit: BoxFit.fill,
+          ),
+        ),
+      ],
     ),
     const SizedBox(
       height: 20.0,
@@ -176,7 +206,45 @@ Widget paymentButton({
     ),
     clipBehavior: Clip.antiAliasWithSaveLayer,
     child: MaterialButton(
-      onPressed: (){},
+      onPressed: (){
+        CoolAlert.show(
+          context: context,
+          type: CoolAlertType.success,
+          backgroundColor: HexColor('#6F2236'),
+          title: 'Successfully!',
+
+          text: 'Thank you for paying the bill',
+          loopAnimation: false,
+          //autoCloseDuration:Duration(seconds: 2),
+          confirmBtnText:'Ok',
+          confirmBtnTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 15.sp,
+        // CoolAlert.show(
+        //   context: context,
+        //   type: CoolAlertType.error,
+        //   backgroundColor: HexColor('#6F2236'),
+        //   title: 'Error',
+        //
+        //   text: 'Sorry, something went wrong',
+        //   loopAnimation: false,
+        //   //autoCloseDuration:Duration(seconds: 2),
+        //   confirmBtnText:'Close',
+        //   confirmBtnTextStyle: TextStyle(
+        //     color: Colors.white,
+        //     fontSize: 15.sp,
+
+          ),
+
+          confirmBtnColor: HexColor('#6F2236'),
+
+
+
+        );
+
+
+
+      },
       child: Text(
         'Confirm Payment',
         style: TextStyle(
@@ -388,8 +456,6 @@ Widget buildLogo({
     ),
   ],
 );
-
-// ------------------------------------------------------
 
 Widget buildBottomSheet() => Container(
   height: 50.0,
