@@ -3,9 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/bloc_observer.dart';
 import 'package:project/cubit/app_cubit.dart';
-import 'package:project/modules/home/home_screen.dart';
+import 'package:project/modules/choose_bill/choose_bill.dart';
+import 'package:project/modules/payment/electricity_bill.dart';
+import 'package:project/modules/payment/electricity_screen.dart';
 import 'package:sizer/sizer.dart';
-
+//
 void main() {
   //  to change status bar and icon color
   SystemChrome.setSystemUIOverlayStyle(
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.white,
             ),
             debugShowCheckedModeBanner: false,
-            home: HomeScreen() ,
+            home:ElectricityBillScreen() ,
           );
         },
       ),
