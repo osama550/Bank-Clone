@@ -3,10 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/bloc_observer.dart';
 import 'package:project/cubit/app_cubit.dart';
-import 'package:project/modules/choose_bill/choose_bill.dart';
-import 'package:project/modules/home/home_screen.dart';
 import 'package:project/modules/payment/electricity_bill.dart';
-import 'package:project/modules/payment/electricity_screen.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {

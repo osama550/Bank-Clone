@@ -5,8 +5,8 @@ import 'package:project/components/components.dart';
 import 'package:project/components/in_out_components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
-import 'package:project/in_out_payment/history.dart';
-import 'package:project/in_out_payment/requested.dart';
+import 'package:project/modules/in_out_payment/history.dart';
+import 'package:project/modules/in_out_payment/requested.dart';
 
 class ScheduledScreen extends StatelessWidget {
   ScheduledScreen({Key? key}) : super(key: key);

@@ -5,11 +5,11 @@ import 'package:project/components/components.dart';
 import 'package:project/components/in_out_components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
-import 'package:project/in_out_payment/history.dart';
-import 'package:project/in_out_payment/scheduled.dart';
+import 'package:project/modules/in_out_payment/requested.dart';
+import 'package:project/modules/in_out_payment/scheduled.dart';
 
-class RequestedScreen extends StatelessWidget {
-  RequestedScreen({Key? key}) : super(key: key);
+class HistoryScreen extends StatelessWidget {
+  HistoryScreen({Key? key}) : super(key: key);
 
   var searchController = TextEditingController();
 
@@ -53,11 +53,8 @@ class RequestedScreen extends StatelessWidget {
                             inOutButton(
                               onPressed: () {
                                 cubit.selectInOutPayment(index: 0,);
-                                navigateTo(context, HistoryScreen());
                               },
                               text: 'History',
-                              textColor: primaryColor,
-                              background: Colors.white,
                             ),
                             const SizedBox(
                               width: 5.0,
@@ -77,8 +74,11 @@ class RequestedScreen extends StatelessWidget {
                             inOutButton(
                               onPressed: () {
                                 cubit.selectInOutPayment(index: 2,);
+                                navigateTo(context, RequestedScreen());
                               },
                               text: 'Requested',
+                              textColor: primaryColor,
+                              background: Colors.white,
                             ),
                           ],
                         ),
