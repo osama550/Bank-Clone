@@ -158,16 +158,9 @@ class HomeScreen extends StatelessWidget {
 
                                   }, icon:Image(
                                 image: AssetImage('images/Picture17.png'),
-
-
                               )
                               ),
                             ),
-
-
-
-
-
                           ],
                         )
                     ),
