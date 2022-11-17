@@ -208,41 +208,53 @@ Widget paymentButton({
           onPressed: () {
             showDialog(
                 context: context,
-                builder: (context) =>
-                AlertDialog(
-                  backgroundColor:primaryColor,
+                builder: (context) => AlertDialog(
+                  backgroundColor:Colors.white,
                   title:Center(
                     child:Column(
                       children: [
-                        Image.asset('images/Picture2.png'),
-                        const SizedBox(
-                          height: 5,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(40),
+                                child: CircleAvatar(
+                                  radius: 60,
+                                  backgroundColor: primaryColor,
+                                ),
+                              ),
+                              Image.asset('images/icon6.png'),
+                            ],
+                          ),
                         ),
-                        const Text('Error!',
+                         Text('Bill Paid Successfully!',
                         style:TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold
-
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
                         )
                         ),
                       ],
                     ),
-                    
                   ),
-
-                  content: const Text(
-                    'Bill Paid  Failed,Please Try again!',style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w400
-                  ),
+                  content:  const Padding(
+                    padding: EdgeInsets.only(
+                    left: 27
+                    ),
+                    child: Text(
+                      'Thank you for paying the bill',style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    ),
                   ),
                  actions: [
                    Container(
                      width: 120,
                      height: 30,
                      decoration: BoxDecoration(
-                       borderRadius: BorderRadius.circular(20),color:Colors.white,
+                       borderRadius: BorderRadius.circular(20),color:primaryColor,
                      ),
                      child:MaterialButton(
                        onPressed: () {
@@ -253,55 +265,72 @@ Widget paymentButton({
                          style: TextStyle(
                            fontWeight: FontWeight.w400,
                            fontSize: 18,
-                           color: Colors.black,
+                           color: Colors.white,
                          )
                          ),
                        ) ,
                      )
                  ],
-                  actionsPadding: EdgeInsets.only(
+                  actionsPadding: const EdgeInsets.only(
                     right: 75,
                     bottom: 20,
                   ),
                 ),
 
-
+//AlertDialog(
+//                   backgroundColor:primaryColor,
+//                   title:Center(
+//                     child:Column(
+//                       children: [
+//                         Image.asset('images/icon7.png'),
+//
+//                         const Text('Error!',
+//                         style:TextStyle(
+//                           color: Colors.white,
+//                           fontWeight: FontWeight.bold
+//
+//                         )
+//                         ),
+//                       ],
+//                     ),
+//
+//                   ),
+//
+//                   content: const Text(
+//                     'Bill Paid  Failed,Please Try again!',style: TextStyle(
+//                     color: Colors.white,
+//                     fontSize: 15,
+//                     fontWeight: FontWeight.w400
+//                   ),
+//                   ),
+//                  actions: [
+//                    Container(
+//                      width: 120,
+//                      height: 30,
+//                      decoration: BoxDecoration(
+//                        borderRadius: BorderRadius.circular(20),color:Colors.white,
+//                      ),
+//                      child:MaterialButton(
+//                        onPressed: () {
+//                          Navigator.pop(context);
+//                        },
+//                        child: const Text(
+//                          'Close',
+//                          style: TextStyle(
+//                            fontWeight: FontWeight.w400,
+//                            fontSize: 18,
+//                            color: Colors.black,
+//                          )
+//                          ),
+//                        ) ,
+//                      )
+//                  ],
+//                   actionsPadding: EdgeInsets.only(
+//                     right: 75,
+//                     bottom: 20,
+//                   ),
+//                 ),
                 );
-
-            //CoolAlert.show(
-            //           context: context,
-            //           type: CoolAlertType.success,
-            //           backgroundColor: HexColor('#6F2236'),
-            //           title: 'Successfully!',
-            //
-            //           text: 'Thank you for paying the bill',
-            //           loopAnimation: false,
-            //           //autoCloseDuration:Duration(seconds: 2),
-            //           confirmBtnText:'Ok',
-            //           confirmBtnTextStyle: TextStyle(
-            //             color: Colors.white,
-            //             fontSize: 15.sp,
-            //         // CoolAlert.show(
-            //         //   context: context,
-            //         //   type: CoolAlertType.error,
-            //         //   backgroundColor: HexColor('#6F2236'),
-            //         //   title: 'Error',
-            //         //
-            //         //   text: 'Sorry, something went wrong',
-            //         //   loopAnimation: false,
-            //         //   //autoCloseDuration:Duration(seconds: 2),
-            //         //   confirmBtnText:'Close',
-            //         //   confirmBtnTextStyle: TextStyle(
-            //         //     color: Colors.white,
-            //         //     fontSize: 15.sp,
-            //
-            //           ),
-            //
-            //           confirmBtnColor: HexColor('#6F2236'),
-            //
-            //
-            //
-            //         );
           },
           child: Text(
             'Confirm Payment',
