@@ -90,198 +90,250 @@ Widget notorientation(context)=>Scaffold(
         //height: 100.w,
 
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: HexColor('#c8abb3'),
+          borderRadius: BorderRadius.circular(15),
+          color: primaryColor,
         ),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: () {},
-                  child: Text('1',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold)),
-                ),
-                SizedBox(
-                  width: 8.w,
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text('2',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold)),
-                ),
-                SizedBox(
-                  width: 8.w,
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text('3',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold)),
-                ),
-              ],
+            SizedBox(
+              height: 5,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: () {},
-                  child: Text('4',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold)),
-                ),
-                SizedBox(
-                  width: 8.w,
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text('5',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold)),
-                ),
-                SizedBox(
-                  width: 8.w,
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text('6',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold)),
-                ),
-              ],
-            ),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: () {},
-                  child: Text('7',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold)),
-                ),
-                SizedBox(
-                  width: 8.w,
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text('8',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold)),
-                ),
-                SizedBox(
-                  width: 8.w,
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text('9',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold)),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: () {},
-                  child: Text('.',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold)),
-                ),
-                SizedBox(
-                  width: 8.w,
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text('0',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold)),
-                ),
-                SizedBox(
-                  width: 8.w,
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Icon(
-                    Icons.arrow_back,size: 35.sp,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-            ////////////////////////////////////
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                    decoration: BoxDecoration(
-                      color: HexColor('#9E6F2236'),
-                      borderRadius: BorderRadiusDirectional.circular(15.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    color:HexColor('#925766') ,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text('1',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.bold)),
                     ),
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    child:  Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20.0,
-                          vertical: 12.0,
-                        ),
-                        child: Text(
-                            'X',
-                            style: TextStyle(
-                              color: HexColor('#6F2236'),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.sp,)))),
-                SizedBox(
-                  width: 5.w,
-                ),
-                Container(
-                  padding: EdgeInsets.only(
-                    left: 30,
-                    right: 30,
                   ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: HexColor('#6F2236'),
+                  SizedBox(
+                    width: 12.w,
                   ),
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Continue',
-                      style: TextStyle(
+                  Container(
+                    color:HexColor('#925766') ,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text('2',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Container(
+                    color:HexColor('#925766') ,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text('3',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    color:HexColor('#925766') ,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text('4',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Container(
+                    color:HexColor('#925766') ,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text('5',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Container(
+                    color:HexColor('#925766') ,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text('6',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    color:HexColor('#925766') ,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text('7',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Container(
+                    color:HexColor('#925766') ,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text('8',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Container(
+                    color:HexColor('#925766') ,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text('9',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    color:HexColor('#925766') ,
+                    child: TextButton(
+                      onPressed: () {},
+                      child:const Icon(
+                        Icons.arrow_back_sharp,color:Colors.white,
+                      ),
+                  ),),
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Container(
+                    color:HexColor('#925766') ,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text('0',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Container(
+                    color:HexColor('#925766') ,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Icon(
+                        Icons.backspace_outlined,
                         color: Colors.white,
-                        fontSize: 18.sp,
+
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
+            SizedBox(
+              height: 5,
+            ),
+            ////////////////////////////////////
+
+            //Row(
+            //               mainAxisAlignment: MainAxisAlignment.center,
+            //               children: [
+            //                 Container(
+            //                     decoration: BoxDecoration(
+            //                       color: HexColor('#9E6F2236'),
+            //                       borderRadius: BorderRadiusDirectional.circular(15.0),
+            //                     ),
+            //                     clipBehavior: Clip.antiAliasWithSaveLayer,
+            //                     child:  Padding(
+            //                         padding: EdgeInsets.symmetric(
+            //                           horizontal: 20.0,
+            //                           vertical: 12.0,
+            //                         ),
+            //                         child: Text(
+            //                             'X',
+            //                             style: TextStyle(
+            //                               color: HexColor('#6F2236'),
+            //                               fontWeight: FontWeight.bold,
+            //                               fontSize: 20.sp,)))),
+            //                 SizedBox(
+            //                   width: 5.w,
+            //                 ),
+            //                 Container(
+            //                   padding: EdgeInsets.only(
+            //                     left: 30,
+            //                     right: 30,
+            //                   ),
+            //                   decoration: BoxDecoration(
+            //                     borderRadius: BorderRadius.circular(20),
+            //                     color: HexColor('#6F2236'),
+            //                   ),
+            //                   child: TextButton(
+            //                     onPressed: () {},
+            //                     child: Text(
+            //                       'Continue',
+            //                       style: TextStyle(
+            //                         color: Colors.white,
+            //                         fontSize: 18.sp,
+            //                       ),
+            //                     ),
+            //                   ),
+            //                 ),
+            //               ],
+            //             ),
           ],
         ),
       ),
