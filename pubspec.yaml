@@ -41,6 +41,7 @@ dependencies:
   cool_alert: ^1.1.0
   qr_flutter: ^4.0.0
   sleek_circular_slider: ^2.0.1
+  percent_indicator: ^4.2.2
 #  qr_code_scanner: ^1.0.1
 
 dev_dependencies:
