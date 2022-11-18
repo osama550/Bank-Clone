@@ -276,60 +276,6 @@ Widget paymentButton({
                     bottom: 20,
                   ),
                 ),
-
-//AlertDialog(
-//                   backgroundColor:primaryColor,
-//                   title:Center(
-//                     child:Column(
-//                       children: [
-//                         Image.asset('images/icon7.png'),
-//
-//                         const Text('Error!',
-//                         style:TextStyle(
-//                           color: Colors.white,
-//                           fontWeight: FontWeight.bold
-//
-//                         )
-//                         ),
-//                       ],
-//                     ),
-//
-//                   ),
-//
-//                   content: const Text(
-//                     'Bill Paid  Failed,Please Try again!',style: TextStyle(
-//                     color: Colors.white,
-//                     fontSize: 15,
-//                     fontWeight: FontWeight.w400
-//                   ),
-//                   ),
-//                  actions: [
-//                    Container(
-//                      width: 120,
-//                      height: 30,
-//                      decoration: BoxDecoration(
-//                        borderRadius: BorderRadius.circular(20),color:Colors.white,
-//                      ),
-//                      child:MaterialButton(
-//                        onPressed: () {
-//                          Navigator.pop(context);
-//                        },
-//                        child: const Text(
-//                          'Close',
-//                          style: TextStyle(
-//                            fontWeight: FontWeight.w400,
-//                            fontSize: 18,
-//                            color: Colors.black,
-//                          )
-//                          ),
-//                        ) ,
-//                      )
-//                  ],
-//                   actionsPadding: EdgeInsets.only(
-//                     right: 75,
-//                     bottom: 20,
-//                   ),
-//                 ),
                 );
           },
           child: Text(

@@ -72,7 +72,7 @@ class transfarScreen extends StatelessWidget {
                       'Osama Kamel',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 12.sp,
+                        fontSize: 15.sp,
                       ),
                     ),
                     const SizedBox(
@@ -99,11 +99,11 @@ class transfarScreen extends StatelessWidget {
                       padding: EdgeInsetsDirectional.only(
                         start: 25,
                         end: 25,
-                        top: 15,
+                        top: 10,
                       ),
                       child: Container(
                         width: double.infinity,
-                        height: 70,
+                        height: 60,
                         padding: EdgeInsetsDirectional.only(
                           top: 7,
                           bottom: 10,
