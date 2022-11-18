@@ -87,7 +87,10 @@ Widget defaultNumbers() => Container(
       //height: 100.w,
 
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.only(
+          topRight:Radius.circular(15),
+          topLeft: Radius.circular(15),
+        ),
         color: primaryColor,
       ),
       child: Column(
@@ -307,55 +310,55 @@ Widget defaultNumbers() => Container(
             ),
           ),
           SizedBox(
-            height: 5,
+            height: 3,
           ),
-          ////////////////////////////////////
-
-          //Row(
-          //               mainAxisAlignment: MainAxisAlignment.center,
-          //               children: [
-          //                 Container(
-          //                     decoration: BoxDecoration(
-          //                       color: HexColor('#9E6F2236'),
-          //                       borderRadius: BorderRadiusDirectional.circular(15.0),
-          //                     ),
-          //                     clipBehavior: Clip.antiAliasWithSaveLayer,
-          //                     child:  Padding(
-          //                         padding: EdgeInsets.symmetric(
-          //                           horizontal: 20.0,
-          //                           vertical: 12.0,
-          //                         ),
-          //                         child: Text(
-          //                             'X',
-          //                             style: TextStyle(
-          //                               color: HexColor('#6F2236'),
-          //                               fontWeight: FontWeight.bold,
-          //                               fontSize: 20.sp,)))),
-          //                 SizedBox(
-          //                   width: 5.w,
-          //                 ),
-          //                 Container(
-          //                   padding: EdgeInsets.only(
-          //                     left: 30,
-          //                     right: 30,
-          //                   ),
-          //                   decoration: BoxDecoration(
-          //                     borderRadius: BorderRadius.circular(20),
-          //                     color: HexColor('#6F2236'),
-          //                   ),
-          //                   child: TextButton(
-          //                     onPressed: () {},
-          //                     child: Text(
-          //                       'Continue',
-          //                       style: TextStyle(
-          //                         color: Colors.white,
-          //                         fontSize: 18.sp,
-          //                       ),
-          //                     ),
-          //                   ),
-          //                 ),
-          //               ],
-          //             ),
         ],
       ),
     );
+////////////////////////////////////
+
+//Row(
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 Container(
+//                     decoration: BoxDecoration(
+//                       color: HexColor('#9E6F2236'),
+//                       borderRadius: BorderRadiusDirectional.circular(15.0),
+//                     ),
+//                     clipBehavior: Clip.antiAliasWithSaveLayer,
+//                     child:  Padding(
+//                         padding: EdgeInsets.symmetric(
+//                           horizontal: 20.0,
+//                           vertical: 12.0,
+//                         ),
+//                         child: Text(
+//                             'X',
+//                             style: TextStyle(
+//                               color: HexColor('#6F2236'),
+//                               fontWeight: FontWeight.bold,
+//                               fontSize: 20.sp,)))),
+//                 SizedBox(
+//                   width: 5.w,
+//                 ),
+//                 Container(
+//                   padding: EdgeInsets.only(
+//                     left: 30,
+//                     right: 30,
+//                   ),
+//                   decoration: BoxDecoration(
+//                     borderRadius: BorderRadius.circular(20),
+//                     color: HexColor('#6F2236'),
+//                   ),
+//                   child: TextButton(
+//                     onPressed: () {},
+//                     child: Text(
+//                       'Continue',
+//                       style: TextStyle(
+//                         color: Colors.white,
+//                         fontSize: 18.sp,
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//               ],
+//             ),
