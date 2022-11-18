@@ -6,6 +6,7 @@ import 'package:project/cubit/app_cubit.dart';
 import 'package:project/modules/choose_bill/choose_bill.dart';
 import 'package:project/modules/payment/electricity_bill.dart';
 import 'package:project/modules/payment/electricity_screen.dart';
+import 'package:project/modules/transfar_money/transfar_money_screen.dart';
 import 'package:sizer/sizer.dart';
 //
 void main() {
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.white,
             ),
             debugShowCheckedModeBanner: false,
-            home:ServiseScreen() ,
+            home:transfarScreen() ,
           );
         },
       ),
