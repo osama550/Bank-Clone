@@ -174,6 +174,39 @@ class EReceiptScreen extends StatelessWidget {
                             const SizedBox(
                               height: 20.0,
                             ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Status',
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                                const Spacer(),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadiusDirectional.circular(10.0),
+                                  ),
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  child: const Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 20.0,
+                                      vertical: 5.0,
+                                    ),
+                                    child: Text(
+                                      'unpaid',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 20.0,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
 
