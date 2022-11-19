@@ -6,3 +6,5 @@ class AppInitialState extends AppStates {}
 class ChangePaymentBillScreenState extends AppStates {}
 
 class ChangeInOutPaymentScreenState extends AppStates {}
+
+class ChangeFavoriteIconState extends AppStates {}

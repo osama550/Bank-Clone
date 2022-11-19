@@ -4,8 +4,6 @@ import 'package:project/components/colors/colors.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/modules/payment/bill_services.dart';
 import 'package:sizer/sizer.dart';
-import 'colors/colors.dart';
-import 'package:cool_alert/cool_alert.dart';
 
 void navigateTo(context, Widget screen) {
   Navigator.push(
@@ -512,8 +510,7 @@ Widget buildBillType({
 
 Widget buildLogo({
   required BuildContext context,
-}) =>
-    Stack(
+}) => Stack(
       alignment: AlignmentDirectional.topEnd,
       children: [
         Stack(
@@ -544,6 +541,9 @@ Widget buildLogo({
         ),
       ],
     );
+
+//------------------------------------------------------------
+
 
 Widget buildBottomSheet() => Container(
       height: 50.0,
