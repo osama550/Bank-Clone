@@ -5,6 +5,7 @@ import 'package:project/bloc_observer.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/modules/Confirm%20Payment/Confirm%20Payment_Screen.dart';
 import 'package:project/modules/choose_bill/choose_bill.dart';
+import 'package:project/modules/e_Receipt/e-receipt_screen.dart';
 import 'package:project/modules/payment/electricity_bill.dart';
 import 'package:project/modules/payment/electricity_screen.dart';
 import 'package:project/modules/transfar_money/transfar_money_screen.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.white,
             ),
             debugShowCheckedModeBanner: false,
-            home:ConfirmPaymentScreen() ,
+            home:EReceiptScreen() ,
           );
         },
       ),

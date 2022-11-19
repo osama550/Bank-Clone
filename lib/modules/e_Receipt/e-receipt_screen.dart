@@ -7,7 +7,8 @@ import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
 import 'package:sizer/sizer.dart';
 
-class ConfirmPaymentScreen extends StatelessWidget {
+class EReceiptScreen extends StatelessWidget {
+  const EReceiptScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
@@ -82,7 +83,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                         ],
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(15.0),
+                        padding:  EdgeInsets.all(15.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -153,19 +154,130 @@ class ConfirmPaymentScreen extends StatelessWidget {
                               height: 20.0,
                             ),
                             paymentData(
+                              title: 'Transaction Date',
+                              answer: '12/22',
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            paymentData(
+                              title: 'Transaction ID',
+                              answer: '4579832',
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            paymentData(
                               title: 'Notes',
                               answer: 'Thank you  :)',
                             ),
                             const SizedBox(
                               height: 20.0,
                             ),
-                              ],
-                            ),
-
+                          ],
                         ),
+
                       ),
                     ),
-                  paymentButton(context: context),
+                  ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 8.w,
+                ),
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadiusDirectional.circular(30.0),
+                    color: primaryColor,
+                  ),
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  child: MaterialButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          backgroundColor:Colors.white,
+                          title:Center(
+                            child:Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Stack(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(40),
+                                        child: CircleAvatar(
+                                          radius: 60,
+                                          backgroundColor: primaryColor,
+                                        ),
+                                      ),
+                                      Image.asset('images/icon6.png'),
+                                    ],
+                                  ),
+                                ),
+                                Text('Bill Paid Successfully!',
+
+                                    style:TextStyle(
+                                      fontSize: 15.sp,
+                                      color: primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                    )
+                                ),
+                              ],
+                            ),
+                          ),
+                          content:   Padding(
+                            padding: EdgeInsets.only(
+                                left: 27
+                            ),
+                            child: Text(
+                              'Thank you for paying the bill',style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            ),
+                          ),
+                          actions: [
+                            Container(
+                              width: 120,
+                              height: 35,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),color:primaryColor,
+                              ),
+                              child:MaterialButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text(
+                                    'Close',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                    )
+                                ),
+                              ) ,
+                            )
+                          ],
+                          actionsPadding: const EdgeInsets.only(
+                            right: 75,
+                            bottom: 20,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'Change',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
                 ],
               ),
             ),
