@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/cubit/app_state.dart';
 
@@ -72,6 +73,23 @@ class AppCubit extends Cubit<AppStates> {
     emit(ChangeInOutPaymentScreenState());
     numberOfInOutScreen = index;
     print(numberOfInOutScreen);
+  }
+
+
+  IconData favoriteIcon = Icons.star_border_rounded;
+  bool isFavorite = false;
+  Color favoriteColor = Colors.grey;
+  void changeFavoriteIcon(){
+    isFavorite = !isFavorite;
+    if(isFavorite){
+      favoriteIcon = Icons.star_rounded;
+      favoriteColor = Colors.amber;
+    }
+    else{
+      favoriteIcon = Icons.star_border_rounded;
+      favoriteColor = Colors.grey;
+    }
+    emit(ChangeFavoriteIconState());
   }
 
 

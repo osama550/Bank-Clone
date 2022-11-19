@@ -140,7 +140,7 @@ Widget buildHistoryItem({
             if(AppCubit.get(context).numberOfInOutScreen == 0)
               Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.outbox,
                   color: Colors.red,
                 ),
@@ -163,8 +163,8 @@ Widget buildHistoryItem({
                 color: Colors.blue.withOpacity(0.2,),
               ),
               clipBehavior: Clip.antiAliasWithSaveLayer,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
+              child: const Padding(
+                padding: EdgeInsets.symmetric(
                   vertical: 5.0,
                   horizontal: 8.0,
                 ),
@@ -185,8 +185,8 @@ Widget buildHistoryItem({
                 color: Colors.blue,
               ),
               clipBehavior: Clip.antiAliasWithSaveLayer,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
+              child: const Padding(
+                padding: EdgeInsets.symmetric(
                   vertical: 5.0,
                   horizontal: 8.0,
                 ),
@@ -279,5 +279,101 @@ Widget buildInOutButtons({
       background: Colors.white,
     ),
   ],
+);
+
+//----------------------------------------------------------------------
+
+
+Widget buildFavoriteItem({
+  required BuildContext context,
+  required String image,
+  required String name,
+  required String type,
+  required String accountNumber,
+  required IconData favoriteIcon,
+  required VoidCallback favoriteIconPressed,
+  Color color = Colors.white,
+}) => Padding(
+  padding: const EdgeInsets.symmetric(
+    horizontal: 13.0,
+  ),
+  child: Container(
+    height: 70.0,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadiusDirectional.circular(20.0,),
+      color: Colors.white,
+    ),
+    clipBehavior: Clip.antiAliasWithSaveLayer,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 12.0,
+      ),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 25.0,
+            backgroundImage: AssetImage(image),
+          ),
+          const SizedBox(
+            width: 10.0,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                name,
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15.0.sp,
+                ),
+              ),
+              const SizedBox(
+                height: 5.0,
+              ),
+              Row(
+                children: [
+                  Text(
+                    type,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 10.sp,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 5.0,
+                  ),
+                  Container(
+                    height: 8.0,
+                    width: 1.0,
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(
+                    width: 5.0,
+                  ),
+                  Text(
+                    accountNumber,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 10.sp,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const Spacer(),
+          IconButton(
+            onPressed: favoriteIconPressed,
+            icon: Icon(
+              favoriteIcon,
+              size: 30.0,
+              color: AppCubit.get(context).favoriteColor,
+            ),
+          ),
+        ],
+      ),
+    ),
+  ),
 );
 
