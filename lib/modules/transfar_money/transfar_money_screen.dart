@@ -126,8 +126,8 @@ class transfarScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(30.0),
                                   color: HexColor('#925766').withOpacity(0.5),
                                 ),
-                                height: 32,
-                                width: 105,
+                                height: 5.h,
+                                width: 30.w,
                                 child: Row(
                                   children: [
                                     SizedBox(
