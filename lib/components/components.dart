@@ -206,74 +206,7 @@ Widget paymentButton({
           onPressed: () {
             showDialog(
                 context: context,
-                builder: (context) => AlertDialog(
-                  backgroundColor:Colors.white,
-                  title:Center(
-                    child:Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Stack(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(40),
-                                child: CircleAvatar(
-                                  radius: 60,
-                                  backgroundColor: primaryColor,
-                                ),
-                              ),
-                              Image.asset('images/icon6.png'),
-                            ],
-                          ),
-                        ),
-                         Text('Bill Paid Successfully!',
-                        style:TextStyle(
-                          color: primaryColor,
-                          fontWeight: FontWeight.bold,
-                        )
-                        ),
-                      ],
-                    ),
-                  ),
-                  content:  const Padding(
-                    padding: EdgeInsets.only(
-                    left: 27
-                    ),
-                    child: Text(
-                      'Thank you for paying the bill',style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    ),
-                  ),
-                 actions: [
-                   Container(
-                     width: 120,
-                     height: 30,
-                     decoration: BoxDecoration(
-                       borderRadius: BorderRadius.circular(20),color:primaryColor,
-                     ),
-                     child:MaterialButton(
-                       onPressed: () {
-                         Navigator.pop(context);
-                       },
-                       child: const Text(
-                         'Close',
-                         style: TextStyle(
-                           fontWeight: FontWeight.w400,
-                           fontSize: 18,
-                           color: Colors.white,
-                         )
-                         ),
-                       ) ,
-                     )
-                 ],
-                  actionsPadding: const EdgeInsets.only(
-                    right: 75,
-                    bottom: 20,
-                  ),
-                ),
+                builder: (context) => defaultErrorDialog(context),
                 );
           },
           child: Text(
@@ -287,6 +220,131 @@ Widget paymentButton({
         ),
       ),
     );
+
+//----------------------------------------------------
+
+AlertDialog defaultSuccessDialog(context)=>AlertDialog(
+  backgroundColor:Colors.white,
+  title:Center(
+    child:Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(40),
+                child: CircleAvatar(
+                  radius: 60,
+                  backgroundColor: primaryColor,
+                ),
+              ),
+              Image.asset('images/icon6.png'),
+            ],
+          ),
+        ),
+        Text('Bill Paid Successfully!',
+            style:TextStyle(
+              color: primaryColor,
+              fontWeight: FontWeight.bold,
+            )
+        ),
+      ],
+    ),
+  ),
+  content:  const Padding(
+    padding: EdgeInsets.only(
+        left: 27
+    ),
+    child: Text(
+      'Thank you for paying the bill',style: TextStyle(
+      color: Colors.black,
+      fontSize: 15,
+      fontWeight: FontWeight.w400,
+    ),
+    ),
+  ),
+  actions: [
+    Container(
+      width: 120,
+      height: 30,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),color:primaryColor,
+      ),
+      child:MaterialButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: const Text(
+            'Close',
+            style: TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 18,
+              color: Colors.white,
+            )
+        ),
+      ) ,
+    )
+  ],
+  actionsPadding: const EdgeInsets.only(
+    right: 75,
+    bottom: 20,
+  ),
+);
+AlertDialog defaultErrorDialog(context)=>AlertDialog(
+  backgroundColor:primaryColor,
+  title:Center(
+    child:Column(
+      children: [
+        Image.asset('images/icon7.png'),
+        Text('Error !',
+            style:TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            )
+        ),
+      ],
+    ),
+  ),
+  content:  const Padding(
+    padding: EdgeInsets.only(
+        left: 10
+    ),
+    child: Text(
+      'Bill Paid Failed,Please Try Again !',style: TextStyle(
+      color: Colors.white,
+      fontSize: 15,
+      fontWeight: FontWeight.w400,
+    ),
+    ),
+  ),
+  actions: [
+    Container(
+      width: 120,
+      height: 30,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),color:Colors.white,
+      ),
+      child:MaterialButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: const Text(
+            'Close',
+            style: TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 18,
+              color: Colors.black,
+            )
+        ),
+      ) ,
+    )
+  ],
+  actionsPadding: const EdgeInsets.only(
+    right: 75,
+    bottom: 20,
+  ),
+);
 
 //----------------------------------------------------
 
@@ -490,7 +548,6 @@ Widget buildLogo({
 
 //------------------------------------------------------------
 
-
 Widget buildBottomSheet() => Container(
       height: 50.0,
       width: double.infinity,
@@ -505,6 +562,7 @@ Widget buildBottomSheet() => Container(
     );
 
 //------------------------------------------------------------
+
 Widget defaultNumbers() => Container(
   decoration: BoxDecoration(
     borderRadius: BorderRadius.only(

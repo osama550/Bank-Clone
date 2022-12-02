@@ -19,43 +19,9 @@ class transfarScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox(
-                      height: 10.0,
-                    ),
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: Icon(
-                            Icons.arrow_back_ios_rounded,
-                            color: primaryColor,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 5.0,
-                        ),
-                        Text(
-                          'Transfar Money',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15.sp,
-                          ),
-                        ),
-                        const Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            right: 10.0,
-                          ),
-                          child: Image.asset(
-                            'images/Picture14.png',
-                            width: 18.w,
-                            height: 7.h,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ],
+                    buildAppBar(
+                      context: context,
+                      screenTitle: 'Transfer Money',
                     ),
                     const SizedBox(
                       height: 30.0,
@@ -97,7 +63,7 @@ class transfarScreen extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.only(
+                      padding: const EdgeInsetsDirectional.only(
                         start: 25,
                         end: 25,
                         top: 10,
@@ -131,7 +97,7 @@ class transfarScreen extends StatelessWidget {
                                 width: 30.w,
                                 child: Row(
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 7,
                                     ),
                                     Container(
@@ -140,23 +106,23 @@ class transfarScreen extends StatelessWidget {
                                             BorderRadius.circular(30.0),
                                         color: primaryColor,
                                       ),
-                                      child: Icon(
+                                      child: const Icon(
                                         Icons.attach_money_outlined,
                                         color: Colors.white,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
-                                    Text(
+                                    const Text(
                                       'USD',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 8,
                                     ),
-                                    Icon(
+                                    const Icon(
                                       Icons.keyboard_arrow_down_outlined,
                                       size: 22,
                                     ),
