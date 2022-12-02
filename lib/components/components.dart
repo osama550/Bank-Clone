@@ -503,3 +503,235 @@ Widget buildBottomSheet() => Container(
       ),
       clipBehavior: Clip.antiAliasWithSaveLayer,
     );
+
+//------------------------------------------------------------
+Widget defaultNumbers() => Container(
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.only(
+      topRight:Radius.circular(15),
+      topLeft: Radius.circular(15),
+    ),
+    color: primaryColor,
+  ),
+  child: Column(
+    children: [
+      SizedBox(
+        height: 5,
+      ),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 50,
+              width: 60,
+              color: numberBackgroundColor,
+              child: TextButton(
+                onPressed: () {},
+                child: Text('1',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold)),
+              ),
+            ),
+            SizedBox(
+              width: 12.w,
+            ),
+            Container(
+              height: 50,
+              width: 60,
+              color: numberBackgroundColor,
+              child: TextButton(
+                onPressed: () {},
+                child: Text('2',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold)),
+              ),
+            ),
+            SizedBox(
+              width: 12.w,
+            ),
+            Container(
+              height: 50,
+              width: 60,
+              color: numberBackgroundColor,
+              child: TextButton(
+                onPressed: () {},
+                child: Text('3',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold)),
+              ),
+            ),
+          ],
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 50,
+              width: 60,
+              color: numberBackgroundColor,
+              child: TextButton(
+                onPressed: () {},
+                child: Text('4',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold)),
+              ),
+            ),
+            SizedBox(
+              width: 12.w,
+            ),
+            Container(
+              height: 50,
+              width: 60,
+              color: numberBackgroundColor,
+              child: TextButton(
+                onPressed: () {},
+                child: Text('5',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold)),
+              ),
+            ),
+            SizedBox(
+              width: 12.w,
+            ),
+            Container(
+              height: 50,
+              width: 60,
+              color: numberBackgroundColor,
+              child: TextButton(
+                onPressed: () {},
+                child: Text('6',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold)),
+              ),
+            ),
+          ],
+        ),
+      ),
+
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 50,
+              width: 60,
+              color: numberBackgroundColor,
+              child: TextButton(
+                onPressed: () {},
+                child: Text('7',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold)),
+              ),
+            ),
+            SizedBox(
+              width: 12.w,
+            ),
+            Container(
+              height: 50,
+              width: 60,
+              color: numberBackgroundColor,
+              child: TextButton(
+                onPressed: () {},
+                child: Text('8',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold)),
+              ),
+            ),
+            SizedBox(
+              width: 12.w,
+            ),
+            Container(
+              height: 50,
+              width: 60,
+              color: numberBackgroundColor,
+              child: TextButton(
+                onPressed: () {},
+                child: Text('9',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold)),
+              ),
+            ),
+          ],
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 50,
+              width: 60,
+              color: numberBackgroundColor,
+              child: TextButton(
+                onPressed: () {},
+                child: const Icon(
+                  Icons.arrow_back_sharp,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 12.w,
+            ),
+            Container(
+              color: numberBackgroundColor,
+              height: 50,
+              width: 60,
+              child: TextButton(
+                onPressed: () {},
+                child: Text('0',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold)),
+              ),
+            ),
+            SizedBox(
+              width: 12.w,
+            ),
+            Container(
+              height: 50,
+              width: 60,
+              color: numberBackgroundColor,
+              child: TextButton(
+                onPressed: () {},
+                child: Icon(
+                  Icons.backspace_outlined,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      SizedBox(
+        height: 3,
+      ),
+    ],
+  ),
+);
