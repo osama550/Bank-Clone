@@ -49,28 +49,7 @@ class AddNewRecipientScreen extends StatelessWidget {
                           'Select Type',
                           style: TextStyle(fontSize: 15.sp),
                         )),
-
-                    // DropdownButton(
-                    //    hint: Text('Select Items: '),
-                    //       dropdownColor: Colors.grey,
-                    //       icon: Icon(
-                    //         Icons.keyboard_arrow_down_sharp,
-                    //       ),
-                    //       onChanged: ( newValue){
-                    //
-                    //     valueChoose= newValue.toString()  ;
-                    //
-                    //       },
-                    //    items:listItem.map((valueItem) {
-                    //         return DropdownMenuItem(
-                    //           value: valueItem,
-                    //           child:Text(valueItem),
-                    //         );
-                    //
-                    //     }).toList(),
-                    //     ),
-
-
+                    
                     Padding(
                       padding: EdgeInsetsDirectional.only(
                         start: 25,

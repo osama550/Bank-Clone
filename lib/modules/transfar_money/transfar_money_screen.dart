@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project/components/colors/colors.dart';
+import 'package:project/components/components.dart';
 import 'package:project/modules/payment/electricity_screen.dart';
 import 'package:sizer/sizer.dart';
 
