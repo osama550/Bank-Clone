@@ -4,6 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:project/components/colors/colors.dart';
 import 'package:project/components/components.dart';
 import 'package:project/modules/payment/electricity_screen.dart';
+import 'package:project/modules/transfar_money/transfar_money_screen.dart';
 import 'package:sizer/sizer.dart';
 
 
@@ -244,7 +245,12 @@ class AddNewRecipientScreen extends StatelessWidget {
                 ),
               ),
             ),
-            defaultNumbers(),
+            defaultNumbers(
+              context: context,
+              onPressed: (){
+                navigateTo(context, transfarScreen());
+              },
+            ),
           ],
         ),
       ),

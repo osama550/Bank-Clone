@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project/components/colors/colors.dart';
 import 'package:project/cubit/app_cubit.dart';
-import 'package:project/modules/payment/bill_services.dart';
+import 'package:project/modules/payment/electricity_screen.dart';
 import 'package:sizer/sizer.dart';
 
 void navigateTo(context, Widget screen) {
@@ -563,233 +563,153 @@ Widget buildBottomSheet() => Container(
 
 //------------------------------------------------------------
 
-Widget defaultNumbers() => Container(
+Widget defaultNumbers({
+  required BuildContext context,
+  required VoidCallback onPressed,
+}) => Container(
   decoration: BoxDecoration(
     borderRadius: BorderRadius.only(
-      topRight:Radius.circular(15),
+      topRight: Radius.circular(15),
       topLeft: Radius.circular(15),
     ),
     color: primaryColor,
   ),
   child: Column(
-    children: [
+    children:  [
       SizedBox(
-        height: 5,
+        height: 15,
       ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 50,
-              width: 60,
-              color: numberBackgroundColor,
-              child: TextButton(
-                onPressed: () {},
-                child: Text('1',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold)),
-              ),
-            ),
-            SizedBox(
-              width: 12.w,
-            ),
-            Container(
-              height: 50,
-              width: 60,
-              color: numberBackgroundColor,
-              child: TextButton(
-                onPressed: () {},
-                child: Text('2',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold)),
-              ),
-            ),
-            SizedBox(
-              width: 12.w,
-            ),
-            Container(
-              height: 50,
-              width: 60,
-              color: numberBackgroundColor,
-              child: TextButton(
-                onPressed: () {},
-                child: Text('3',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold)),
-              ),
-            ),
-          ],
-        ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children:<Widget> [
+          defaultTextKeyboard(num: '1',
+              context: context),
+          defaultTextKeyboard(num: '2',
+              context: context),
+          defaultTextKeyboard(num: '3',
+              context: context),
+        ],
       ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 50,
-              width: 60,
-              color: numberBackgroundColor,
-              child: TextButton(
-                onPressed: () {},
-                child: Text('4',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold)),
-              ),
-            ),
-            SizedBox(
-              width: 12.w,
-            ),
-            Container(
-              height: 50,
-              width: 60,
-              color: numberBackgroundColor,
-              child: TextButton(
-                onPressed: () {},
-                child: Text('5',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold)),
-              ),
-            ),
-            SizedBox(
-              width: 12.w,
-            ),
-            Container(
-              height: 50,
-              width: 60,
-              color: numberBackgroundColor,
-              child: TextButton(
-                onPressed: () {},
-                child: Text('6',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold)),
-              ),
-            ),
-          ],
-        ),
+      SizedBox(
+        height: 15,
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children:<Widget> [
+          defaultTextKeyboard(num: '4',
+              context: context),
+          defaultTextKeyboard(num: '5',
+              context: context),
+          defaultTextKeyboard(num: '6',
+              context: context),
+        ],
+      ),
+      SizedBox(
+        height: 15,
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children:<Widget> [
+          defaultTextKeyboard(num: '7',
+              context: context),
+          defaultTextKeyboard(num: '8',
+              context: context),
+          defaultTextKeyboard(num: '9',
+              context: context),
+        ],
+      ),
+      SizedBox(
+        height: 15,
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children:<Widget> [
+          defaultIconKeyboard(
+              icon:Icon(
+                Icons.backspace_outlined,
+        color: Colors.white,
+      ),
+          onPressed: () {
+            AppCubit.get(context).isBankAccountEmpty(text: result);
+          }
+          ),
+          defaultTextKeyboard(num: '0',
+          context: context),
+          defaultIconKeyboard(
+            icon:Icon(
+            Icons.arrow_forward_rounded,
+            color: Colors.white,
+          ),
+              onPressed: onPressed,
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 15,
       ),
 
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 50,
-              width: 60,
-              color: numberBackgroundColor,
-              child: TextButton(
-                onPressed: () {},
-                child: Text('7',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold)),
-              ),
-            ),
-            SizedBox(
-              width: 12.w,
-            ),
-            Container(
-              height: 50,
-              width: 60,
-              color: numberBackgroundColor,
-              child: TextButton(
-                onPressed: () {},
-                child: Text('8',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold)),
-              ),
-            ),
-            SizedBox(
-              width: 12.w,
-            ),
-            Container(
-              height: 50,
-              width: 60,
-              color: numberBackgroundColor,
-              child: TextButton(
-                onPressed: () {},
-                child: Text('9',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold)),
-              ),
-            ),
-          ],
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 50,
-              width: 60,
-              color: numberBackgroundColor,
-              child: TextButton(
-                onPressed: () {},
-                child: const Icon(
-                  Icons.arrow_back_sharp,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            SizedBox(
-              width: 12.w,
-            ),
-            Container(
-              color: numberBackgroundColor,
-              height: 50,
-              width: 60,
-              child: TextButton(
-                onPressed: () {},
-                child: Text('0',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold)),
-              ),
-            ),
-            SizedBox(
-              width: 12.w,
-            ),
-            Container(
-              height: 50,
-              width: 60,
-              color: numberBackgroundColor,
-              child: TextButton(
-                onPressed: () {},
-                child: Icon(
-                  Icons.backspace_outlined,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-      SizedBox(
-        height: 3,
-      ),
+
+
+
     ],
   ),
 );
+
+//------------------------------------------------------------
+var result ='';
+Widget defaultTextKeyboard({required String num,
+  required BuildContext context,}
+
+    ){
+  return Container(
+    height: 50,
+    width: 60,
+    decoration: BoxDecoration(
+      color: numberBackgroundColor,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.25),
+          blurRadius: 20.0,
+          offset: const Offset(5, 5),
+        ),
+      ],
+    ),
+    child: TextButton(
+      onPressed: ( ) {
+        AppCubit.get(context).addTextToBankAccount(num: num);
+
+      },
+      child: Text(num,
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: 20.sp,
+              fontWeight: FontWeight.bold)),
+    ),
+  );
+}
+//------------------------------------------------------------
+Widget defaultIconKeyboard( {
+  required VoidCallback onPressed,
+  required Icon icon,
+}
+
+    ){
+  return Container(
+    height: 50,
+    width: 60,
+    decoration: BoxDecoration(
+      color: numberBackgroundColor,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.25),
+          blurRadius: 20.0,
+          offset: const Offset(5, 5),
+        ),
+      ],
+    ),
+    child: TextButton(
+      onPressed: onPressed,
+      child: icon,
+    ),
+  );
+}

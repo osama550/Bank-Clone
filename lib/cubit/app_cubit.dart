@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project/components/components.dart';
 import 'package:project/cubit/app_state.dart';
 
 class AppCubit extends Cubit<AppStates> {
@@ -101,6 +102,24 @@ class AppCubit extends Cubit<AppStates> {
   // List titles = ['Electricity','Internet','Water','E-Wallet','School Fees', 'Gas', 'Garbage',
   //   'Sanitation', 'Phone', 'Land Line', 'Television', 'Games'];
 
+void isBankAccountEmpty({
+  required String text,
+}){
+    if(result.isEmpty){
+      result= text;
+    }
+    else{
 
+      result = text.substring(0, text.length-1);
+
+    }
+    emit(ChangeIsBankAccountEmptyState());
+}
+
+void addTextToBankAccount({required String num}){
+          result=result+num;
+          emit(AddTextToBankAccountState());
+
+}
 
 }
