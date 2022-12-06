@@ -42,8 +42,10 @@ dependencies:
   qr_flutter: ^4.0.0
   sleek_circular_slider: ^2.0.1
   percent_indicator: ^4.2.2
-  dropdown_textfield: ^1.0.6
+  dropdown_textfield: ^1.0.7
   flutter_windowmanager: ^0.2.0
+  lottie: ^1.0.1
+
 #  qr_code_scanner: ^1.0.1
 
 dev_dependencies:

@@ -190,6 +190,7 @@ Widget paymentButton({
   required BuildContext context,
   String text = 'Confirm Payment',
   HexColor? color,
+  required VoidCallback onPressed,
 }) =>
     Padding(
       padding: EdgeInsets.symmetric(
@@ -203,12 +204,7 @@ Widget paymentButton({
         ),
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: MaterialButton(
-          onPressed: () {
-            showDialog(
-                context: context,
-                builder: (context) => defaultErrorDialog(context),
-                );
-          },
+          onPressed: onPressed,
           child: Text(
             'Confirm Payment',
             style: TextStyle(
@@ -254,7 +250,8 @@ AlertDialog defaultSuccessDialog(context)=>AlertDialog(
   ),
   content:  const Padding(
     padding: EdgeInsets.only(
-        left: 27
+      left: 27,
+      bottom: 20.0,
     ),
     child: Text(
       'Thank you for paying the bill',style: TextStyle(
@@ -279,7 +276,7 @@ AlertDialog defaultSuccessDialog(context)=>AlertDialog(
             'Close',
             style: TextStyle(
               fontWeight: FontWeight.w400,
-              fontSize: 18,
+              fontSize: 15,
               color: Colors.white,
             )
         ),
@@ -308,7 +305,8 @@ AlertDialog defaultErrorDialog(context)=>AlertDialog(
   ),
   content:  const Padding(
     padding: EdgeInsets.only(
-        left: 10
+      left: 10,
+      bottom: 20.0,
     ),
     child: Text(
       'Bill Paid Failed,Please Try Again !',style: TextStyle(
@@ -333,7 +331,7 @@ AlertDialog defaultErrorDialog(context)=>AlertDialog(
             'Close',
             style: TextStyle(
               fontWeight: FontWeight.w400,
-              fontSize: 18,
+              fontSize: 15,
               color: Colors.black,
             )
         ),

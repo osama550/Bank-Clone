@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:project/components/colors/colors.dart';
 import 'package:project/components/components.dart';
@@ -39,14 +40,14 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 Container(
                                   width: 50.h,
-                                  height: 45.h,
+                                  height: 55.h,
                                   clipBehavior: Clip.antiAliasWithSaveLayer,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadiusDirectional.circular(20.0,),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: primaryColor.withOpacity(0.45),
-                                        offset: const Offset(5,5),
+                                        color: primaryColor.withOpacity(0.46),
+                                        offset: const Offset(3,3),
                                         blurRadius: 15.0,
                                       ),
                                     ],
@@ -82,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                                     // backgroundColor: Colors.red,
                                     animation: true,
                                     animationDuration: 1500,
-                                    progressColor: Colors.amber,
+                                    progressColor: HexColor('#D8A616'),
                                     percent: 0.85,
                                     lineWidth: 12.0,
                                     circularStrokeCap: CircularStrokeCap.round,
@@ -110,14 +111,22 @@ class HomeScreen extends StatelessWidget {
                                       left: 60,
                                       top: 60
                                   ),
-                                  child: IconButton(
-                                      iconSize:45 ,
-                                      onPressed: (){},
-                                      icon:const Image(
-                                    image: AssetImage('images/Picture15.png'),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+
+                                      color: HexColor('#D8A616'),
+                                        borderRadius: BorderRadiusDirectional.circular(50)
+                                    ),
+
+                                    child: IconButton(
+                                        iconSize:35 ,
+                                        onPressed: (){},
+                                        icon:const Image(
+                                      image: AssetImage('images/icon1.png'),
 
 
-                                  )
+                                    )
+                                    ),
                                   ),
                                 ),
                                 const Padding(
@@ -134,66 +143,207 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
+
                                 Padding(
                                   padding: const EdgeInsets.only(
+                                      left: 50,
+                                      top: 140
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+
+                                        color: HexColor('#D8A616'),
+                                        borderRadius: BorderRadiusDirectional.circular(50)
+                                    ),
+
+                                    child: IconButton(
+                                        iconSize:35 ,
+                                        onPressed: (){},
+                                        icon:const Image(
+                                          image: AssetImage('images/icon2.png'),
+
+
+                                        )
+                                    ),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.only(
                                       left: 40,
-                                      top: 135
+                                      top: 190
                                   ),
-                                  child: IconButton(
-                                      iconSize:60 ,
-                                      onPressed: (){},
-                                    icon: const Image(
-                                    image: AssetImage('images/Picture16.png'),
-                                  ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 60,
-                                      top: 200
-                                  ),
-                                  child: IconButton(
-                                      iconSize:75 ,
-                                      onPressed: (){},
-                                      icon: const Image(
-                                    image: AssetImage('images/Picture17.png'),
-                                  )
+                                  child: Text(
+                                    'transfer',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400
+                                    ),
                                   ),
                                 ),
+
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 135,
-                                      top: 230
+                                      left: 85,
+                                      top: 215
                                   ),
-                                  child: IconButton(
-                                      iconSize:60 ,
-                                      onPressed: (){},
-                                      icon: const Image(
-                                    image: AssetImage('images/Picture16.png'),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+
+                                        color: HexColor('#D8A616'),
+                                        borderRadius: BorderRadiusDirectional.circular(50)
+                                    ),
+
+                                    child: IconButton(
+                                        iconSize:30 ,
+                                        onPressed: (){},
+                                        icon:const Image(
+                                          image: AssetImage('images/icon3.png'),
 
 
-                                  )
+                                        )
+                                    ),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 55,
+                                      top: 262
+                                  ),
+                                  child: Text(
+                                    'payment of',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400
+                                    ),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 55,
+                                      top: 277
+                                  ),
+                                  child: Text(
+                                    'purchases',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400,
+                                    ),
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 210,
-                                      top: 230,
+                                      left: 165,
+                                      top: 255
                                   ),
-                                  child: IconButton(
-                                      iconSize:75 ,
-                                      onPressed: (){},
-                                      icon: const Image(
-                                    image: AssetImage('images/Picture17.png'),
-                                  )
+                                  child: Container(
+                                    decoration: BoxDecoration(
+
+                                        color: HexColor('#D8A616'),
+                                        borderRadius: BorderRadiusDirectional.circular(50)
+                                    ),
+
+                                    child: IconButton(
+                                        iconSize:30 ,
+                                        onPressed: (){},
+                                        icon:const Image(
+                                          image: AssetImage('images/icon4.png'),
+
+
+                                        )
+                                    ),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 150,
+                                      top: 303
+                                  ),
+                                  child: Text(
+                                    'payment',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400
+                                    ),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 160,
+                                      top: 320
+                                  ),
+                                  child: Text(
+                                    'of bills',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400
+                                    ),
+                                  ),
+                                ),
+
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 255,
+                                    top: 235,
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+
+                                        color: HexColor('#D8A616'),
+                                        borderRadius: BorderRadiusDirectional.circular(50)
+                                    ),
+
+                                    child: IconButton(
+                                        iconSize:30 ,
+                                        onPressed: (){},
+                                        icon:const Image(
+                                          image: AssetImage('images/icon4.png'),
+
+
+                                        )
+                                    ),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 255,
+                                      top: 280
+                                  ),
+                                  child: Text(
+                                    ' In & Out',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400
+                                    ),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 255,
+                                      top: 295
+                                  ),
+                                  child: Text(
+                                    ' payment',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400
+                                    ),
                                   ),
                                 ),
                               ],
                             )
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.only(
-                            end: 20.0,
+                          padding: const EdgeInsets.only(
+
+                            top: 320,
+                            right: 10
                           ),
                           child: FloatingActionButton(
                             backgroundColor: primaryColor,
@@ -201,7 +351,7 @@ class HomeScreen extends StatelessWidget {
                             child: const Icon(
                               Icons.phone,
                               color: Colors.white,
-                              size: 33.0,
+                              size: 35.0,
                             ),
                           ),
                         ),

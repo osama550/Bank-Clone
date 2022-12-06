@@ -132,7 +132,15 @@ class ConfirmPaymentScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  paymentButton(context: context),
+                  paymentButton(
+                    context: context,
+                    onPressed: (){
+                      showDialog(
+                        context: context,
+                        builder: (context) => defaultErrorDialog(context),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
