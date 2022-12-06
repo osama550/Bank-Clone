@@ -121,5 +121,12 @@ void addTextToBankAccount({required String num}){
           emit(AddTextToBankAccountState());
 
 }
-
+  String dropdownvalue = 'USD';
+  late String newValue ;
+void dropDownValue(
+    newValue
+    ){
+  dropdownvalue = newValue;
+  emit(AddDropDownValueState());
+}
 }

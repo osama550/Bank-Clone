@@ -12,3 +12,4 @@ class ChangeFavoriteIconState extends AppStates {}
 class ChangeIsBankAccountEmptyState extends AppStates {}
 
 class AddTextToBankAccountState extends AppStates {}
+class AddDropDownValueState extends AppStates {}

@@ -33,7 +33,15 @@ class ElectricityBillScreen extends StatelessWidget {
                     name: 'Islam Ahmed',
                     bankAccount: '0552841664',
                   ),
-                  paymentButton(context: context),
+                  paymentButton(
+                    context: context,
+                    onPressed: (){
+                      showDialog(
+                        context: context,
+                        builder: (context) => defaultSuccessDialog(context),
+                      );
+                    },
+                  ),
 
                 ],
               ),
