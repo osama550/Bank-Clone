@@ -68,7 +68,7 @@ class ServiseScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20.0),
                             ),
                             child: Text(
-                             result,
+                              transferResult,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 20.sp,

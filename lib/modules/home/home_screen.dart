@@ -120,7 +120,18 @@ class HomeScreen extends StatelessWidget {
 
                                     child: IconButton(
                                         iconSize:35 ,
-                                        onPressed: (){},
+                                        onPressed: (){
+                                          showDialog(
+                                              context: context,
+                                              builder:(BuildContext context){
+                                                context=context;
+                                                return  defaultLoading();
+
+                                              },
+
+                                          );
+
+                                        },
                                         icon:const Image(
                                       image: AssetImage('images/icon1.png'),
 

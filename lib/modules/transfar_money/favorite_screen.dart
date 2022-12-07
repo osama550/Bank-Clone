@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:project/components/colors/colors.dart';
 import 'package:project/components/components.dart';
 import 'package:project/components/in_out_components.dart';
@@ -18,88 +19,151 @@ class FavoriteScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit = AppCubit.get(context);
         return SafeArea(
-          child: Scaffold(
-            body: Column(
-              children: [
-                buildAppBar(
-                  context: context,
-                  screenTitle: 'Transfer Money',
-                ),
-                const SizedBox(
-                  height: 25.0,
-                ),
-                defaultTextFormFaild(
-                  controller: searchController,
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0
+          child: DefaultTabController(
+            length: 4,
+            child: Scaffold(
+              appBar: PreferredSize(
+                preferredSize: Size.fromHeight(175.0),
+                child: AppBar(
+                  backgroundColor: Colors.white,
+                  title:buildTransferAppBar(
+                    context: context,
+                    screenTitle: 'Transfer Money',
                   ),
-                  child: Row(
-                    children: [
-                      TextButton(
-                        onPressed: (){},
-                        child: Text(
-                          'All',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22.0,
-                            color: primaryColor,
-                            decoration: TextDecoration.underline,
-                            decorationThickness: 3.0,
+                  flexibleSpace: Padding(
+                    padding: const EdgeInsets.only(
+                      right: 40.0,
+                      left: 40.0,
+                      top: 70.0,
+                    ),
+                    child: Container(
+                      height: 45.0,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                            borderSide: BorderSide.none,
                           ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                            borderSide: BorderSide.none,
+                          ),
+                          contentPadding: const EdgeInsets.only(
+                            bottom: 5.0,
+                          ),
+                          filled: true,
+                          fillColor: HexColor('#D9D9D9').withOpacity(0.5,),
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color: HexColor('#292D32').withOpacity(0.8),
+                            size: 30.0,
+                          ),
+                          suffixIcon:IconButton(
+                              onPressed: (){
+
+                              }, icon: Icon(
+                            Icons.settings,
+                            color: Colors.black,
+                          ))
                         ),
                       ),
+                    ),
+                  ),
+                  bottom: TabBar(
+                    tabs: [
+                      Tab(text: 'All',),
+                      Tab(text: 'Favorite',),
+                      Tab(text: 'Bank',),
+                      Tab(text: 'E-wallet',)
                     ],
+                    padding: EdgeInsets.only(
+
+                        right: 30,
+                        left: 30
+                    ),
+                    labelColor: primaryColor,
+                    unselectedLabelColor: Colors.black,
+                    labelPadding: EdgeInsets.only(
+                        left: 3
+                    ),
+
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.0,
+                    ),
+                    indicator: UnderlineTabIndicator(
+                      borderSide:BorderSide(
+                        width: 5,
+                        color: primaryColor,
+                      ),
+                      insets: EdgeInsets.symmetric(
+                        horizontal: 10.0,
+                      ),
+
+                    ),
+
                   ),
+                  elevation: 0,
+
+
                 ),
-                Expanded(
-                  child: ListView.separated(
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) =>
-                        buildFavoriteItem(
-                          context: context,
-                          image: 'images/${index + 1}.jpg',
-                          name: 'Anime World',
-                          type: 'Bank',
-                          accountNumber: '47896021',
-                          favoriteIcon: cubit.favoriteIcon,
-                          favoriteIconPressed: (){
-                            cubit.changeFavoriteIcon();
-                          },
-                          color: cubit.favoriteColor,
-                        ),
-                    separatorBuilder: (context, index) =>
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 25.0,
-                          ),
-                          child: Divider(
-                            color: Colors.grey.shade200,
-                            thickness: 1,
-                          ),
-                        ),
-                    itemCount: 10,
-                  ),
-                ),
-                const SizedBox(
-                  height: 70.0,
-                ),
-              ],
-            ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {},
-              backgroundColor: primaryColor,
-              child: const Icon(
-                Icons.add,
-                color: Colors.white,
-                size: 30.0,
               ),
+              body: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 40.0,
+                        ),
+                    child: Divider(
+                      color: Colors.grey.shade200,
+                      thickness: 2,
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.separated(
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) =>
+                          buildFavoriteItem(
+                            context: context,
+                            image: 'images/${index + 1}.jpg',
+                            name: 'Anime World',
+                            type: 'Bank',
+                            accountNumber: '47896021',
+                            favoriteIcon: cubit.favoriteIcon,
+                            favoriteIconPressed: (){
+                              cubit.changeFavoriteIcon();
+                            },
+                            color: cubit.favoriteColor,
+                          ),
+                      separatorBuilder: (context, index) =>
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 25.0,
+                            ),
+                            child: Divider(
+                              color: Colors.grey.shade200,
+                              thickness: 1,
+                            ),
+                          ),
+                      itemCount: 10,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 70.0,
+                  ),
+                ],
+              ),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {},
+                backgroundColor: primaryColor,
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                  size: 30.0,
+                ),
+              ),
+              bottomSheet: buildBottomSheet(),
             ),
-            bottomSheet: buildBottomSheet(),
           ),
         );
       },

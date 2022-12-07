@@ -150,11 +150,13 @@ class transfarScreen extends StatelessWidget {
                                     )),
                                 const Spacer(),
                                 Text(
-                                  '\$1234',
+                                '''\$$result''',
+
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 20.sp,
+                                    fontSize: 15.sp,
                                     fontWeight: FontWeight.bold,
+                                    overflow: TextOverflow.ellipsis
                                   ),
                                 ),
                                 const SizedBox(

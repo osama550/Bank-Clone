@@ -105,16 +105,32 @@ class AppCubit extends Cubit<AppStates> {
 void isBankAccountEmpty({
   required String text,
 }){
-    if(result.isEmpty){
-      result= text;
+    if(transferResult.isEmpty){
+      transferResult= text;
     }
     else{
 
-      result = text.substring(0, text.length-1);
+      transferResult = text.substring(0, text.length-1);
 
     }
     emit(ChangeIsBankAccountEmptyState());
 }
+
+  void isBankTransferEmpty({
+    required String text,
+  }){
+    if(transferResult.isEmpty){
+      transferResult= text;
+    }
+    else{
+
+      transferResult = text.substring(0, text.length-1);
+
+    }
+    emit(AddTextToBankTransferState());
+  }
+
+/////////////////////////////////////////////////////////////////////////
 
 void addTextToBankAccount({required String num}){
           result=result+num;
