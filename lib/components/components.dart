@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project/components/colors/colors.dart';
+import 'package:project/components/in_out_components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/modules/payment/electricity_screen.dart';
 import 'package:sizer/sizer.dart';
@@ -45,6 +47,7 @@ Widget buildAppBar({
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 15.sp,
+            color: Colors.black
           ),
         ),
         const Spacer(),
@@ -59,6 +62,79 @@ Widget buildAppBar({
             fit: BoxFit.fill,
           ),
         ),
+      ],
+    );
+//-----------------------------------------
+
+Widget buildTransferAppBar({
+  required BuildContext context,
+  required String screenTitle,
+}) =>
+    Column(
+      children: [
+        Row(
+          children: [
+            IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(
+                Icons.arrow_back_ios_rounded,
+                color: primaryColor,
+              ),
+            ),
+            const SizedBox(
+              width: 5.0,
+            ),
+            Text(
+              screenTitle,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15.sp,
+                  color: Colors.black
+              ),
+            ),
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(
+                right: 10.0,
+              ),
+              child: Image.asset(
+                'images/Picture14.png',
+                width: 18.w,
+                height: 7.h,
+                fit: BoxFit.fill,
+              ),
+            ),
+
+          ],
+        ),
+
+        // Container(
+        //   child: TextFormField(
+        //     decoration: InputDecoration(
+        //       enabledBorder: OutlineInputBorder(
+        //         borderRadius: BorderRadius.circular(20.0),
+        //         borderSide: BorderSide.none,
+        //       ),
+        //       focusedBorder: OutlineInputBorder(
+        //         borderRadius: BorderRadius.circular(20.0),
+        //         borderSide: BorderSide.none,
+        //       ),
+        //       contentPadding: const EdgeInsets.only(
+        //         bottom: 5.0,
+        //       ),
+        //       filled: true,
+        //       fillColor: HexColor('#D9D9D9').withOpacity(0.5,),
+        //       prefixIcon: Icon(
+        //         Icons.search,
+        //         color: HexColor('#292D32').withOpacity(0.8),
+        //         size: 30.0,
+        //       ),
+        //     ),
+        //   ),
+        // ),
+
       ],
     );
 
@@ -655,6 +731,7 @@ Widget defaultNumbers({
 
 //------------------------------------------------------------
 var result ='';
+var transferResult = '';
 Widget defaultTextKeyboard({required String num,
   required BuildContext context,}
 
@@ -689,9 +766,7 @@ Widget defaultTextKeyboard({required String num,
 Widget defaultIconKeyboard( {
   required VoidCallback onPressed,
   required Icon icon,
-}
-
-    ){
+}){
   return Container(
     height: 50,
     width: 60,
@@ -709,5 +784,29 @@ Widget defaultIconKeyboard( {
       onPressed: onPressed,
       child: icon,
     ),
+  );
+}
+
+//------------------------------------------------------------
+Widget defaultLoading(){
+  return AnimatedContainer(
+    duration:const Duration(milliseconds: 800) ,
+    curve: Curves.fastLinearToSlowEaseIn,
+    child: Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      child: Center(
+        child: SpinKitCubeGrid(
+          color: primaryColor,
+          size: 50,
+          duration: Duration(seconds: 4),
+
+        ),
+      ),
+    ),
+
   );
 }
