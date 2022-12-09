@@ -6,9 +6,13 @@ import 'package:project/components/components.dart';
 import 'package:project/components/in_out_components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
+import 'package:sizer/sizer.dart';
 
 class FavoriteScreen extends StatelessWidget {
   FavoriteScreen({Key? key}) : super(key: key);
+  final item =[];
+  final GlobalKey<AnimatedListState> _key = GlobalKey();
+  void addItem(){}
 
   var searchController = TextEditingController();
 
@@ -89,7 +93,7 @@ class FavoriteScreen extends StatelessWidget {
 
                     labelStyle: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18.0,
+                      fontSize: 12.sp,
                     ),
                     indicator: UnderlineTabIndicator(
                       borderSide:BorderSide(
@@ -120,33 +124,33 @@ class FavoriteScreen extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: ListView.separated(
-                      physics: const BouncingScrollPhysics(),
-                      itemBuilder: (context, index) =>
-                          buildFavoriteItem(
-                            context: context,
-                            image: 'images/${index + 1}.jpg',
-                            name: 'Anime World',
-                            type: 'Bank',
-                            accountNumber: '47896021',
-                            favoriteIcon: cubit.favoriteIcon,
-                            favoriteIconPressed: (){
-                              cubit.changeFavoriteIcon();
-                            },
-                            color: cubit.favoriteColor,
-                          ),
-                      separatorBuilder: (context, index) =>
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 25.0,
-                            ),
-                            child: Divider(
-                              color: Colors.grey.shade200,
-                              thickness: 1,
-                            ),
-                          ),
-                      itemCount: 10,
-                    ),
+                    child:ListView.separated(
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context, index) =>buildFavoriteItem(
+                          context: context,
+                          image: 'images/${index + 1}.jpg',
+                          name: 'Hex Team',
+                          type: 'Bank',
+                          accountNumber: '47896021',
+                          favoriteIcon: cubit.favoriteIcon,
+                          favoriteIconPressed: (){
+                            cubit.changeFavoriteIcon();
+                          },
+                          color: cubit.favoriteColor,
+                        ),
+
+                        separatorBuilder: (context, index) =>
+                    Padding(
+                    padding: const EdgeInsets.symmetric(
+                    horizontal: 25.0,
+                  ),
+            child: Divider(
+              color: Colors.grey.shade200,
+              thickness: 1,
+            ),
+          ),
+          itemCount: 10,
+        ),
                   ),
                   const SizedBox(
                     height: 70.0,
@@ -170,4 +174,5 @@ class FavoriteScreen extends StatelessWidget {
     );
   }
 }
+
 

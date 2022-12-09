@@ -7,6 +7,7 @@ import 'package:project/cubit/app_cubit.dart';
 import 'package:project/modules/Confirm%20Payment/Confirm%20Payment_Screen.dart';
 import 'package:project/modules/add%20new%20recipient/add%20new%20recipient_screen.dart';
 import 'package:project/modules/home/home_screen.dart';
+import 'package:project/modules/in_out_payment/history.dart';
 import 'package:project/modules/payment/electricity_bill.dart';
 import 'package:project/modules/transfar_money/favorite_screen.dart';
 import 'package:project/modules/transfar_money/transfar_money_screen.dart';
