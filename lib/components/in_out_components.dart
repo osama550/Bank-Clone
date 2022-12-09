@@ -22,7 +22,7 @@ Widget inOutButton({
         width: 2.5,
       ),
     ),
-    child: MaterialButton(
+    child: TextButton(
       onPressed: onPressed,
       child: Text(
         text,
@@ -95,7 +95,7 @@ Widget buildHistoryItem({
                   date,
                   style: TextStyle(
                     color: Colors.grey,
-                    fontSize: 10.sp,
+                    fontSize: 8.sp,
                   ),
                 ),
                 const SizedBox(
@@ -113,7 +113,7 @@ Widget buildHistoryItem({
                   time,
                   style: TextStyle(
                     color: Colors.grey,
-                    fontSize: 10.sp,
+                    fontSize: 9.sp,
                   ),
                 ),
               ],
