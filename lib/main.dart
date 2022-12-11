@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:project/bloc_observer.dart';
 import 'package:project/cubit/app_cubit.dart';
+import 'package:project/layout/layout_screen.dart';
 import 'package:project/modules/Confirm%20Payment/Confirm%20Payment_Screen.dart';
 import 'package:project/modules/add%20new%20recipient/add%20new%20recipient_screen.dart';
 import 'package:project/modules/home/home_screen.dart';
@@ -18,7 +19,7 @@ import 'modules/payment/electricity_screen.dart';
 
 //
 void main() {
-  disabledCapture();
+  // disabledCapture();
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp
@@ -36,9 +37,9 @@ void main() {
   Bloc.observer = MyBlocObserver();
 
 }
-disabledCapture(){
-  FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
-}
+// disabledCapture(){
+//   FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -56,7 +57,7 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.white,
             ),
             debugShowCheckedModeBanner: false,
-            home: FavoriteScreen() ,
+            home: LayoutScreen() ,
           );
         },
       ),

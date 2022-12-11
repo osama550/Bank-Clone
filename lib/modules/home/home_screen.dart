@@ -309,13 +309,11 @@ class HomeScreen extends StatelessWidget {
                                     ),
 
                                     child: IconButton(
-                                        iconSize:30 ,
-                                        onPressed: (){},
-                                        icon:const Image(
-                                          image: AssetImage('images/icon4.png'),
-
-
-                                        )
+                                      iconSize:30 ,
+                                      onPressed: (){},
+                                      icon:const Image(
+                                        image: AssetImage('images/icon4.png'),
+                                      ),
                                     ),
                                   ),
                                 ),
