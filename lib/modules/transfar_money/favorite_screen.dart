@@ -6,6 +6,7 @@ import 'package:project/components/components.dart';
 import 'package:project/components/in_out_components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
+import 'package:project/modules/add%20new%20recipient/add%20new%20recipient_screen.dart';
 import 'package:sizer/sizer.dart';
 
 class FavoriteScreen extends StatelessWidget {
@@ -29,6 +30,9 @@ class FavoriteScreen extends StatelessWidget {
               appBar: PreferredSize(
                 preferredSize: Size.fromHeight(175.0),
                 child: AppBar(
+                  iconTheme: IconThemeData(
+                    color: primaryColor, //change your color here
+                  ),
                   backgroundColor: Colors.white,
                   title:buildTransferAppBar(
                     context: context,
@@ -158,7 +162,9 @@ class FavoriteScreen extends StatelessWidget {
                 ],
               ),
               floatingActionButton: FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  navigateAndFinish(context, AddNewRecipientScreen());
+                },
                 backgroundColor: primaryColor,
                 child: const Icon(
                   Icons.add,

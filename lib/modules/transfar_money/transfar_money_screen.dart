@@ -6,7 +6,6 @@ import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
 import 'package:project/modules/Confirm%20Payment/Confirm%20Payment_Screen.dart';
-import 'package:project/modules/payment/electricity_screen.dart';
 import 'package:sizer/sizer.dart';
 
 class transfarScreen extends StatelessWidget {
@@ -23,6 +22,7 @@ class transfarScreen extends StatelessWidget {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state){},
       builder: (context, state){
+        var cubit = AppCubit.get(context);
         return SafeArea(
           child: Scaffold(
             backgroundColor: Colors.white,
@@ -150,7 +150,7 @@ class transfarScreen extends StatelessWidget {
                                     )),
                                 const Spacer(),
                                 Text(
-                                '''\$$result''',
+                                '''\$${cubit.transferResult}''',
 
                                   style: TextStyle(
                                     color: Colors.black,
@@ -171,6 +171,7 @@ class transfarScreen extends StatelessWidget {
                   ),
                 ),
                 defaultNumbers(
+                  amount: cubit.transferResult,
                   context: context,
                   onPressed: (){
                     navigateTo(context, ConfirmPaymentScreen());

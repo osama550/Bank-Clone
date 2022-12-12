@@ -1,8 +1,11 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project/components/colors/colors.dart';
 import 'package:project/components/components.dart';
+import 'package:project/cubit/app_cubit.dart';
+import 'package:project/cubit/app_state.dart';
 import 'package:project/modules/payment/electricity_screen.dart';
 import 'package:project/modules/transfar_money/transfar_money_screen.dart';
 import 'package:sizer/sizer.dart';
@@ -20,6 +23,10 @@ class AddNewRecipientScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<AppCubit, AppStates>(
+  listener: (context, state) {},
+  builder: (context, state) {
+    var cubit = AppCubit.get(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -246,6 +253,7 @@ class AddNewRecipientScreen extends StatelessWidget {
               ),
             ),
             defaultNumbers(
+              amount: cubit.addTransferRecipientResult,
               context: context,
               onPressed: (){
                 navigateTo(context, transfarScreen());
@@ -255,5 +263,7 @@ class AddNewRecipientScreen extends StatelessWidget {
         ),
       ),
     );
+  },
+);
   }
 }

@@ -61,6 +61,7 @@ class AppCubit extends Cubit<AppStates> {
     },
   ];
 
+
   void selectBillScreen(int index){
     emit(ChangePaymentBillScreenState());
     billIndex = index;
@@ -105,17 +106,15 @@ class AppCubit extends Cubit<AppStates> {
 void isBankAccountEmpty({
   required String text,
 }){
-    if(transferResult.isEmpty){
-      transferResult= text;
+    if(text.isEmpty){
+      text= text;
     }
     else{
-
-      transferResult = text.substring(0, text.length-1);
-
+      text = text.substring(0, text.length-1);
     }
     emit(ChangeIsBankAccountEmptyState());
 }
-
+//-------------------------------------
   void isBankTransferEmpty({
     required String text,
   }){
@@ -123,26 +122,55 @@ void isBankAccountEmpty({
       transferResult= text;
     }
     else{
-
       transferResult = text.substring(0, text.length-1);
-
     }
     emit(AddTextToBankTransferState());
   }
 
-/////////////////////////////////////////////////////////////////////////
+//-------------------------------------------------
 
-void addTextToBankAccount({required String num}){
-          result=result+num;
-          emit(AddTextToBankAccountState());
-
+  var result ='';
+  var transferResult = '';
+  var addTransferRecipientResult = '';
+void addTextToBankAccount({
+  required String num,
+  required String amount,
+}){
+  if(isMaxLength(text: amount)){
+    amount=amount+num;
+    print(amount);
+    print(num);
+  }
+  else{
+    amount = amount;
+  }
+    emit(AddTextToBankAccountState());
 }
+
   String dropdownvalue = 'USD';
   late String newValue ;
-void dropDownValue(
+  void dropDownValue(
     newValue
     ){
   dropdownvalue = newValue;
   emit(AddDropDownValueState());
 }
+
+//-------------------------------------------------
+
+//  this function used to limit the amount of money that can transfer or payment.
+bool isMaxLength({
+  required String text,
+}){
+  return text.length <= 8? true : false;
 }
+//-------------------------------------------------
+
+
+
+
+
+
+
+}
+

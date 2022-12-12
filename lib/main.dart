@@ -1,20 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:project/bloc_observer.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/layout/layout_screen.dart';
-import 'package:project/modules/Confirm%20Payment/Confirm%20Payment_Screen.dart';
-import 'package:project/modules/add%20new%20recipient/add%20new%20recipient_screen.dart';
-import 'package:project/modules/home/home_screen.dart';
-import 'package:project/modules/in_out_payment/history.dart';
-import 'package:project/modules/payment/electricity_bill.dart';
-import 'package:project/modules/transfar_money/favorite_screen.dart';
-import 'package:project/modules/transfar_money/transfar_money_screen.dart';
 import 'package:sizer/sizer.dart';
-
-import 'modules/payment/electricity_screen.dart';
 
 
 //

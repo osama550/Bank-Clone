@@ -6,6 +6,10 @@ import 'package:project/components/colors/colors.dart';
 import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
+import 'package:project/modules/choose_bill/choose_bill.dart';
+import 'package:project/modules/in_out_payment/history.dart';
+import 'package:project/modules/qr/qr_screen.dart';
+import 'package:project/modules/transfar_money/favorite_screen.dart';
 import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -162,18 +166,17 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                   child: Container(
                                     decoration: BoxDecoration(
-
                                         color: HexColor('#D8A616'),
                                         borderRadius: BorderRadiusDirectional.circular(50)
                                     ),
 
                                     child: IconButton(
                                         iconSize:35 ,
-                                        onPressed: (){},
+                                        onPressed: (){
+                                          navigateTo(context, FavoriteScreen());
+                                        },
                                         icon:const Image(
                                           image: AssetImage('images/icon2.png'),
-
-
                                         )
                                     ),
                                   ),
@@ -207,11 +210,11 @@ class HomeScreen extends StatelessWidget {
 
                                     child: IconButton(
                                         iconSize:30 ,
-                                        onPressed: (){},
+                                        onPressed: (){
+                                          navigateTo(context, QRScreen());
+                                        },
                                         icon:const Image(
                                           image: AssetImage('images/icon3.png'),
-
-
                                         )
                                     ),
                                   ),
@@ -258,7 +261,9 @@ class HomeScreen extends StatelessWidget {
 
                                     child: IconButton(
                                         iconSize:30 ,
-                                        onPressed: (){},
+                                        onPressed: (){
+                                          navigateTo(context, ChoosingBill());
+                                        },
                                         icon:const Image(
                                           image: AssetImage('images/icon4.png'),
 
@@ -310,9 +315,11 @@ class HomeScreen extends StatelessWidget {
 
                                     child: IconButton(
                                       iconSize:30 ,
-                                      onPressed: (){},
+                                      onPressed: (){
+                                        navigateTo(context, HistoryScreen());
+                                      },
                                       icon:const Image(
-                                        image: AssetImage('images/icon4.png'),
+                                        image: AssetImage('images/switch.png'),
                                       ),
                                     ),
                                   ),
