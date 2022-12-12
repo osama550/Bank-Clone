@@ -6,6 +6,8 @@ import 'package:project/cubit/app_cubit.dart';
 import 'package:project/layout/layout_screen.dart';
 import 'package:sizer/sizer.dart';
 
+
+//
 void main() {
   // disabledCapture();
   WidgetsFlutterBinding.ensureInitialized();

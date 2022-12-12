@@ -14,6 +14,13 @@ void navigateTo(context, Widget screen) {
   );
 }
 
+// void navigateReplacement(context, Widget screen) {
+//   Navigator.pushReplacement(
+//     context,
+//     MaterialPageRoute(builder: (context) => screen),
+//   );
+// }
+
 void navigateAndFinish(context, Widget screen) {
   Navigator.pushAndRemoveUntil(
     context,
@@ -74,15 +81,15 @@ Widget buildTransferAppBar({
       children: [
         Row(
           children: [
-            IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.arrow_back_ios_rounded,
-                color: primaryColor,
-              ),
-            ),
+            // IconButton(
+            //   onPressed: () {
+            //     Navigator.pop(context);
+            //   },
+            //   icon: Icon(
+            //     Icons.arrow_back_ios_rounded,
+            //     color: primaryColor,
+            //   ),
+            // ),
             const SizedBox(
               width: 5.0,
             ),
@@ -640,9 +647,10 @@ Widget buildBottomSheet() => Container(
 Widget defaultNumbers({
   required BuildContext context,
   required VoidCallback onPressed,
+  required String amount,
 }) => Container(
   decoration: BoxDecoration(
-    borderRadius: BorderRadius.only(
+    borderRadius: const BorderRadius.only(
       topRight: Radius.circular(15),
       topLeft: Radius.circular(15),
     ),
@@ -650,17 +658,23 @@ Widget defaultNumbers({
   ),
   child: Column(
     children:  [
-      SizedBox(
+      const SizedBox(
         height: 15,
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children:<Widget> [
-          defaultTextKeyboard(num: '1',
+          defaultTextKeyboard(
+              num: '1',
+              amount: amount,
               context: context),
           defaultTextKeyboard(num: '2',
+              amount: amount,
+
               context: context),
           defaultTextKeyboard(num: '3',
+              amount: amount,
+
               context: context),
         ],
       ),
@@ -671,10 +685,13 @@ Widget defaultNumbers({
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children:<Widget> [
           defaultTextKeyboard(num: '4',
+              amount: amount,
               context: context),
           defaultTextKeyboard(num: '5',
+              amount: amount,
               context: context),
           defaultTextKeyboard(num: '6',
+              amount: amount,
               context: context),
         ],
       ),
@@ -685,10 +702,13 @@ Widget defaultNumbers({
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children:<Widget> [
           defaultTextKeyboard(num: '7',
+              amount: amount,
               context: context),
           defaultTextKeyboard(num: '8',
+              amount: amount,
               context: context),
           defaultTextKeyboard(num: '9',
+              amount: amount,
               context: context),
         ],
       ),
@@ -704,11 +724,12 @@ Widget defaultNumbers({
         color: Colors.white,
       ),
           onPressed: () {
-            AppCubit.get(context).isBankAccountEmpty(text: result);
+            AppCubit.get(context).isBankAccountEmpty(text: amount);
           }
           ),
           defaultTextKeyboard(num: '0',
-          context: context),
+              amount: amount,
+              context: context),
           defaultIconKeyboard(
             icon:Icon(
             Icons.arrow_forward_rounded,
@@ -730,12 +751,12 @@ Widget defaultNumbers({
 );
 
 //------------------------------------------------------------
-var result ='';
-var transferResult = '';
-Widget defaultTextKeyboard({required String num,
-  required BuildContext context,}
-
-    ){
+Widget defaultTextKeyboard({
+  required String num,
+  required BuildContext context,
+  required String amount,
+})
+{
   return Container(
     height: 50,
     width: 60,
@@ -751,8 +772,10 @@ Widget defaultTextKeyboard({required String num,
     ),
     child: TextButton(
       onPressed: ( ) {
-        AppCubit.get(context).addTextToBankAccount(num: num);
-
+        AppCubit.get(context).addTextToBankAccount(
+          num: num,
+          amount: amount,
+        );
       },
       child: Text(num,
           style: TextStyle(
@@ -808,5 +831,71 @@ Widget defaultLoading(){
       ),
     ),
 
+  );
+}
+
+//--------------------------------------------------------
+
+Widget defaultBackgroundImage(){
+  return Container(
+    height: double.infinity,
+    child: Image.asset(
+      'images/shape.jpg',
+      // fit: BoxFit.fill,
+    ),
+  );
+}
+
+//----------------------------------------------------
+
+Widget defaultBankImage(){
+  return Container(
+    height: 20.0.h,
+    width: double.infinity,
+    child: Image.asset(
+      'images/Picture20.png',
+      fit: BoxFit.fill,
+    ),
+  );
+}
+
+//----------------------------------------------------
+
+defaultShowButtomSheet({
+  Icon? icon,
+  context,
+
+}
+    ){
+  return showModalBottomSheet(
+      backgroundColor: primaryColor.withOpacity(1.0),
+      context: context,
+      builder: (context){
+        return Container(
+          width: double.infinity,
+          height: 38.h,
+          decoration: BoxDecoration(
+            color: primaryColor.withOpacity(1.0),
+            boxShadow: [
+              BoxShadow(
+                color: primaryColor.withOpacity(0.1),
+                blurRadius: 10.0,
+                spreadRadius: 10.0,
+                // offset: const Offset(5, 5),
+              ),
+            ],
+          ),
+          child: Center(
+            child: Container(
+              width: 120,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20)
+              ),
+              child: icon,
+            ),
+          ),
+        );
+      }
   );
 }

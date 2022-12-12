@@ -27,10 +27,11 @@ class ServiseScreen extends StatelessWidget {
                       children: [
                         paymentBill(
                             context: context,
-                            screenTitle: ('Electricity'),
-                            imagePath: 'images/Picture2.png',
-                            imageHeader: 'Pay Electricity Bill',
-                            payType: ('Electricity')),
+                            screenTitle: cubit.bills[cubit.billIndex]['title'],
+                            imagePath: cubit.bills[cubit.billIndex]['image'],
+                            imageHeader: cubit.bills[cubit.billIndex]['title'],
+                            payType: 'Pay ${cubit.bills[cubit.billIndex]['title']} Bill',
+                        ),
                         SizedBox(
                           height: 4.h,
                         ),
@@ -46,14 +47,14 @@ class ServiseScreen extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.only(
+                          padding: const EdgeInsetsDirectional.only(
                             start: 25,
                             end: 25,
                             top: 5,
                           ),
                           child: Container(
                             width: double.infinity,
-                            padding: EdgeInsetsDirectional.only(
+                            padding: const EdgeInsetsDirectional.only(
                               top: 7,
                               bottom: 10,
                               start: 13,
@@ -68,13 +69,12 @@ class ServiseScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20.0),
                             ),
                             child: Text(
-                              transferResult,
+                              cubit.result,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 20.sp,
                                 fontWeight: FontWeight.w400,
                               ),
-
                             ),
                           ),
                         ),
@@ -83,6 +83,7 @@ class ServiseScreen extends StatelessWidget {
                   ),
                 ),
                 defaultNumbers(
+                  amount: cubit.result,
                   context: context,
                   onPressed: (){
                     navigateTo(context, ElectricityBillScreen());
