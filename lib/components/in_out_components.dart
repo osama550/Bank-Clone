@@ -453,7 +453,7 @@ Widget buildInOutButtons({
 //----------------------------------------------------------------------
 
 
-Widget buildFavoriteItem({
+Widget buildFavoriteItem( {
   required BuildContext context,
   required String image,
   required String name,
@@ -462,6 +462,8 @@ Widget buildFavoriteItem({
   required IconData favoriteIcon,
   required VoidCallback favoriteIconPressed,
   Color color = Colors.white,
+  Color iconColor = Colors.amber,
+  required int index,
 }) => Padding(
   padding: const EdgeInsets.symmetric(
     horizontal: 13.0,
@@ -537,7 +539,7 @@ Widget buildFavoriteItem({
             icon: Icon(
               favoriteIcon,
               size: 30.0,
-              color: AppCubit.get(context).favoriteColor,
+              color: iconColor,
             ),
           ),
         ],

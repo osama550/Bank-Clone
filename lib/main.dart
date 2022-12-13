@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/bloc_observer.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/layout/layout_screen.dart';
+import 'package:project/modules/transfar_money/favorite_screen.dart';
 import 'package:sizer/sizer.dart';
 
 
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.white,
             ),
             debugShowCheckedModeBanner: false,
-            home: LayoutScreen() ,
+            home: FavoriteScreen() ,
           );
         },
       ),
