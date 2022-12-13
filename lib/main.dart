@@ -5,6 +5,7 @@ import 'package:project/bloc_observer.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/layout/layout_screen.dart';
 import 'package:project/modules/transfar_money/favorite_screen.dart';
+import 'package:project/modules/transfar_money/transfar_money_screen.dart';
 import 'package:sizer/sizer.dart';
 
 
