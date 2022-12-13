@@ -132,17 +132,18 @@ class FavoriteScreen extends StatelessWidget {
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) =>buildFavoriteItem(
                           context: context,
+                          index: index-1,
                           image: 'images/${index + 1}.jpg',
                           name: 'Hex Team',
                           type: 'Bank',
                           accountNumber: '47896021',
-                          favoriteIcon: cubit.favoriteIcon,
+                          favoriteIcon: cubit.favoriteIcon[index],
                           favoriteIconPressed: (){
-                            cubit.changeFavoriteIcon();
+                            print('Index Which CLicked Here ============> ${index}');
+                            cubit.changeFavoriteIcon(index: index);
                           },
-                          color: cubit.favoriteColor,
+                          color: cubit.favoriteColor[index],
                         ),
-
                         separatorBuilder: (context, index) =>
                     Padding(
                     padding: const EdgeInsets.symmetric(
@@ -153,7 +154,7 @@ class FavoriteScreen extends StatelessWidget {
               thickness: 1,
             ),
           ),
-          itemCount: 10,
+          itemCount:10 ,
         ),
                   ),
                   const SizedBox(
