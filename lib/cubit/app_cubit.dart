@@ -1,15 +1,7 @@
-
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:local_auth/local_auth.dart';
 import 'package:project/components/components.dart';
 import 'package:project/cubit/app_state.dart';
-import 'package:project/layout/layout_screen.dart';
-import 'package:project/models/layout_model.dart';
-import 'package:project/network/remote/dio_helper.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
@@ -152,58 +144,46 @@ class AppCubit extends Cubit<AppStates> {
 
 void isBankAccountEmpty({
   required String text,
-  int? id,
 }){
-  if(text.isEmpty){
-    text= text;
-  }
-  else{
-    text = text.substring(0, text.length-1);
-  }
-  switch(id){
-    case 1:
-      result = text;
-      break;
-    case 2:
-      transferResult = text;
-      break;
-    case 3:
-      addTransferRecipientResult = text;
-      break;
-  }
+    if(text.isEmpty){
+      text= text;
+    }
+    else{
+      text = text.substring(0, text.length-1);
+    }
     emit(ChangeIsBankAccountEmptyState());
 }
 //-------------------------------------
+  void isBankTransferEmpty({
+    required String text,
+  }){
+    if(transferResult.isEmpty){
+      transferResult= text;
+    }
+    else{
+      transferResult = text.substring(0, text.length-1);
+    }
+    emit(AddTextToBankTransferState());
+  }
 
-  String result = '';
+//-------------------------------------------------
+
+  var result ='';
   var transferResult = '';
   var addTransferRecipientResult = '';
-  var amount = '';
 void addTextToBankAccount({
   required String num,
   required String amount,
-  required int id,
 }){
-  emit(AddTextToBankAccountState());
   if(isMaxLength(text: amount)){
-    amount = amount + num;
+    amount=amount+num;
     print(amount);
-    print(amount.length);
+    print(num);
   }
   else{
     amount = amount;
   }
-  switch(id){
-    case 1:
-      result = amount;
-      break;
-    case 2:
-      transferResult = amount;
-      break;
-    case 3:
-      addTransferRecipientResult = amount;
-      break;
-  }
+    emit(AddTextToBankAccountState());
 }
 
   String dropdownvalue = 'USD';
@@ -221,127 +201,94 @@ void addTextToBankAccount({
 bool isMaxLength({
   required String text,
 }){
-  return text.length < 8? true : false;
+  return text.length <= 8? true : false;
 }
 //-------------------------------------------------
+  List<Map<String,dynamic>> allUsers =[
+    {
+      "id": 1,
+      "name": "Osama Kamel",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+    {
+      "id": 2,
+      "name": "Osama",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+    {
+      "id": 3,
+      "name": "Eslam",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+    {
+      "id": 4,
+      "name": "Eldahshan",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+    {
+      "id": 5,
+      "name": "Ahmed",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+    {
+      "id": 6,
+      "name": "Hero",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+    {
+      "id": 7,
+      "name": "hero",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+    {
+      "id": 8,
+      "name": "Omar",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+    {
+      "id": 9,
+      "name": "Mohamed",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+    {
+      "id": 10,
+      "name": "Khaled",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+  ];
 
-void clearAmount({
-  required int id,
-}){
-    switch(id){
-      case 1:
-        result = '';
-        break;
-      case 2:
-        transferResult = '';
-        break;
-      case 3:
-        addTransferRecipientResult = '';
-        break;
-    }
-}
-//-------------------------------------------------
+  List<Map<String,dynamic>> searchUser=[];
 
-  LayoutModel? layoutModel;
-  String? data;
-void getLayoutData(){
-  emit(GetLayoutLoadingState());
-  DioHelper.getData(
-      path: 'atm/home.php',
-    ).then((value){
-      // print(value.data.runtimeType);
-      // print(value.data);
-      // layoutModel = LayoutModel.fromJson(value.data);
-      layoutModel = LayoutModel.fromJson(jsonDecode(value.data));
-      // print(layoutModel!.totalBalance);
-      print('Get Layout Data Successfully');
-      emit(GetLayoutSuccessState());
-    }).catchError((error){
-      emit(GetLayoutErrorState());
-      print('Error When Get Layout Data Data =====> ${error.toString()}');
-  });
-}
-
-
-var userAccountIndex;
-void userAccount({
-  required int index,
-}){
-  emit(ChangeUserAccountState());
-  userAccountIndex = index;
-}
-
-//---------------------------------------------------
-
-  late LocalAuthentication auth = LocalAuthentication();
-  bool? canCheckBiometrics;
-  List<BiometricType>? availableBiometrics;
-  bool isAuthenticating = false;
-  String authorized = 'Not Authorized';
-  int start = 30;
-
-  Future<void> checkBiometrics() async {
-    bool? CheckBiometrics;
-    try {
-      print('ok');
-      CheckBiometrics = await auth.canCheckBiometrics;
-    } on PlatformException catch (e) {
-      print('No No');
-      CheckBiometrics = false;
-      print(e);
-    }
-     canCheckBiometrics = CheckBiometrics;
+  void searchuser(){
+    searchUser=allUsers;
+    emit(SearchUserToBankTransferState());
   }
 
-  Future<void> getAvailableBiometrics() async {
-    List<BiometricType>? availableBiometric;
-    try {
-      availableBiometric = await auth.getAvailableBiometrics();
-    } on PlatformException catch (e) {
-      availableBiometric = <BiometricType>[];
-      print(e);
+  void runFilter(String enteredKeyword) {
+    List<Map<String, dynamic>> results = [];
+    if (enteredKeyword.isEmpty) {
+      results = allUsers;
     }
-      availableBiometrics = availableBiometric;
-  }
-
-
-  Future<void> authenticate({
-  required BuildContext context,
-}) async {
-    emit(AuthenticateUserLoadingState());
-    bool authenticated = false;
-    try {
-        isAuthenticating = true;
-        authorized = 'Authenticating';
-      authenticated = await auth.authenticate(
-        localizedReason: 'Let OS determine authentication method',
-        options: const AuthenticationOptions(
-          stickyAuth: true,
-          useErrorDialogs: true,
-          biometricOnly: true,
-        ),
-      );
-      BiometricType.fingerprint;
-        BiometricType.fingerprint;
-        isAuthenticating = false;
-        emit(AuthenticateUserSuccessState());
-    } on PlatformException catch (e) {
-        isAuthenticating = false;
-        authorized = 'Error - The operation was canceled because the API is locked out due to too many attempts. This occurs after 5 failed attempts, and lasts for ${start} seconds.}';
-        print(e.message);
-        emit(AuthenticateUserErrorState());
-      return;
+    else
+    {
+      results = allUsers
+          .where((user) =>
+          user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .toList();
     }
+ searchUser=results;
+    emit(SearchUserToBankTransferState());
 
-      authorized = authenticated ? 'Authorized' : 'Not Authorized';
-      // authorized == 'Authorized' ? navigateAndFinish(context, LayoutScreen()) : null;
-      authorized == 'Authorized' ? getLayoutData() : null;
-      //     ? Navigator.pushAndRemoveUntil(
-      //   context,
-      //   MaterialPageRoute(builder: (context) =>  LayoutScreen()),
-      //       (Route<dynamic> route) => false,
-      // )
-      //     : null;
   }
 
 
