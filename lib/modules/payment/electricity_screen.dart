@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:project/components/colors/colors.dart';
 import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
@@ -85,6 +84,7 @@ class ServiseScreen extends StatelessWidget {
                 defaultNumbers(
                   amount: cubit.result,
                   context: context,
+                  id: 1,
                   onPressed: (){
                     navigateTo(context, ElectricityBillScreen());
                   },

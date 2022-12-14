@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        // var cubit = AppCubit.get(context);
+        var cubit = AppCubit.get(context);
         return SafeArea(
           child: Scaffold(
             body: SingleChildScrollView(
@@ -98,7 +98,8 @@ class HomeScreen extends StatelessWidget {
                                         horizontal: 12.0,
                                       ),
                                       child: Text(
-                                        'Credit Account \$100,000',
+                                        // 'Credit Account \$100,000',
+                                        '${cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountType}\n\$${cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountBalance}',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: Colors.white,
