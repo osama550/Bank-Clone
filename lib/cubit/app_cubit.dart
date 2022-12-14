@@ -204,8 +204,92 @@ bool isMaxLength({
   return text.length <= 8? true : false;
 }
 //-------------------------------------------------
+  List<Map<String,dynamic>> allUsers =[
+    {
+      "id": 1,
+      "name": "Osama Kamel",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+    {
+      "id": 2,
+      "name": "Osama",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+    {
+      "id": 3,
+      "name": "Eslam",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+    {
+      "id": 4,
+      "name": "Eldahshan",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+    {
+      "id": 5,
+      "name": "Ahmed",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+    {
+      "id": 6,
+      "name": "Hero",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+    {
+      "id": 7,
+      "name": "hero",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+    {
+      "id": 8,
+      "name": "Omar",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+    {
+      "id": 9,
+      "name": "Mohamed",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+    {
+      "id": 10,
+      "name": "Khaled",
+      "type": "Bank",
+      "accountNumber": "47896021"
+    },
+  ];
 
+  List<Map<String,dynamic>> searchUser=[];
 
+  void searchuser(){
+    searchUser=allUsers;
+    emit(SearchUserToBankTransferState());
+  }
+
+  void runFilter(String enteredKeyword) {
+    List<Map<String, dynamic>> results = [];
+    if (enteredKeyword.isEmpty) {
+      results = allUsers;
+    }
+    else
+    {
+      results = allUsers
+          .where((user) =>
+          user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .toList();
+    }
+ searchUser=results;
+    emit(SearchUserToBankTransferState());
+
+  }
 
 
 
