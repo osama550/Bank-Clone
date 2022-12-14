@@ -15,9 +15,22 @@ class LayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        var cubit = AppCubit.get(context);
+      listener: (context, state) {
+        // if(AppCubit.get(context).layoutModel == null) {
+        //   showDialog(
+        //     context: context,
+        //     builder:(BuildContext context){
+        //       context=context;
+        //       return  defaultLoading();
+        //     },
+        //   );
+        // }
+        // if(state is GetLayoutLoadingState){
+        //   print('Yeeeeeeeeeeeeeeeeeeeeeeeeeees');
+        // }
+      },
+    builder: (context, state) {
+      var cubit = AppCubit.get(context);
       return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.light,
@@ -87,7 +100,7 @@ class LayoutScreen extends StatelessWidget {
                                   height: 5.0,
                                 ),
                                 Text(
-                                  'Islam Eldahshan',
+                                  '${cubit.layoutModel!.clientName}',
                                   style: TextStyle(
                                     color: layoutNameColor,
                                     fontSize: 18.0,
@@ -148,44 +161,58 @@ class LayoutScreen extends StatelessWidget {
                           ],
                         ),
                         child: Center(
-                          child: SfCircularChart(
-                            series: <CircularSeries>[
-                              DoughnutSeries<AccountTypes, String>(
-                                radius: '40%',
-                                opacity: 0.7,
-                                onPointTap: (pointInteractionDetails){
-                                  print(pointInteractionDetails.pointIndex);
-                                  AppCubit.get(context).getLayoutData();
-                                  navigateTo(context, HomeScreen());
-                                },
-                                dataSource:[
-                                  AccountTypes(cubit.layoutModel!.clientAccounts[0].accountType!, 15000, const Color.fromRGBO(215, 80, 20, 1)),
-                                  AccountTypes(cubit.layoutModel!.clientAccounts[1].accountType!, 12000, const Color.fromRGBO(216, 110, 20, 1)),
-                                  AccountTypes(cubit.layoutModel!.clientAccounts[2].accountType!, 10000, const Color.fromRGBO(216, 140, 20, 1)),
-                                  AccountTypes(cubit.layoutModel!.clientAccounts[3].accountType!, 8000, const Color.fromRGBO(216, 160, 20, 1)),
+                          child: Stack(
+                            children: [
+                              SfCircularChart(
+                                series: <CircularSeries>[
+                                  DoughnutSeries<AccountTypes, String>(
+                                    radius: '60%',
+                                    opacity: 0.7,
+                                    onPointTap: (pointInteractionDetails){
+                                      // print(pointInteractionDetails.pointIndex);
+                                      // AppCubit.get(context).getLayoutData();
+                                      // cubit.userAccount(index:pointInteractionDetails.pointIndex!);
+                                      cubit.userAccountIndex = pointInteractionDetails.pointIndex!;
+                                      navigateTo(context, HomeScreen());
+                                      },
+                                    dataSource:[
+                                      AccountTypes(cubit.layoutModel!.clientAccounts[0].accountType!, int.parse(cubit.layoutModel!.clientAccounts[0].accountBalance!), const Color.fromRGBO(215, 80, 20, 1)),
+                                      AccountTypes(cubit.layoutModel!.clientAccounts[1].accountType!, int.parse(cubit.layoutModel!.clientAccounts[1].accountBalance!), const Color.fromRGBO(216, 110, 20, 1)),
+                                      AccountTypes(cubit.layoutModel!.clientAccounts[2].accountType!, int.parse(cubit.layoutModel!.clientAccounts[2].accountBalance!), const Color.fromRGBO(216, 140, 20, 1)),
+                                      AccountTypes(cubit.layoutModel!.clientAccounts[3].accountType!, int.parse(cubit.layoutModel!.clientAccounts[3].accountBalance!), const Color.fromRGBO(216, 160, 20, 1)),
+                                    ],
+                                    xValueMapper: (AccountTypes data, _) => data.type,
+                                    yValueMapper: (AccountTypes data, _) => data.salary,
+                                    pointColorMapper: (AccountTypes data, _) => data.color,
+                                    dataLabelMapper: (AccountTypes data, _) => '\$${data.salary}\n${data.type}',
+                                    enableTooltip: true,
+                                    dataLabelSettings: DataLabelSettings(
+                                      isVisible: true,
+                                      labelPosition: ChartDataLabelPosition.outside,
+                                      color: Colors.black26.withOpacity(0.25),
+                                      borderRadius: 8.0,
+                                      opacity: 0.1,
+                                      textStyle: const TextStyle(
+                                        fontSize: 15.0,
+                                      ),
+                                    ),
+                                    explode: true,
+                                    // Explode all the segments
+                                    explodeAll: true,
+                                  )
                                 ],
-                                xValueMapper: (AccountTypes data, _) => data.type,
-                                yValueMapper: (AccountTypes data, _) => data.salary,
-                                pointColorMapper: (AccountTypes data, _) => data.color,
-                                dataLabelMapper: (AccountTypes data, _) => '\$${data.salary}\n${data.type}',
-                                enableTooltip: true,
-                                sortingOrder: SortingOrder.ascending,
-                                dataLabelSettings: DataLabelSettings(
-                                  isVisible: true,
-                                  labelPosition: ChartDataLabelPosition.outside,
-                                  color: Colors.black26.withOpacity(0.25),
-                                  borderRadius: 8.0,
-                                  opacity: 0.1,
-                                  textStyle: const TextStyle(
-                                    fontSize: 15.0,
+                                enableMultiSelection: true,
+                              ),
+                              Center(
+                                child: Text(
+                                  '\$${cubit.layoutModel!.totalBalance}',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                explode: true,
-                                // Explode all the segments
-                                explodeAll: true,
-                              )
+                              ),
                             ],
-                            enableMultiSelection: true,
                           ),
                         ),
                       ),

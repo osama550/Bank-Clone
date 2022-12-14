@@ -2,8 +2,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:local_auth/local_auth.dart';
+import 'package:project/components/components.dart';
 import 'package:project/cubit/app_state.dart';
+import 'package:project/layout/layout_screen.dart';
 import 'package:project/models/layout_model.dart';
 import 'package:project/network/remote/dio_helper.dart';
 
@@ -240,17 +244,16 @@ void clearAmount({
 
   LayoutModel? layoutModel;
   String? data;
-void getLayoutData()async{
+void getLayoutData(){
   emit(GetLayoutLoadingState());
-    await DioHelper.getData(
+  DioHelper.getData(
       path: 'atm/home.php',
     ).then((value){
       // print(value.data.runtimeType);
       // print(value.data);
       // layoutModel = LayoutModel.fromJson(value.data);
       layoutModel = LayoutModel.fromJson(jsonDecode(value.data));
-      print('Type of Data ============ ${layoutModel.runtimeType}');
-      print(layoutModel!.totalBalance);
+      // print(layoutModel!.totalBalance);
       print('Get Layout Data Successfully');
       emit(GetLayoutSuccessState());
     }).catchError((error){
@@ -259,6 +262,87 @@ void getLayoutData()async{
   });
 }
 
+
+var userAccountIndex;
+void userAccount({
+  required int index,
+}){
+  emit(ChangeUserAccountState());
+  userAccountIndex = index;
+}
+
+//---------------------------------------------------
+
+  late LocalAuthentication auth = LocalAuthentication();
+  bool? canCheckBiometrics;
+  List<BiometricType>? availableBiometrics;
+  bool isAuthenticating = false;
+  String authorized = 'Not Authorized';
+  int start = 30;
+
+  Future<void> checkBiometrics() async {
+    bool? CheckBiometrics;
+    try {
+      print('ok');
+      CheckBiometrics = await auth.canCheckBiometrics;
+    } on PlatformException catch (e) {
+      print('No No');
+      CheckBiometrics = false;
+      print(e);
+    }
+     canCheckBiometrics = CheckBiometrics;
+  }
+
+  Future<void> getAvailableBiometrics() async {
+    List<BiometricType>? availableBiometric;
+    try {
+      availableBiometric = await auth.getAvailableBiometrics();
+    } on PlatformException catch (e) {
+      availableBiometric = <BiometricType>[];
+      print(e);
+    }
+      availableBiometrics = availableBiometric;
+  }
+
+
+  Future<void> authenticate({
+  required BuildContext context,
+}) async {
+    emit(AuthenticateUserLoadingState());
+    bool authenticated = false;
+    try {
+        isAuthenticating = true;
+        authorized = 'Authenticating';
+      authenticated = await auth.authenticate(
+        localizedReason: 'Let OS determine authentication method',
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+          useErrorDialogs: true,
+          biometricOnly: true,
+        ),
+      );
+      BiometricType.fingerprint;
+        BiometricType.fingerprint;
+        isAuthenticating = false;
+        emit(AuthenticateUserSuccessState());
+    } on PlatformException catch (e) {
+        isAuthenticating = false;
+        authorized = 'Error - The operation was canceled because the API is locked out due to too many attempts. This occurs after 5 failed attempts, and lasts for ${start} seconds.}';
+        print(e.message);
+        emit(AuthenticateUserErrorState());
+      return;
+    }
+
+      authorized = authenticated ? 'Authorized' : 'Not Authorized';
+      // authorized == 'Authorized' ? navigateAndFinish(context, LayoutScreen()) : null;
+      authorized == 'Authorized' ? getLayoutData() : null;
+      //     ? Navigator.pushAndRemoveUntil(
+      //   context,
+      //   MaterialPageRoute(builder: (context) =>  LayoutScreen()),
+      //       (Route<dynamic> route) => false,
+      // )
+      //     : null;
+  }
 
 
 

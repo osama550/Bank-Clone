@@ -40,6 +40,7 @@ dependencies:
   dio: ^4.0.6
   flutter_bloc: ^8.1.0
   cool_alert: ^1.1.0
+  local_auth: ^2.1.2
   qr_flutter: ^4.0.0
   sleek_circular_slider: ^2.0.1
   percent_indicator: ^4.2.2

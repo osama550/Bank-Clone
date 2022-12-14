@@ -22,3 +22,11 @@ class GetLayoutLoadingState extends AppStates {}
 class GetLayoutSuccessState extends AppStates {}
 
 class GetLayoutErrorState extends AppStates {}
+
+class ChangeUserAccountState extends AppStates {}
+
+class AuthenticateUserLoadingState extends AppStates {}
+
+class AuthenticateUserSuccessState extends AppStates {}
+
+class AuthenticateUserErrorState extends AppStates {}
