@@ -152,7 +152,7 @@ class HomeScreen extends StatelessWidget {
                                   child: Text(
                                     'withdrawel',
                                     style: TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 14,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w400
                                     ),
@@ -189,7 +189,7 @@ class HomeScreen extends StatelessWidget {
                                   child: Text(
                                     'transfer',
                                     style: TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 14,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w400
                                     ),
@@ -227,7 +227,7 @@ class HomeScreen extends StatelessWidget {
                                   child: Text(
                                     'payment of',
                                     style: TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 14,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w400
                                     ),
@@ -236,12 +236,12 @@ class HomeScreen extends StatelessWidget {
                                 const Padding(
                                   padding: EdgeInsets.only(
                                       left: 55,
-                                      top: 277
+                                      top: 280
                                   ),
                                   child: Text(
                                     'purchases',
                                     style: TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 14,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w400,
                                     ),
@@ -280,7 +280,7 @@ class HomeScreen extends StatelessWidget {
                                   child: Text(
                                     'payment',
                                     style: TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 14,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w400
                                     ),
@@ -289,12 +289,12 @@ class HomeScreen extends StatelessWidget {
                                 const Padding(
                                   padding: EdgeInsets.only(
                                       left: 160,
-                                      top: 320
+                                      top: 323
                                   ),
                                   child: Text(
                                     'of bills',
                                     style: TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 14,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w400
                                     ),
@@ -314,7 +314,7 @@ class HomeScreen extends StatelessWidget {
                                     ),
 
                                     child: IconButton(
-                                      iconSize:30 ,
+                                      iconSize:25 ,
                                       onPressed: (){
                                         navigateTo(context, HistoryScreen());
                                       },
@@ -326,13 +326,13 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.only(
-                                      left: 255,
-                                      top: 280
+                                      left: 250,
+                                      top: 285
                                   ),
                                   child: Text(
-                                    ' In & Out',
+                                    'In & Out',
                                     style: TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 14,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w400
                                     ),
@@ -340,13 +340,13 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.only(
-                                      left: 255,
-                                      top: 295
+                                      left: 247,
+                                      top: 300
                                   ),
                                   child: Text(
-                                    ' payment',
+                                    'payment',
                                     style: TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 14,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w400
                                     ),

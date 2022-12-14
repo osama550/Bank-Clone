@@ -82,18 +82,57 @@ class AppCubit extends Cubit<AppStates> {
   }
 
 
-  IconData favoriteIcon = Icons.star_border_rounded;
-  bool isFavorite = false;
-  Color favoriteColor = Colors.grey;
-  void changeFavoriteIcon(){
-    isFavorite = !isFavorite;
-    if(isFavorite){
-      favoriteIcon = Icons.star_rounded;
-      favoriteColor = Colors.amber;
+  // IconData favoriteIcon = Icons.star_border_rounded;
+  // bool isFavorite = false;
+  List isFavorite = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ];
+  List<IconData> favoriteIcon = [
+    Icons.star_border_rounded,
+    Icons.star_border_rounded,
+    Icons.star_border_rounded,
+    Icons.star_border_rounded,
+    Icons.star_border_rounded,
+    Icons.star_border_rounded,
+    Icons.star_border_rounded,
+    Icons.star_border_rounded,
+    Icons.star_border_rounded,
+    Icons.star_border_rounded,
+    Icons.star_border_rounded,
+  ];
+  List favoriteColor = [
+    Colors.grey,
+    Colors.grey,
+    Colors.grey,
+    Colors.grey,
+    Colors.grey,
+    Colors.grey,
+    Colors.grey,
+    Colors.grey,
+    Colors.grey,
+    Colors.grey,
+  ];
+
+  void changeFavoriteIcon({
+  required int index,
+}){
+    isFavorite[index] = !isFavorite[index];
+    if(isFavorite[index]){
+      favoriteIcon[index] = Icons.star_rounded;
+      favoriteColor[index] = Colors.amber;
     }
     else{
-      favoriteIcon = Icons.star_border_rounded;
-      favoriteColor = Colors.grey;
+      favoriteIcon[index] = Icons.star_border_outlined;
+      favoriteColor[index] = Colors.grey;
     }
     emit(ChangeFavoriteIconState());
   }

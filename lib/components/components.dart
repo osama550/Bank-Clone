@@ -291,7 +291,7 @@ Widget paymentButton({
         child: MaterialButton(
           onPressed: onPressed,
           child: Text(
-            'Confirm Payment',
+            text,
             style: TextStyle(
               color: Colors.white,
               fontSize: 15.sp,
@@ -584,7 +584,7 @@ Widget buildBillType({
               Text(
                 title,
                 style: TextStyle(
-                  fontSize: 12.0.sp,
+                  fontSize: 10.0.sp,
                 ),
               ),
             ],
@@ -833,7 +833,7 @@ Widget defaultIconKeyboard( {
 //------------------------------------------------------------
 Widget defaultLoading(){
   return AnimatedContainer(
-    duration:const Duration(milliseconds: 800) ,
+    duration:const Duration(milliseconds: 1200) ,
     curve: Curves.fastLinearToSlowEaseIn,
     child: Dialog(
       shape: RoundedRectangleBorder(
@@ -842,10 +842,10 @@ Widget defaultLoading(){
       elevation: 0,
       backgroundColor: Colors.transparent,
       child: Center(
-        child: SpinKitCubeGrid(
-          color: primaryColor,
-          size: 50,
-          duration: Duration(seconds: 4),
+        child: SpinKitPouringHourGlassRefined(
+          color: HexColor('#D8A616'),
+          size: 70,
+          duration: Duration(seconds: 3),
 
         ),
       ),

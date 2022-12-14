@@ -10,13 +10,6 @@ import 'package:sizer/sizer.dart';
 
 class transfarScreen extends StatelessWidget {
 
-
-  // List of items in our dropdown menu
-  var items = [
-    'USD',
-    'EGY',
-    'CNY',
-  ];
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
@@ -39,7 +32,7 @@ class transfarScreen extends StatelessWidget {
                           screenTitle: 'Transfer Money',
                         ),
                         const SizedBox(
-                          height: 30.0,
+                          height: 40.0,
                         ),
                         CircleAvatar(
                           radius: 40,
@@ -79,16 +72,16 @@ class transfarScreen extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsetsDirectional.only(
-                            start: 25,
-                            end: 25,
-                            top: 10,
+                            start: 40,
+                            end: 40,
+                            top: 20,
                           ),
                           child: Container(
                             width: double.infinity,
-                            height: 60,
+                            height: 65,
                             padding: EdgeInsetsDirectional.only(
-                              top: 7,
-                              bottom: 10,
+                              top: 15,
+                              bottom: 15,
                               start: 13,
                             ),
                             decoration: BoxDecoration(
@@ -103,54 +96,8 @@ class transfarScreen extends StatelessWidget {
                             ),
                             child: Row(
                               children: [
-                                Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                      color: HexColor('#925766').withOpacity(0.5),
-                                    ),
-                                    height: 5.h,
-                                    width: 30.w,
-                                    child: Row(
-                                      children: [
-                                        const SizedBox(
-                                          width: 7,
-                                        ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                            BorderRadius.circular(30.0),
-                                            color: primaryColor,
-                                          ),
-                                          child: const Icon(
-                                            Icons.attach_money_outlined,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-
-
-                                        DropdownButton(
-                                          value: AppCubit.get(context).dropdownvalue,
-                                          icon: const Icon(Icons.keyboard_arrow_down),
-                                          items: items.map((String items) {
-                                            return DropdownMenuItem(
-                                              value: items,
-                                              child: Text(items),
-                                            );
-                                          }).toList(),
-// After selecting the desired option,it will
-// change button value to selected value
-                                          onChanged: (newValue) {
-                                            AppCubit.get(context).dropDownValue(newValue );
-                                          },
-                                        ),
-                                      ],
-                                    )),
-                                const Spacer(),
                                 Text(
-                                '''\$${cubit.transferResult}''',
+                                '''EG${cubit.transferResult}''',
 
                                   style: TextStyle(
                                     color: Colors.black,
@@ -158,9 +105,6 @@ class transfarScreen extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                     overflow: TextOverflow.ellipsis
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
                                 ),
                               ],
                             ),
@@ -189,3 +133,4 @@ class transfarScreen extends StatelessWidget {
 
 
 
+//'''\$${cubit.transferResult}''',
