@@ -173,6 +173,7 @@ class transfarScreen extends StatelessWidget {
                 defaultNumbers(
                   amount: cubit.transferResult,
                   context: context,
+                  id: 2,
                   onPressed: (){
                     navigateTo(context, ConfirmPaymentScreen());
                   },

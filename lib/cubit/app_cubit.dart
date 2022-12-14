@@ -1,7 +1,11 @@
+
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project/components/components.dart';
 import 'package:project/cubit/app_state.dart';
+import 'package:project/models/layout_model.dart';
+import 'package:project/network/remote/dio_helper.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
@@ -105,46 +109,58 @@ class AppCubit extends Cubit<AppStates> {
 
 void isBankAccountEmpty({
   required String text,
+  int? id,
 }){
-    if(text.isEmpty){
-      text= text;
-    }
-    else{
-      text = text.substring(0, text.length-1);
-    }
+  if(text.isEmpty){
+    text= text;
+  }
+  else{
+    text = text.substring(0, text.length-1);
+  }
+  switch(id){
+    case 1:
+      result = text;
+      break;
+    case 2:
+      transferResult = text;
+      break;
+    case 3:
+      addTransferRecipientResult = text;
+      break;
+  }
     emit(ChangeIsBankAccountEmptyState());
 }
 //-------------------------------------
-  void isBankTransferEmpty({
-    required String text,
-  }){
-    if(transferResult.isEmpty){
-      transferResult= text;
-    }
-    else{
-      transferResult = text.substring(0, text.length-1);
-    }
-    emit(AddTextToBankTransferState());
-  }
 
-//-------------------------------------------------
-
-  var result ='';
+  String result = '';
   var transferResult = '';
   var addTransferRecipientResult = '';
+  var amount = '';
 void addTextToBankAccount({
   required String num,
   required String amount,
+  required int id,
 }){
+  emit(AddTextToBankAccountState());
   if(isMaxLength(text: amount)){
-    amount=amount+num;
+    amount = amount + num;
     print(amount);
-    print(num);
+    print(amount.length);
   }
   else{
     amount = amount;
   }
-    emit(AddTextToBankAccountState());
+  switch(id){
+    case 1:
+      result = amount;
+      break;
+    case 2:
+      transferResult = amount;
+      break;
+    case 3:
+      addTransferRecipientResult = amount;
+      break;
+  }
 }
 
   String dropdownvalue = 'USD';
@@ -162,10 +178,47 @@ void addTextToBankAccount({
 bool isMaxLength({
   required String text,
 }){
-  return text.length <= 8? true : false;
+  return text.length < 8? true : false;
 }
 //-------------------------------------------------
 
+void clearAmount({
+  required int id,
+}){
+    switch(id){
+      case 1:
+        result = '';
+        break;
+      case 2:
+        transferResult = '';
+        break;
+      case 3:
+        addTransferRecipientResult = '';
+        break;
+    }
+}
+//-------------------------------------------------
+
+  LayoutModel? layoutModel;
+  String? data;
+void getLayoutData()async{
+  emit(GetLayoutLoadingState());
+    await DioHelper.getData(
+      path: 'atm/home.php',
+    ).then((value){
+      // print(value.data.runtimeType);
+      // print(value.data);
+      // layoutModel = LayoutModel.fromJson(value.data);
+      layoutModel = LayoutModel.fromJson(jsonDecode(value.data));
+      print('Type of Data ============ ${layoutModel.runtimeType}');
+      print(layoutModel!.totalBalance);
+      print('Get Layout Data Successfully');
+      emit(GetLayoutSuccessState());
+    }).catchError((error){
+      emit(GetLayoutErrorState());
+      print('Error When Get Layout Data Data =====> ${error.toString()}');
+  });
+}
 
 
 

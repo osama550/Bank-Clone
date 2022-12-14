@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/bloc_observer.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/layout/layout_screen.dart';
+import 'package:project/network/remote/dio_helper.dart';
 import 'package:sizer/sizer.dart';
 
 
@@ -14,6 +15,8 @@ void main() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp
   ]);
+  WidgetsFlutterBinding.ensureInitialized();
+  DioHelper.init();
 
   //  to change status bar and icon color
 //SystemChrome.setSystemUIOverlayStyle(
@@ -38,7 +41,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppCubit(),
+      create: (context) => AppCubit()..getLayoutData(),
       child: Sizer(
         builder: (BuildContext context, Orientation orientation,
             DeviceType deviceType) {

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/components/colors/colors.dart';
 import 'package:project/components/components.dart';
+import 'package:project/cubit/app_cubit.dart';
+import 'package:project/cubit/app_state.dart';
 import 'package:project/modules/home/home_screen.dart';
 import 'package:sizer/sizer.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -11,7 +14,11 @@ class LayoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
+    return BlocConsumer<AppCubit, AppStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cubit = AppCubit.get(context);
+      return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.light,
         statusBarColor: primaryColor,
@@ -148,13 +155,14 @@ class LayoutScreen extends StatelessWidget {
                                 opacity: 0.7,
                                 onPointTap: (pointInteractionDetails){
                                   print(pointInteractionDetails.pointIndex);
+                                  AppCubit.get(context).getLayoutData();
                                   navigateTo(context, HomeScreen());
                                 },
                                 dataSource:[
-                                  AccountTypes('Current Account', 15000, const Color.fromRGBO(215, 80, 20, 1)),
-                                  AccountTypes('Saving Account', 12000, const Color.fromRGBO(216, 110, 20, 1)),
-                                  AccountTypes('Current Account', 10000, const Color.fromRGBO(216, 140, 20, 1)),
-                                  AccountTypes('Salary', 8000, const Color.fromRGBO(216, 160, 20, 1)),
+                                  AccountTypes(cubit.layoutModel!.clientAccounts[0].accountType!, 15000, const Color.fromRGBO(215, 80, 20, 1)),
+                                  AccountTypes(cubit.layoutModel!.clientAccounts[1].accountType!, 12000, const Color.fromRGBO(216, 110, 20, 1)),
+                                  AccountTypes(cubit.layoutModel!.clientAccounts[2].accountType!, 10000, const Color.fromRGBO(216, 140, 20, 1)),
+                                  AccountTypes(cubit.layoutModel!.clientAccounts[3].accountType!, 8000, const Color.fromRGBO(216, 160, 20, 1)),
                                 ],
                                 xValueMapper: (AccountTypes data, _) => data.type,
                                 yValueMapper: (AccountTypes data, _) => data.salary,
@@ -191,8 +199,11 @@ class LayoutScreen extends StatelessWidget {
         ),
       ),
     );
+  },
+);
   }
 }
+
 
 
 class AccountTypes {

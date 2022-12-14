@@ -12,7 +12,6 @@ import 'package:sizer/sizer.dart';
 class FavoriteScreen extends StatelessWidget {
   FavoriteScreen({Key? key}) : super(key: key);
   final item =[];
-  final GlobalKey<AnimatedListState> _key = GlobalKey();
   void addItem(){}
 
   var searchController = TextEditingController();
@@ -163,7 +162,7 @@ class FavoriteScreen extends StatelessWidget {
               ),
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  navigateAndFinish(context, AddNewRecipientScreen());
+                  navigateTo(context, AddNewRecipientScreen());
                 },
                 backgroundColor: primaryColor,
                 child: const Icon(

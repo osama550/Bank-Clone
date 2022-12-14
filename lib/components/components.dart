@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project/components/colors/colors.dart';
-import 'package:project/components/in_out_components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/modules/payment/electricity_screen.dart';
 import 'package:sizer/sizer.dart';
@@ -164,6 +163,9 @@ Widget paymentBill({
           children: [
             IconButton(
               onPressed: () {
+                AppCubit.get(context).clearAmount(
+                  id: 1,
+                );
                 Navigator.pop(context);
               },
               icon: Icon(
@@ -648,6 +650,7 @@ Widget defaultNumbers({
   required BuildContext context,
   required VoidCallback onPressed,
   required String amount,
+  required int id,
 }) => Container(
   decoration: BoxDecoration(
     borderRadius: const BorderRadius.only(
@@ -667,14 +670,17 @@ Widget defaultNumbers({
           defaultTextKeyboard(
               num: '1',
               amount: amount,
-              context: context),
+              context: context,
+              id: id,
+          ),
           defaultTextKeyboard(num: '2',
               amount: amount,
-
-              context: context),
+              context: context,
+            id: id,
+          ),
           defaultTextKeyboard(num: '3',
               amount: amount,
-
+              id: id,
               context: context),
         ],
       ),
@@ -686,12 +692,15 @@ Widget defaultNumbers({
         children:<Widget> [
           defaultTextKeyboard(num: '4',
               amount: amount,
+              id: id,
               context: context),
           defaultTextKeyboard(num: '5',
               amount: amount,
+              id: id,
               context: context),
           defaultTextKeyboard(num: '6',
               amount: amount,
+              id: id,
               context: context),
         ],
       ),
@@ -703,12 +712,15 @@ Widget defaultNumbers({
         children:<Widget> [
           defaultTextKeyboard(num: '7',
               amount: amount,
+              id: id,
               context: context),
           defaultTextKeyboard(num: '8',
               amount: amount,
+              id: id,
               context: context),
           defaultTextKeyboard(num: '9',
               amount: amount,
+              id: id,
               context: context),
         ],
       ),
@@ -721,15 +733,20 @@ Widget defaultNumbers({
           defaultIconKeyboard(
               icon:Icon(
                 Icons.backspace_outlined,
-        color: Colors.white,
+                color: Colors.white,
       ),
           onPressed: () {
-            AppCubit.get(context).isBankAccountEmpty(text: amount);
+            AppCubit.get(context).isBankAccountEmpty(
+              text: amount,
+              id: id,
+            );
           }
           ),
           defaultTextKeyboard(num: '0',
               amount: amount,
-              context: context),
+              context: context,
+              id: id,
+          ),
           defaultIconKeyboard(
             icon:Icon(
             Icons.arrow_forward_rounded,
@@ -742,10 +759,6 @@ Widget defaultNumbers({
       SizedBox(
         height: 15,
       ),
-
-
-
-
     ],
   ),
 );
@@ -755,6 +768,7 @@ Widget defaultTextKeyboard({
   required String num,
   required BuildContext context,
   required String amount,
+  required int id,
 })
 {
   return Container(
@@ -772,12 +786,17 @@ Widget defaultTextKeyboard({
     ),
     child: TextButton(
       onPressed: ( ) {
+        // if(num == '0' && amount.length ==0){
+        //
+        // }
         AppCubit.get(context).addTextToBankAccount(
           num: num,
           amount: amount,
+          id: id,
         );
       },
-      child: Text(num,
+      child: Text(
+          num,
           style: TextStyle(
               color: Colors.white,
               fontSize: 20.sp,
@@ -789,6 +808,7 @@ Widget defaultTextKeyboard({
 Widget defaultIconKeyboard( {
   required VoidCallback onPressed,
   required Icon icon,
+  int? id,
 }){
   return Container(
     height: 50,

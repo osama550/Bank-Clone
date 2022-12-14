@@ -6,7 +6,6 @@ import 'package:project/components/colors/colors.dart';
 import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
-import 'package:project/modules/payment/electricity_screen.dart';
 import 'package:project/modules/transfar_money/transfar_money_screen.dart';
 import 'package:sizer/sizer.dart';
 
@@ -43,7 +42,7 @@ class AddNewRecipientScreen extends StatelessWidget {
                     ),
                     buildAppBar(
                       context: context,
-                      screenTitle: 'Transfer Money',
+                      screenTitle: 'Add New Recipient',
                     ),
                     SizedBox(
                       height: 5.h,
@@ -139,7 +138,7 @@ class AddNewRecipientScreen extends StatelessWidget {
                           color: HexColor('#f4f4f4'), //////////////////////
                         ),
                         child: Text(
-                          '659745',
+                          cubit.addTransferRecipientResult,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 15.sp,
@@ -255,6 +254,7 @@ class AddNewRecipientScreen extends StatelessWidget {
             defaultNumbers(
               amount: cubit.addTransferRecipientResult,
               context: context,
+              id: 3,
               onPressed: (){
                 navigateTo(context, transfarScreen());
               },
