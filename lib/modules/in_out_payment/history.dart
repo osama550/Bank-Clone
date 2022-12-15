@@ -86,23 +86,24 @@ class HistoryScreen extends StatelessWidget {
                           height: 10.0,
                         ),
                         // ListView Item
-                        Expanded(
-                          child: ListView.separated(
-                            physics: const BouncingScrollPhysics(),
-                            itemBuilder: (context, index) => buildHistoryItem(
-                              context: context,
-                              image: 'images/${index+1}.jpg',
-                              name: 'Anime World',
-                              date: 'Dec 24,2024',
-                              time: '12.30 PM',
-                              price: '\$25',
-                            ),
-                            separatorBuilder: (context, index) => const SizedBox(
-                              height: 10.0,
-                            ),
-                            itemCount: 10,
-                          ),
-                        ),
+                        // Expanded(
+                        //   child: ListView.separated(
+                        //     physics: const BouncingScrollPhysics(),
+                        //     itemBuilder: (context, index) => buildHistoryItem(
+                        //       context: context,
+                        //       image: 'images/${index+1}.jpg',
+                        //       name: 'Anime World',
+                        //       date: 'Dec 24,2024',
+                        //       time: '12.30 PM',
+                        //       price: '\$25',
+                        //     ),
+                        //     separatorBuilder: (context, index) => const SizedBox(
+                        //       height: 10.0,
+                        //     ),
+                        //     itemCount: 10,
+                        //   ),
+                        // ),
+                        cubit.inOutScreens[cubit.numberOfInOutScreen],
                       ],
                     ),
                   ),
