@@ -30,3 +30,5 @@ class AuthenticateUserLoadingState extends AppStates {}
 class AuthenticateUserSuccessState extends AppStates {}
 
 class AuthenticateUserErrorState extends AppStates {}
+
+class SearchUserToBankTransferState extends AppStates {}

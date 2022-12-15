@@ -11,17 +11,20 @@ import 'package:sizer/sizer.dart';
 
 class FavoriteScreen extends StatelessWidget {
   FavoriteScreen({Key? key}) : super(key: key);
-  final item =[];
-  void addItem(){}
+  final item = [];
+  void addItem() {}
 
   var searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        // AppCubit.get(context).searchuser();
+      },
       builder: (context, state) {
         var cubit = AppCubit.get(context);
+        // cubit.searchuser();
         return SafeArea(
           child: DefaultTabController(
             length: 4,
@@ -33,7 +36,7 @@ class FavoriteScreen extends StatelessWidget {
                     color: primaryColor, //change your color here
                   ),
                   backgroundColor: Colors.white,
-                  title:buildTransferAppBar(
+                  title: buildTransferAppBar(
                     context: context,
                     screenTitle: 'Transfer Money',
                   ),
@@ -46,118 +49,128 @@ class FavoriteScreen extends StatelessWidget {
                     child: Container(
                       height: 45.0,
                       child: TextFormField(
+                        onChanged: (value) => cubit.runFilter(value),
                         decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                            borderSide: BorderSide.none,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                            borderSide: BorderSide.none,
-                          ),
-                          contentPadding: const EdgeInsets.only(
-                            bottom: 5.0,
-                          ),
-                          filled: true,
-                          fillColor: HexColor('#D9D9D9').withOpacity(0.5,),
-                          prefixIcon: Icon(
-                            Icons.search,
-                            color: HexColor('#292D32').withOpacity(0.8),
-                            size: 30.0,
-                          ),
-                          suffixIcon:IconButton(
-                              onPressed: (){
-
-                              }, icon: Icon(
-                            Icons.settings,
-                            color: Colors.black,
-                          ))
-                        ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                              borderSide: BorderSide.none,
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                              borderSide: BorderSide.none,
+                            ),
+                            contentPadding: const EdgeInsets.only(
+                              bottom: 5.0,
+                            ),
+                            filled: true,
+                            fillColor: HexColor('#D9D9D9').withOpacity(
+                              0.5,
+                            ),
+                            prefixIcon: Icon(
+                              Icons.search,
+                              color: HexColor('#292D32').withOpacity(0.8),
+                              size: 30.0,
+                            ),
+                            suffixIcon: IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.settings,
+                                  color: Colors.black,
+                                ))),
                       ),
                     ),
                   ),
                   bottom: TabBar(
                     tabs: [
-                      Tab(text: 'All',),
-                      Tab(text: 'Favorite',),
-                      Tab(text: 'Bank',),
-                      Tab(text: 'E-wallet',)
+                      Tab(
+                        text: 'All',
+                      ),
+                      Tab(
+                        text: 'Favorite',
+                      ),
+                      Tab(
+                        text: 'Bank',
+                      ),
+                      Tab(
+                        text: 'E-wallet',
+                      )
                     ],
-                    padding: EdgeInsets.only(
-
-                        right: 30,
-                        left: 30
-                    ),
+                    padding: EdgeInsets.only(right: 30, left: 30),
                     labelColor: primaryColor,
                     unselectedLabelColor: Colors.black,
-                    labelPadding: EdgeInsets.only(
-                        left: 3
-                    ),
-
+                    labelPadding: EdgeInsets.only(left: 3),
                     labelStyle: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12.sp,
                     ),
                     indicator: UnderlineTabIndicator(
-                      borderSide:BorderSide(
+                      borderSide: BorderSide(
                         width: 5,
                         color: primaryColor,
                       ),
                       insets: EdgeInsets.symmetric(
                         horizontal: 10.0,
                       ),
-
                     ),
-
                   ),
                   elevation: 0,
-
-
                 ),
               ),
+
               body: Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 40.0,
-                        ),
+                    ),
                     child: Divider(
                       color: Colors.grey.shade200,
                       thickness: 2,
                     ),
                   ),
                   Expanded(
-                    child:ListView.separated(
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) =>buildFavoriteItem(
-                          context: context,
-                          index: index-1,
-                          image: 'images/${index + 1}.jpg',
-                          name: 'Hex Team',
-                          type: 'Bank',
-                          accountNumber: '47896021',
-                          favoriteIcon: cubit.favoriteIcon[index],
-                          favoriteIconPressed: (){
-                            print('Index Which CLicked Here ============> ${index}');
-                            cubit.changeFavoriteIcon(index: index);
-                          },
-                          color: cubit.favoriteColor[index],
-                        ),
-                        separatorBuilder: (context, index) =>
-                    Padding(
-                    padding: const EdgeInsets.symmetric(
-                    horizontal: 25.0,
+                    child: cubit.searchUser.isNotEmpty
+                        ? ListView.separated(
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, index) =>buildFavoriteItem(
+                              context: context,
+                              index: index - 1,
+                              image: 'images/${index + 1}.jpg',
+                              name: cubit.searchUser[index]['name'],
+                              type: cubit.searchUser[index]['type'],
+                              accountNumber: cubit.searchUser[index]
+                                  ['accountNumber'],
+                              favoriteIcon: cubit.favoriteIcon[index],
+                              favoriteIconPressed: () {
+                                print(
+                                    'Index Which CLicked Here ============> ${index}');
+                                cubit.changeFavoriteIcon(index: index);
+                              },
+                              color: cubit.favoriteColor[index],
+                            ),
+                            separatorBuilder: (context, index) => Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 25.0,
+                              ),
+                              child: Divider(
+                                color: Colors.grey.shade200,
+                                thickness: 1,
+                              ),
+                            ),
+                            itemCount: cubit.searchUser.length,
+                          )
+                        : const Center(
+                            child: Text(
+                              'No results found',
+                              style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey),
+                            ),
+                          ),
                   ),
-            child: Divider(
-              color: Colors.grey.shade200,
-              thickness: 1,
-            ),
-          ),
-          itemCount:10 ,
-        ),
-                  ),
-                  const SizedBox(
-                    height: 70.0,
+                  SizedBox(
+                    height: 50,
                   ),
                 ],
               ),
@@ -180,5 +193,3 @@ class FavoriteScreen extends StatelessWidget {
     );
   }
 }
-
-
