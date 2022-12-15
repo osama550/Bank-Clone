@@ -469,6 +469,7 @@ Widget buildFavoriteItem( {
     horizontal: 13.0,
   ),
   child: Container(
+
     height: 70.0,
     decoration: BoxDecoration(
       borderRadius: BorderRadiusDirectional.circular(20.0,),
