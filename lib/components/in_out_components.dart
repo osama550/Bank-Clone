@@ -52,9 +52,7 @@ Widget buildHistoryItem({
     navigateTo(context, EReceiptScreen());
   },
   child:Container(
-
     height: 80.0,
-
     decoration: BoxDecoration(
 
       borderRadius: BorderRadiusDirectional.circular(20.0,),
@@ -82,21 +80,13 @@ Widget buildHistoryItem({
       ],
 
     ),
-
     clipBehavior: Clip.antiAliasWithSaveLayer,
-
     child: Padding(
-
       padding: const EdgeInsets.symmetric(
-
         horizontal: 12.0,
-
       ),
-
       child: Row(
-
         children: [
-
           CircleAvatar(
 
             radius: 25.0,
@@ -104,13 +94,11 @@ Widget buildHistoryItem({
             backgroundImage: AssetImage(image),
 
           ),
-
           const SizedBox(
 
             width: 10.0,
 
           ),
-
           Column(
 
             mainAxisAlignment: MainAxisAlignment.center,
@@ -194,23 +182,14 @@ Widget buildHistoryItem({
                   ),
 
                 ],
-
-              ),
-
-            ],
+              ),],
 
           ),
-
           const Spacer(),
-
           Column(
-
             crossAxisAlignment: CrossAxisAlignment.end,
-
             mainAxisAlignment: MainAxisAlignment.center,
-
             children: [
-
               Text(
 
                 price,
@@ -226,17 +205,12 @@ Widget buildHistoryItem({
                 ),
 
               ),
-
               const SizedBox(
 
                 height: 5.0,
 
               ),
-
-
-
               if(AppCubit.get(context).numberOfInOutScreen == 0)
-
                 Row(
 
                 children: [
@@ -272,9 +246,7 @@ Widget buildHistoryItem({
                 ],
 
               ),
-
               if(AppCubit.get(context).numberOfInOutScreen == 1)
-
                 Container(
 
                 decoration: BoxDecoration(
@@ -316,9 +288,7 @@ Widget buildHistoryItem({
                 ),
 
               ),
-
               if(AppCubit.get(context).numberOfInOutScreen == 2)
-
                 Container(
 
                 decoration: BoxDecoration(
@@ -360,7 +330,6 @@ Widget buildHistoryItem({
                 ),
 
               ),
-
             ],
 
           ),

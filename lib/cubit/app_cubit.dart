@@ -8,7 +8,7 @@ import 'package:project/cubit/app_state.dart';
 import 'package:project/models/layout_model.dart';
 import 'package:project/modules/in_out_payment/history.dart';
 import 'package:project/modules/in_out_payment/requested.dart';
-import 'package:project/modules/in_out_payment/test_screen.dart';
+import 'package:project/modules/in_out_payment/scheduled.dart';
 import 'package:project/network/remote/dio_helper.dart';
 
 class AppCubit extends Cubit<AppStates> {
@@ -78,10 +78,12 @@ class AppCubit extends Cubit<AppStates> {
 
   List<Widget> inOutScreens = [
     HistoryScreen(),
-    TestScreen(),
+    ScheduledScreen(),
     RequestedScreen(),
   ];
-  int numberOfInOutScreen = 1;
+
+  int numberOfInOutScreen = 0;
+
   void selectInOutPayment({
   required int index,
 }){

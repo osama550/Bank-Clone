@@ -7,7 +7,7 @@ import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
 import 'package:project/modules/choose_bill/choose_bill.dart';
-import 'package:project/modules/in_out_payment/history.dart';
+import 'package:project/modules/in_out_payment/in_out_layout.dart';
 import 'package:project/modules/qr/qr_screen.dart';
 import 'package:project/modules/transfar_money/favorite_screen.dart';
 import 'package:sizer/sizer.dart';
@@ -317,7 +317,7 @@ class HomeScreen extends StatelessWidget {
                                     child: IconButton(
                                       iconSize:25 ,
                                       onPressed: (){
-                                        navigateTo(context, HistoryScreen());
+                                        navigateTo(context, InOutLayoutScreen());
                                       },
                                       icon:const Image(
                                         image: AssetImage('images/switch.png'),

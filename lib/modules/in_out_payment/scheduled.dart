@@ -19,99 +19,62 @@ class ScheduledScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         var cubit = AppCubit.get(context);
-        return SafeArea(
-          child: Scaffold(
-            body: Column(
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
               children: [
+                inOutButton(
+                  onPressed: () {
+                    cubit.selectInOutPayment(index: 0,);
+                  },
+                  text: 'History',
+                  textColor: primaryColor,
+                  background: Colors.white,
+                ),
                 const SizedBox(
-                  height: 10.0,
+                  width: 5.0,
                 ),
-                buildAppBar(
-                  context: context,
-                  screenTitle: 'In & Out Payment',
+                inOutButton(
+                  onPressed: () {
+                    cubit.selectInOutPayment(index: 1,);
+                  },
+                  text: 'Scheduled',
                 ),
                 const SizedBox(
-                  height: 25.0,
+                  width: 5.0,
                 ),
-                defaultTextFormFaild(
-                  controller: searchController,
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      top: 20.0,
-                      bottom: 50.0,
-                      left: 20.0,
-                      right: 20.0,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        // 3 Buttons
-                        Row(
-                          children: [
-                            inOutButton(
-                              onPressed: () {
-                                cubit.selectInOutPayment(index: 0,);
-                                navigateTo(context, HistoryScreen());
-                              },
-                              text: 'History',
-                              textColor: primaryColor,
-                              background: Colors.white,
-                            ),
-                            const SizedBox(
-                              width: 5.0,
-                            ),
-                            inOutButton(
-                              onPressed: () {
-                                cubit.selectInOutPayment(index: 1,);
-                              },
-                              text: 'Scheduled',
-
-                            ),
-                            const SizedBox(
-                              width: 5.0,
-                            ),
-                            inOutButton(
-                              onPressed: () {
-                                cubit.selectInOutPayment(index: 2,);
-                                navigateTo(context, RequestedScreen());
-                              },
-                              text: 'Requested',
-                              textColor: primaryColor,
-                              background: Colors.white,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        // ListView Item
-                        Expanded(
-                          child: ListView.separated(
-                            physics: const BouncingScrollPhysics(),
-                            itemBuilder: (context, index) => buildHistoryItem(
-                              context: context,
-                              image: 'images/${index+1}.jpg',
-                              name: 'Anime World',
-                              date: 'Dec 24,2024',
-                              time: '12.30 PM',
-                              price: '\$25',
-                            ),
-                            separatorBuilder: (context, index) => const SizedBox(
-                              height: 10.0,
-                            ),
-                            itemCount: 10,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                inOutButton(
+                  onPressed: () {
+                    cubit.selectInOutPayment(index: 2,);
+                  },
+                  text: 'Requested',
+                  textColor: primaryColor,
+                  background: Colors.white,
                 ),
               ],
             ),
-            bottomSheet: buildBottomSheet(),
-          ),
+            const SizedBox(
+              height: 10.0,
+            ),
+            Expanded(
+              child: ListView.separated(
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) => buildHistoryItem(
+                  context: context,
+                  image: 'images/${index+1}.jpg',
+                  name: 'Anime World',
+                  date: 'Dec 24,2024',
+                  time: '12.30 PM',
+                  price: '\$25',
+                ),
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 10.0,
+                ),
+                itemCount: 10,
+              ),
+            ),
+          ],
         );
       },
     );
