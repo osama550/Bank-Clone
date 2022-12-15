@@ -833,18 +833,19 @@ Widget defaultIconKeyboard( {
 //------------------------------------------------------------
 Widget defaultLoading(){
   return AnimatedContainer(
-    duration:const Duration(milliseconds: 1200) ,
-    curve: Curves.fastLinearToSlowEaseIn,
+    duration:const Duration(milliseconds: 800) ,
+    curve: Curves.bounceIn,
     child: Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      elevation: 0,
+      elevation: 200,
       backgroundColor: Colors.transparent,
       child: Center(
-        child: SpinKitPouringHourGlassRefined(
-          color: HexColor('#D8A616'),
-          size: 70,
+        child: SpinKitThreeBounce(
+          color:Colors.white,
+              // HexColor('#D8A616'),
+          size: 50,
           duration: Duration(seconds: 3),
 
         ),
