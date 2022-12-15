@@ -6,6 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:project/cubit/app_state.dart';
 import 'package:project/models/layout_model.dart';
+import 'package:project/modules/in_out_payment/history.dart';
+import 'package:project/modules/in_out_payment/requested.dart';
+import 'package:project/modules/in_out_payment/scheduled.dart';
 import 'package:project/network/remote/dio_helper.dart';
 
 class AppCubit extends Cubit<AppStates> {
@@ -73,7 +76,14 @@ class AppCubit extends Cubit<AppStates> {
   }
 
 
+  List<Widget> inOutScreens = [
+    HistoryScreen(),
+    ScheduledScreen(),
+    RequestedScreen(),
+  ];
+
   int numberOfInOutScreen = 0;
+
   void selectInOutPayment({
   required int index,
 }){
