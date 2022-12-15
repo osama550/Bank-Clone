@@ -75,13 +75,15 @@ class LayoutScreen extends StatelessWidget {
                         child: Row(
                           children: [
                             CircleAvatar(
-                              child: Icon(
-                                Icons.person,
-                                color: Colors.white,
-                                size: 45.0,
-                              ),
+                              // child: Icon(
+                              //   Icons.person,
+                              //   color: Colors.white,
+                              //   size: 45.0,
+                              // ),
                               radius: 30.0,
-                              backgroundColor: Colors.grey.shade400,
+                              // backgroundColor: Colors.grey.shade400,
+                              // backgroundImage: Image.network('https://atmvoice.000webhostapp.com//photos//1.jpg');
+                              backgroundImage: NetworkImage(cubit.layoutModel!.clientPhoto.toString()),
                             ),
                             const SizedBox(
                               width: 5.0,

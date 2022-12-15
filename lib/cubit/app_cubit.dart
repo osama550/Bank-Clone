@@ -276,7 +276,7 @@ void userAccount({
   late LocalAuthentication auth = LocalAuthentication();
   bool? canCheckBiometrics;
   List<BiometricType>? availableBiometrics;
-  bool isAuthenticating = false;
+  bool? isAuthenticating;
   String authorized = 'Not Authorized';
   int start = 30;
 
@@ -332,7 +332,7 @@ void userAccount({
         emit(AuthenticateUserErrorState());
       return;
     }
-
+    isAuthenticating = authenticated;
       authorized = authenticated ? 'Authorized' : 'Not Authorized';
       // authorized == 'Authorized' ? navigateAndFinish(context, LayoutScreen()) : null;
       authorized == 'Authorized' ? getLayoutData() : null;

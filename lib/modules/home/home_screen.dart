@@ -118,7 +118,6 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                   child: Container(
                                     decoration: BoxDecoration(
-
                                       color: HexColor('#D8A616'),
                                         borderRadius: BorderRadiusDirectional.circular(50)
                                     ),

@@ -1,10 +1,12 @@
 class LayoutModel {
   String? clientName;
+  String? clientPhoto;
   String? totalBalance;
   List<LayoutDataModel> clientAccounts = [];
 
   LayoutModel.fromJson(Map<dynamic, dynamic> json) {
     clientName = json['Client_Name'];
+    clientPhoto = json['Client_Photo'];
     totalBalance = json['Total_balance'];
 
     if (json['Client_accounts'] != null) {

@@ -93,14 +93,17 @@ class LoginScreen extends StatelessWidget {
                             print(cubit.canCheckBiometrics);
                             if(cubit.canCheckBiometrics!){
                               cubit.authenticate(context: context).then((value){
-                                if(AppCubit.get(context).layoutModel == null){
-                                  showDialog(
-                                    context: context,
-                                    builder:(BuildContext context){
-                                      context=context;
-                                      return  defaultLoading();
-                                    },
-                                  );
+                                if(cubit.layoutModel == null){
+                                  if(cubit.isAuthenticating!){
+                                    print('isAuthenticating =====> ${cubit.isAuthenticating}');
+                                    showDialog(
+                                      context: context,
+                                      builder:(BuildContext context){
+                                        context=context;
+                                        return  defaultLoading();
+                                      },
+                                    );
+                                  }
                                 }
                                 // else{
                                 //   navigateAndFinish(context, LayoutScreen());
