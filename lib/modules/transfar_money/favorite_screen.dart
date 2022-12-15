@@ -73,10 +73,16 @@ class FavoriteScreen extends StatelessWidget {
                             ),
                             suffixIcon: IconButton(
                                 onPressed: () {},
-                                icon: Icon(
-                                  Icons.settings,
-                                  color: Colors.black,
-                                ))),
+                                icon: Image(
+                                  image: AssetImage(
+                                    'images/qr.png',
+
+                                  ),
+                                  height: 20,
+                                  width: 20,
+                                )
+                            )
+                        ),
                       ),
                     ),
                   ),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:project/components/colors/colors.dart';
 import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
 import 'package:sizer/sizer.dart';
 
-class ConfirmPaymentScreen extends StatelessWidget {
+class ComfirmDepositeScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
@@ -27,13 +27,13 @@ class ConfirmPaymentScreen extends StatelessWidget {
                     children: [
                       buildAppBar(
                         context: context,
-                        screenTitle: 'Confirm Payment',
+                        screenTitle: 'Confirm Deposite',
                       ),
                     ],
                   ),
                   Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 6.w, vertical: 5.h),
+                    EdgeInsets.symmetric(horizontal: 6.w, vertical: 5.h),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -135,10 +135,6 @@ class ConfirmPaymentScreen extends StatelessWidget {
                   paymentButton(
                     context: context,
                     onPressed: (){
-                      showDialog(
-                        context: context,
-                        builder: (context) => defaultErrorDialog(context),
-                      );
                     },
                   ),
                   SizedBox(

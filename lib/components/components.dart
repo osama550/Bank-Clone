@@ -920,3 +920,52 @@ defaultShowButtomSheet({
       }
   );
 }
+
+//----------------------------------------------------
+Widget defaultTextFormNumber(
+{required String text
+}
+    ){
+  return Padding(
+    padding: const EdgeInsetsDirectional.only(
+      start: 40,
+      end: 40,
+      top: 20,
+    ),
+    child: Container(
+      width: double.infinity,
+      height: 65,
+      padding: EdgeInsetsDirectional.only(
+        top: 15,
+        bottom: 15,
+        start: 13,
+      ),
+      decoration: BoxDecoration(
+        border: Border.all(
+          width: 2,
+// color: primaryColor.withOpacity(0.5),
+          color: primaryColor.withOpacity(
+            0.5,
+          ),
+        ),
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: Row(
+        children: [
+          Text(
+            text,
+
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 15.sp,
+                fontWeight: FontWeight.bold,
+                overflow: TextOverflow.ellipsis
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+//'''EG${cubit.transferResult}'''

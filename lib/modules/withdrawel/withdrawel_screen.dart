@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:project/components/colors/colors.dart';
 import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
-import 'package:project/modules/Confirm%20Payment/Confirm%20Payment_Screen.dart';
 import 'package:sizer/sizer.dart';
 
-class transfarScreen extends StatelessWidget {
-
+class WithdrawelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppCubit, AppStates>(
+    return  BlocConsumer<AppCubit, AppStates>(
       listener: (context, state){},
       builder: (context, state){
         var cubit = AppCubit.get(context);
@@ -29,7 +25,7 @@ class transfarScreen extends StatelessWidget {
                       children: [
                         buildAppBar(
                           context: context,
-                          screenTitle: 'Transfer Money',
+                          screenTitle: 'Withdrawel',
                         ),
                         const SizedBox(
                           height: 40.0,
@@ -70,7 +66,9 @@ class transfarScreen extends StatelessWidget {
                             thickness: 1.8,
                           ),
                         ),
-                        defaultTextFormNumber(text: '''EG${cubit.transferResult}''')
+                        defaultTextFormNumber(
+                            text: "EG"
+                        ),
                       ],
                     ),
                   ),
@@ -80,7 +78,6 @@ class transfarScreen extends StatelessWidget {
                   context: context,
                   id: 2,
                   onPressed: (){
-                    navigateTo(context, ConfirmPaymentScreen());
                   },
                 ),
               ],
@@ -91,7 +88,3 @@ class transfarScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-//'''\$${cubit.transferResult}''',

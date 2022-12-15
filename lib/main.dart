@@ -3,7 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/bloc_observer.dart';
 import 'package:project/cubit/app_cubit.dart';
+import 'package:project/modules/Confirm%20Payment/Confirm%20Payment_Screen.dart';
+import 'package:project/modules/deposite/confirm_deposite_screen.dart';
 import 'package:project/modules/login_screen/login_screen.dart';
+import 'package:project/modules/transfar_money/favorite_screen.dart';
+import 'package:project/modules/transfar_money/transfar_money_screen.dart';
+import 'package:project/modules/withdrawel/withdrawel_Payment_screen.dart';
+import 'package:project/modules/withdrawel/withdrawel_screen.dart';
 import 'package:project/network/remote/dio_helper.dart';
 import 'package:sizer/sizer.dart';
 
@@ -50,7 +56,7 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.white,
             ),
             debugShowCheckedModeBanner: false,
-            home: LoginScreen() ,
+            home:FavoriteScreen() ,
           );
         },
       ),
