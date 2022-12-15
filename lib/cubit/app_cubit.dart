@@ -360,20 +360,20 @@ bool isMaxLength({
     {
       "id": 2,
       "name": "Osama",
-      "type": "Bank",
-      "accountNumber": "47896021"
+      "type": "E-wallet",
+      "accountNumber": "44444444"
     },
     {
       "id": 3,
       "name": "Eslam",
       "type": "Bank",
-      "accountNumber": "47896021"
+      "accountNumber": "22222222"
     },
     {
       "id": 4,
       "name": "Eldahshan",
-      "type": "Bank",
-      "accountNumber": "47896021"
+      "type": "E-wallet",
+      "accountNumber": "333333333"
     },
     {
       "id": 5,
@@ -384,7 +384,7 @@ bool isMaxLength({
     {
       "id": 6,
       "name": "Hero",
-      "type": "Bank",
+      "type": "E-wallet",
       "accountNumber": "47896021"
     },
     {
@@ -396,7 +396,7 @@ bool isMaxLength({
     {
       "id": 8,
       "name": "Omar",
-      "type": "Bank",
+      "type": "E-wallet",
       "accountNumber": "47896021"
     },
     {
@@ -408,7 +408,7 @@ bool isMaxLength({
     {
       "id": 10,
       "name": "Khaled",
-      "type": "Bank",
+      "type": "E-wallet",
       "accountNumber": "47896021"
     },
   ];
