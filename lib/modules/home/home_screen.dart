@@ -173,6 +173,7 @@ class HomeScreen extends StatelessWidget {
                                     child: IconButton(
                                         iconSize:35 ,
                                         onPressed: (){
+                                          cubit.searchuser();
                                           navigateTo(context, FavoriteScreen());
                                         },
                                         icon:const Image(

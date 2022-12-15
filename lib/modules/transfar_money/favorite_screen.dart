@@ -12,7 +12,6 @@ import 'package:sizer/sizer.dart';
 class FavoriteScreen extends StatelessWidget {
   FavoriteScreen({Key? key}) : super(key: key);
   final item = [];
-  final GlobalKey<AnimatedListState> _key = GlobalKey();
   void addItem() {}
 
   var searchController = TextEditingController();
@@ -20,9 +19,12 @@ class FavoriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        // AppCubit.get(context).searchuser();
+      },
       builder: (context, state) {
         var cubit = AppCubit.get(context);
+        // cubit.searchuser();
         return SafeArea(
           child: DefaultTabController(
             length: 4,
@@ -47,7 +49,6 @@ class FavoriteScreen extends StatelessWidget {
                     child: Container(
                       height: 45.0,
                       child: TextFormField(
-
                         onChanged: (value) => cubit.runFilter(value),
                         decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
@@ -115,6 +116,7 @@ class FavoriteScreen extends StatelessWidget {
                   elevation: 0,
                 ),
               ),
+
               body: Column(
                 children: [
                   Padding(
@@ -130,25 +132,21 @@ class FavoriteScreen extends StatelessWidget {
                     child: cubit.searchUser.isNotEmpty
                         ? ListView.separated(
                             physics: const BouncingScrollPhysics(),
-                            itemBuilder: (context, index) => Container(
-                              key:ValueKey(cubit.searchUser[index]["id"]),
-                              child: buildFavoriteItem(
-
-                                context: context,
-                                index: index - 1,
-                                image: 'images/${index + 1}.jpg',
-                                name: cubit.searchUser[index]['name'],
-                                type: cubit.searchUser[index]['type'],
-                                accountNumber: cubit.searchUser[index]
-                                    ['accountNumber'],
-                                favoriteIcon: cubit.favoriteIcon[index],
-                                favoriteIconPressed: () {
-                                  print(
-                                      'Index Which CLicked Here ============> ${index}');
-                                  cubit.changeFavoriteIcon(index: index);
-                                },
-                                color: cubit.favoriteColor[index],
-                              ),
+                            itemBuilder: (context, index) =>buildFavoriteItem(
+                              context: context,
+                              index: index - 1,
+                              image: 'images/${index + 1}.jpg',
+                              name: cubit.searchUser[index]['name'],
+                              type: cubit.searchUser[index]['type'],
+                              accountNumber: cubit.searchUser[index]
+                                  ['accountNumber'],
+                              favoriteIcon: cubit.favoriteIcon[index],
+                              favoriteIconPressed: () {
+                                print(
+                                    'Index Which CLicked Here ============> ${index}');
+                                cubit.changeFavoriteIcon(index: index);
+                              },
+                              color: cubit.favoriteColor[index],
                             ),
                             separatorBuilder: (context, index) => Padding(
                               padding: const EdgeInsets.symmetric(
@@ -161,9 +159,14 @@ class FavoriteScreen extends StatelessWidget {
                             ),
                             itemCount: cubit.searchUser.length,
                           )
-                        : const Text(
-                            'No results found',
-                            style: TextStyle(fontSize: 24),
+                        : const Center(
+                            child: Text(
+                              'No results found',
+                              style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey),
+                            ),
                           ),
                   ),
                   SizedBox(
@@ -173,7 +176,7 @@ class FavoriteScreen extends StatelessWidget {
               ),
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  navigateAndFinish(context, AddNewRecipientScreen());
+                  navigateTo(context, AddNewRecipientScreen());
                 },
                 backgroundColor: primaryColor,
                 child: const Icon(
