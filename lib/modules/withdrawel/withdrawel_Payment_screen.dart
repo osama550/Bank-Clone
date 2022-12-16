@@ -59,12 +59,10 @@ class WithdrawelPaymentScreen extends StatelessWidget {
                               child: CircleAvatar(
                                 backgroundColor: HexColor('#DCDDE1'),
                                 radius: 40.0,
-                                child: const Center(
+                                child: Center(
                                   child: CircleAvatar(
                                     radius: 40,
-                                    backgroundImage: AssetImage(
-                                      'images/4.jpg',
-                                    ),
+                                    backgroundImage: NetworkImage(cubit.layoutModel!.clientPhoto.toString()),
                                   ),
                                 ),
                               ),
@@ -81,50 +79,51 @@ class WithdrawelPaymentScreen extends StatelessWidget {
                             ),
                             paymentData(
                               title: 'Amount(USD)',
-                              answer: '\$5000',
+                              // answer: '\$5000',
+                              answer: cubit.withdrawelResult,
                             ),
                             const SizedBox(
                               height: 20.0,
                             ),
                             paymentData(
                               title: 'Name',
-                              answer: 'Osama Kamel',
+                              answer: cubit.layoutModel!.clientName.toString(),
                             ),
                             const SizedBox(
                               height: 20.0,
                             ),
                             paymentData(
                               title: 'Bank Account',
-                              answer: '45798',
+                              answer: cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountId.toString(),
                             ),
                             const SizedBox(
                               height: 20.0,
                             ),
-                            paymentData(
-                              title: 'Schedule',
-                              answer: 'Now',
-                            ),
-                            const SizedBox(
-                              height: 20.0,
-                            ),
-                            paymentData(
-                              title: 'Hours',
-                              answer: 'Now',
-                            ),
-                            const SizedBox(
-                              height: 20.0,
-                            ),
+                            // paymentData(
+                            //   title: 'Schedule',
+                            //   answer: 'Now',
+                            // ),
+                            // const SizedBox(
+                            //   height: 20.0,
+                            // ),
+                            // paymentData(
+                            //   title: 'Hours',
+                            //   answer: 'Now',
+                            // ),
+                            // const SizedBox(
+                            //   height: 20.0,
+                            // ),
                             paymentData(
                               title: 'Category',
-                              answer: '45798',
+                              answer: cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountType.toString(),
                             ),
-                            const SizedBox(
-                              height: 20.0,
-                            ),
-                            paymentData(
-                              title: 'Notes',
-                              answer: 'Thank you  :)',
-                            ),
+                            // const SizedBox(
+                            //   height: 20.0,
+                            // ),
+                            // paymentData(
+                            //   title: 'Notes',
+                            //   answer: 'Thank you  :)',
+                            // ),
                             const SizedBox(
                               height: 20.0,
                             ),
@@ -135,12 +134,36 @@ class WithdrawelPaymentScreen extends StatelessWidget {
                   ),
                   paymentButton(
                     context: context,
-                    onPressed: (){
+                    onPressed: () async{
+                      await cubit.userWithdrawal(
+                        context: context,
+                        transaction: 'withdrawal',
+                        accountType: cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountType.toString(),
+                        amount: int.parse(cubit.withdrawelResult),
+                        atm_id: 1,
+                      );
+
+                      if(cubit.isWithdrawal!){
+                        showDialog(
+                          context: context,
+                          builder: (context) => defaultSuccessDialog(context),
+                        );
+                      }
+                      else{
+                        showDialog(
+                          context: context,
+                          builder: (context) => defaultErrorDialog(
+                            context: context,
+                            errorText: cubit.withdrawalErrorMessage,
+                          ),
+                        );
+                      }
+                      cubit.getLayoutData();
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
-                  )
+                  ),
                 ],
               ),
             ),

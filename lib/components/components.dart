@@ -33,11 +33,15 @@ void navigateAndFinish(context, Widget screen) {
 Widget buildAppBar({
   required BuildContext context,
   required String screenTitle,
+  int id = 0,
 }) =>
     Row(
       children: [
         IconButton(
           onPressed: () {
+            AppCubit.get(context).clearAmount(
+              id: id,
+            );
             Navigator.pop(context);
           },
           icon: Icon(
@@ -373,7 +377,10 @@ AlertDialog defaultSuccessDialog(context)=>AlertDialog(
     bottom: 20,
   ),
 );
-AlertDialog defaultErrorDialog(context)=>AlertDialog(
+AlertDialog defaultErrorDialog({
+  required BuildContext context,
+  required String errorText,
+})=>AlertDialog(
   backgroundColor:primaryColor,
   title:Center(
     child:Column(
@@ -388,13 +395,14 @@ AlertDialog defaultErrorDialog(context)=>AlertDialog(
       ],
     ),
   ),
-  content:  const Padding(
-    padding: EdgeInsets.only(
+  content: Padding(
+    padding: const EdgeInsets.only(
       left: 10,
       bottom: 20.0,
     ),
     child: Text(
-      'Bill Paid Failed,Please Try Again !',style: TextStyle(
+      errorText,
+      style: const TextStyle(
       color: Colors.white,
       fontSize: 15,
       fontWeight: FontWeight.w400,

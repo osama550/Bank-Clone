@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:project/cubit/app_state.dart';
 import 'package:project/models/layout_model.dart';
+import 'package:project/models/withdrawel_model.dart';
 import 'package:project/modules/in_out_payment/history.dart';
 import 'package:project/modules/in_out_payment/requested.dart';
 import 'package:project/modules/in_out_payment/scheduled.dart';
@@ -162,12 +163,28 @@ void isBankAccountEmpty({
   required int id,
 }){
     if(text.isEmpty){
-      text= text;
+      text = text;
     }
     else{
       text = text.substring(0, text.length-1);
     }
     emit(ChangeIsBankAccountEmptyState());
+
+    switch(id){
+      case 1:
+        result = text;
+        break;
+      case 2:
+        transferResult = text;
+        break;
+      case 3:
+        addTransferRecipientResult = text;
+        break;
+      case 4:
+        withdrawelResult = text;
+        break;
+    }
+
 }
 //-------------------------------------
   void isBankTransferEmpty({
@@ -187,20 +204,37 @@ void isBankAccountEmpty({
   var result ='';
   var transferResult = '';
   var addTransferRecipientResult = '';
+  var withdrawelResult = '';
 void addTextToBankAccount({
   required String num,
   required String amount,
   required int id,
 }){
-  if(isMaxLength(text: amount)){
-    amount=amount+num;
+  if(amount.length == 0 && num == '0'){
+    amount = amount;
+  }
+  else if(isMaxLength(text: amount)){
+    amount = amount + num;
     print(amount);
-    print(num);
   }
   else{
     amount = amount;
   }
     emit(AddTextToBankAccountState());
+  switch(id){
+    case 1:
+      result = amount;
+      break;
+    case 2:
+      transferResult = amount;
+      break;
+    case 3:
+      addTransferRecipientResult = amount;
+      break;
+    case 4:
+      withdrawelResult = amount;
+      break;
+  }
 }
 
   String dropdownvalue = 'USD';
@@ -222,7 +256,6 @@ bool isMaxLength({
 }
 //-------------------------------------------------
 
-
   void clearAmount({
     required int id,
   }){
@@ -236,8 +269,12 @@ bool isMaxLength({
       case 3:
         addTransferRecipientResult = '';
         break;
+      case 4:
+        withdrawelResult = '';
+        break;
     }
   }
+
 //-------------------------------------------------
 
   LayoutModel? layoutModel;
@@ -268,6 +305,8 @@ bool isMaxLength({
     emit(ChangeUserAccountState());
     userAccountIndex = index;
   }
+
+
 
 //---------------------------------------------------
 
@@ -439,8 +478,53 @@ bool isMaxLength({
     }
     searchUser=results;
     emit(SearchUserToBankTransferState());
-
   }
+
+
+  WithdrawelModel? withdrawelModel;
+  bool? isWithdrawal;
+  String withdrawalErrorMessage = '';
+
+  Future<void> userWithdrawal({
+    required BuildContext context,
+    required int amount,
+    required int atm_id,
+    required String accountType,
+    required String transaction ,
+})async{
+    emit(WithdrawelLoadingState());
+    await DioHelper.postData(
+      path: 'atm/transaction1.php',
+      data: {
+        'transaction' : transaction ,
+        'account_type' : accountType,
+        'amount' : amount,
+        'ATM_id' : 1,
+      },
+    ).then((value){
+      // print(value.data);
+      // print(value.data.runtimeType);
+      // withdrawelModel = WithdrawelModel.fromJson(jsonDecode(value.data));
+      // print(withdrawelModel);
+      print(value.data);
+      print(value.data.runtimeType);
+      if(value.data == '"successed"'){
+        print('Yessssssssss');
+        isWithdrawal = true;
+      }
+      else{
+        print('Noooooooooooo');
+        isWithdrawal = false;
+        withdrawalErrorMessage = value.data;
+      }
+      emit(WithdrawelSuccessState());
+    }).catchError((onError){
+      print('Error When Do Withdrawel Transaction ======> ${onError.toString()}');
+      emit(WithdrawelErrorState());
+    });
+  }
+
+
 
 
 

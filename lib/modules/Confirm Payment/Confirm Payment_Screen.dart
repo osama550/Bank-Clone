@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:project/components/colors/colors.dart';
 import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
@@ -137,7 +136,10 @@ class ConfirmPaymentScreen extends StatelessWidget {
                     onPressed: (){
                       showDialog(
                         context: context,
-                        builder: (context) => defaultErrorDialog(context),
+                        builder: (context) => defaultErrorDialog(
+                          context: context,
+                          errorText: 'Error!!!!!',
+                        ),
                       );
                     },
                   ),

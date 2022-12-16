@@ -26,7 +26,16 @@ class GetLayoutSuccessState extends AppStates {}
 class GetLayoutErrorState extends AppStates {}
 
 class ChangeUserAccountState extends AppStates {}
+
 class AuthenticateUserLoadingState extends AppStates {}
+
 class AuthenticateUserSuccessState extends AppStates {}
+
 class AuthenticateUserErrorState extends AppStates {}
+
+class WithdrawelLoadingState extends AppStates {}
+
+class WithdrawelSuccessState extends AppStates {}
+
+class WithdrawelErrorState extends AppStates {}
 

@@ -10,6 +10,7 @@ import 'package:project/modules/choose_bill/choose_bill.dart';
 import 'package:project/modules/in_out_payment/in_out_layout.dart';
 import 'package:project/modules/qr/qr_screen.dart';
 import 'package:project/modules/transfar_money/favorite_screen.dart';
+import 'package:project/modules/withdrawel/withdrawel_screen.dart';
 import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -125,21 +126,17 @@ class HomeScreen extends StatelessWidget {
                                     child: IconButton(
                                         iconSize:35 ,
                                         onPressed: (){
-                                          showDialog(
-                                              context: context,
-                                              builder:(BuildContext context){
-                                                context=context;
-                                                return  defaultLoading();
-
-                                              },
-
-                                          );
-
+                                          // showDialog(
+                                          //     context: context,
+                                          //     builder:(BuildContext context){
+                                          //       context=context;
+                                          //       return  defaultLoading();
+                                          //     },
+                                          // );
+                                          navigateTo(context, WithdrawelScreen());
                                         },
                                         icon:const Image(
                                       image: AssetImage('images/icon1.png'),
-
-
                                     )
                                     ),
                                   ),

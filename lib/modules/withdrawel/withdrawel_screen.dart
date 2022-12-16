@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
+import 'package:project/modules/withdrawel/withdrawel_Payment_screen.dart';
 import 'package:sizer/sizer.dart';
 
 class WithdrawelScreen extends StatelessWidget {
@@ -25,22 +26,21 @@ class WithdrawelScreen extends StatelessWidget {
                       children: [
                         buildAppBar(
                           context: context,
-                          screenTitle: 'Withdrawel',
+                          screenTitle: 'Withdrawal',
+                          id: 4,
                         ),
                         const SizedBox(
                           height: 40.0,
                         ),
                         CircleAvatar(
                           radius: 40,
-                          backgroundImage: AssetImage(
-                            'images/4.jpg',
-                          ),
+                          backgroundImage: NetworkImage(cubit.layoutModel!.clientPhoto.toString()),
                         ),
                         const SizedBox(
                           height: 8.0,
                         ),
                         Text(
-                          'Osama Kamel',
+                          '${cubit.layoutModel!.clientName}',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15.sp,
@@ -67,17 +67,25 @@ class WithdrawelScreen extends StatelessWidget {
                           ),
                         ),
                         defaultTextFormNumber(
-                            text: "EG"
+                            text: "EG ${cubit.withdrawelResult}",
                         ),
                       ],
                     ),
                   ),
                 ),
                 defaultNumbers(
-                  amount: cubit.transferResult,
+                  amount: cubit.withdrawelResult,
                   context: context,
-                  id: 2,
+                  id: 4,
                   onPressed: (){
+                    navigateTo(context, WithdrawelPaymentScreen());
+                    // cubit.userWithdrawal(
+                    //   context: context,
+                    //   transaction: 'withdrawal',
+                    //   accountType: cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountType.toString(),
+                    //   amount: int.parse(cubit.withdrawelResult),
+                    //   atm_id: int.parse(cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountId.toString()),
+                    // );
                   },
                 ),
               ],
