@@ -511,6 +511,7 @@ bool isMaxLength({
       if(value.data == '"successed"'){
         print('Yessssssssss');
         isWithdrawal = true;
+        withdrawelResult = '';
       }
       else{
         print('Noooooooooooo');
