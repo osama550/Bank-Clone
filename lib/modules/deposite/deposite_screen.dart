@@ -36,11 +36,9 @@ class DepositeScreen extends StatelessWidget {
                           const SizedBox(
                             height: 40.0,
                           ),
-                          const CircleAvatar(
+                          CircleAvatar(
                             radius: 40,
-                            backgroundImage: AssetImage(
-                              'images/4.jpg',
-                            ),
+                            backgroundImage: NetworkImage(cubit.layoutModel!.clientPhoto.toString()),
                           ),
                           const SizedBox(
                             height: 8.0,
@@ -54,7 +52,7 @@ class DepositeScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'Osama Kamel',
+                            cubit.layoutModel!.clientName.toString(),
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 11.sp,
@@ -137,6 +135,9 @@ class DepositeScreen extends StatelessWidget {
                       //   ),
                       // );
                     },
+                  ),
+                  const SizedBox(
+                    height: 40.0,
                   ),
                 ],
               ),

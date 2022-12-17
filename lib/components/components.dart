@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project/components/colors/colors.dart';
 import 'package:project/cubit/app_cubit.dart';
+import 'package:project/modules/home/home_screen.dart';
 import 'package:project/modules/payment/electricity_screen.dart';
 import 'package:sizer/sizer.dart';
 
@@ -359,7 +360,7 @@ AlertDialog defaultSuccessDialog(context)=>AlertDialog(
       ),
       child:MaterialButton(
         onPressed: () {
-          Navigator.pop(context);
+          navigateAndFinish(context, HomeScreen());
         },
         child: const Text(
             'Close',
@@ -418,7 +419,7 @@ AlertDialog defaultErrorDialog({
       ),
       child:MaterialButton(
         onPressed: () {
-          Navigator.pop(context);
+          navigateAndFinish(context, HomeScreen());
         },
         child: const Text(
             'Close',

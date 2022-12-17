@@ -122,6 +122,11 @@ class ConfirmDepositScreen extends StatelessWidget {
                         amount: 5000,
                         atm_id: 1,
                       );
+                      cubit.getLayoutData();
+                      showDialog(
+                        context: context,
+                        builder: (context) => defaultSuccessDialog(context),
+                      );
                     },
                   ),
                   const SizedBox(
