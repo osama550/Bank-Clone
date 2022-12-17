@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.white,
             ),
             debugShowCheckedModeBanner: false,
-            home: HomeScreen() ,
+            home: LoginScreen() ,
           );
         },
       ),
