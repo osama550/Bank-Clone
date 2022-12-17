@@ -6,7 +6,7 @@ import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
 import 'package:sizer/sizer.dart';
 
-class ComfirmDepositeScreen extends StatelessWidget {
+class ConfirmDepositScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class ComfirmDepositeScreen extends StatelessWidget {
                     children: [
                       buildAppBar(
                         context: context,
-                        screenTitle: 'Confirm Deposite',
+                        screenTitle: 'Confirm Deposit',
                       ),
                     ],
                   ),
@@ -58,11 +58,11 @@ class ComfirmDepositeScreen extends StatelessWidget {
                               child: CircleAvatar(
                                 backgroundColor: HexColor('#DCDDE1'),
                                 radius: 40.0,
-                                child: const Center(
+                                child: Center(
                                   child: CircleAvatar(
                                     radius: 40,
-                                    backgroundImage: AssetImage(
-                                      'images/4.jpg',
+                                    backgroundImage: NetworkImage(
+                                      cubit.layoutModel!.clientPhoto.toString(),
                                     ),
                                   ),
                                 ),
@@ -87,42 +87,21 @@ class ComfirmDepositeScreen extends StatelessWidget {
                             ),
                             paymentData(
                               title: 'Name',
-                              answer: 'Osama Kamel',
+                              answer: cubit.layoutModel!.clientName.toString(),
                             ),
                             const SizedBox(
                               height: 20.0,
                             ),
                             paymentData(
                               title: 'Bank Account',
-                              answer: '45798',
-                            ),
-                            const SizedBox(
-                              height: 20.0,
-                            ),
-                            paymentData(
-                              title: 'Schedule',
-                              answer: 'Now',
-                            ),
-                            const SizedBox(
-                              height: 20.0,
-                            ),
-                            paymentData(
-                              title: 'Hours',
-                              answer: 'Now',
+                              answer: cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountId.toString(),
                             ),
                             const SizedBox(
                               height: 20.0,
                             ),
                             paymentData(
                               title: 'Category',
-                              answer: '45798',
-                            ),
-                            const SizedBox(
-                              height: 20.0,
-                            ),
-                            paymentData(
-                              title: 'Notes',
-                              answer: 'Thank you  :)',
+                              answer: cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountType.toString(),
                             ),
                             const SizedBox(
                               height: 20.0,
@@ -134,10 +113,18 @@ class ComfirmDepositeScreen extends StatelessWidget {
                   ),
                   paymentButton(
                     context: context,
-                    onPressed: (){
+                    onPressed: ()async{
+                      await cubit.userWithdrawal(
+                        context: context,
+                        transaction: 'deposit',
+                        accountType: cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountType.toString(),
+                        // amount: int.parse(cubit.withdrawelResult),
+                        amount: 5000,
+                        atm_id: 1,
+                      );
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   )
                 ],

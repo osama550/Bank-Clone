@@ -4,6 +4,7 @@ import 'package:project/components/colors/colors.dart';
 import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
+import 'package:project/modules/deposite/confirm_deposite_screen.dart';
 import 'package:sizer/sizer.dart';
 
 class DepositeScreen extends StatelessWidget {
@@ -127,13 +128,14 @@ class DepositeScreen extends StatelessWidget {
                     context: context,
                     text: 'Continue',
                     onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => defaultErrorDialog(
-                          context: context,
-                          errorText: 'Error!!!!!',
-                        ),
-                      );
+                      navigateTo(context, ConfirmDepositScreen());
+                      // showDialog(
+                      //   context: context,
+                      //   builder: (context) => defaultErrorDialog(
+                      //     context: context,
+                      //     errorText: 'Error!!!!!',
+                      //   ),
+                      // );
                     },
                   ),
                 ],
