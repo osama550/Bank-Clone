@@ -7,6 +7,7 @@ import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
 import 'package:project/modules/choose_bill/choose_bill.dart';
+import 'package:project/modules/deposite/deposite_screen.dart';
 import 'package:project/modules/in_out_payment/in_out_layout.dart';
 import 'package:project/modules/qr/qr_screen.dart';
 import 'package:project/modules/transfar_money/favorite_screen.dart';
@@ -114,8 +115,53 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(
+                                      left: 105,
+                                      top: 13
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: HexColor('#D8A616'),
+                                        borderRadius: BorderRadiusDirectional.circular(50)
+                                    ),
+
+                                    child: IconButton(
+                                        iconSize:35 ,
+                                        onPressed: (){
+                                          // showDialog(
+                                          //     context: context,
+                                          //     builder:(BuildContext context){
+                                          //       context=context;
+                                          //       return  defaultLoading();
+                                          //     },
+                                          // );
+                                          navigateTo(context, WithdrawelScreen());
+                                        },
+                                        icon:const Image(
+                                          image: AssetImage('images/icon1.png'),
+                                        )
+                                    ),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 40,
+                                      top: 65
+                                  ),
+                                  child: Text(
+                                    'withdrawel',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400
+                                    ),
+                                  ),
+                                ),
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                Padding(
+                                  padding: const EdgeInsets.only(
                                       left: 60,
-                                      top: 60
+                                      top: 87
                                   ),
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -133,7 +179,7 @@ class HomeScreen extends StatelessWidget {
                                           //       return  defaultLoading();
                                           //     },
                                           // );
-                                          navigateTo(context, WithdrawelScreen());
+                                          navigateTo(context, DepositeScreen());
                                         },
                                         icon:const Image(
                                       image: AssetImage('images/icon1.png'),
@@ -143,11 +189,11 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.only(
-                                      left: 35,
-                                      top: 115
+                                      left: 27,
+                                      top: 138
                                   ),
                                   child: Text(
-                                    'withdrawel',
+                                    'Deposit',
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Colors.white,
@@ -155,11 +201,11 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       left: 50,
-                                      top: 140
+                                      top: 165
                                   ),
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -181,8 +227,8 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.only(
-                                      left: 40,
-                                      top: 190
+                                      left: 27,
+                                      top: 220
                                   ),
                                   child: Text(
                                     'transfer',
@@ -193,11 +239,11 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       left: 85,
-                                      top: 215
+                                      top: 238
                                   ),
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -219,8 +265,8 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.only(
-                                      left: 55,
-                                      top: 262
+                                      left: 48,
+                                      top: 288
                                   ),
                                   child: Text(
                                     'payment of',
@@ -233,8 +279,8 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.only(
-                                      left: 55,
-                                      top: 280
+                                      left: 48,
+                                      top: 307
                                   ),
                                   child: Text(
                                     'purchases',
@@ -245,10 +291,11 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
+///////////////////////////////////////////////////////////////////////////////////////////////////////
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 165,
-                                      top: 255
+                                      left: 170,
+                                      top: 275
                                   ),
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -273,7 +320,7 @@ class HomeScreen extends StatelessWidget {
                                 const Padding(
                                   padding: EdgeInsets.only(
                                       left: 150,
-                                      top: 303
+                                      top: 325
                                   ),
                                   child: Text(
                                     'payment',
@@ -287,7 +334,7 @@ class HomeScreen extends StatelessWidget {
                                 const Padding(
                                   padding: EdgeInsets.only(
                                       left: 160,
-                                      top: 323
+                                      top: 345
                                   ),
                                   child: Text(
                                     'of bills',
@@ -298,7 +345,7 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////
                                 Padding(
                                   padding: const EdgeInsets.only(
                                     left: 255,
