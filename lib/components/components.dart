@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project/components/colors/colors.dart';
 import 'package:project/cubit/app_cubit.dart';
+import 'package:project/layout/layout_screen.dart';
 import 'package:project/modules/home/home_screen.dart';
 import 'package:project/modules/payment/electricity_screen.dart';
 import 'package:sizer/sizer.dart';
@@ -25,7 +26,15 @@ void navigateAndFinish(context, Widget screen) {
   Navigator.pushAndRemoveUntil(
     context,
     MaterialPageRoute(builder: (context) => screen),
-    (Route<dynamic> route) => false,
+        (Route<dynamic> route) => false,
+  );
+}
+
+
+void navigateAndReplacement(context, Widget screen) {
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (context) => screen),
   );
 }
 
@@ -360,7 +369,7 @@ AlertDialog defaultSuccessDialog(context)=>AlertDialog(
       ),
       child:MaterialButton(
         onPressed: () {
-          navigateAndFinish(context, HomeScreen());
+          navigateAndReplacement(context, LayoutScreen());
         },
         child: const Text(
             'Close',
@@ -419,7 +428,7 @@ AlertDialog defaultErrorDialog({
       ),
       child:MaterialButton(
         onPressed: () {
-          navigateAndFinish(context, HomeScreen());
+          navigateAndFinish(context, LayoutScreen());
         },
         child: const Text(
             'Close',
