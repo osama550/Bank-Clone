@@ -369,7 +369,7 @@ AlertDialog defaultSuccessDialog(context)=>AlertDialog(
       ),
       child:MaterialButton(
         onPressed: () {
-          navigateAndReplacement(context, LayoutScreen());
+          navigateAndFinish(context, LayoutScreen());
         },
         child: const Text(
             'Close',
