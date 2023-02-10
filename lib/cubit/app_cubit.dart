@@ -187,6 +187,20 @@ void isBankAccountEmpty({
 
 }
 //-------------------------------------
+  // Initial Selected Value
+  String dropdownvalue = 'South Cairo Electricity';
+
+  // List of items in our dropdown menu
+  var items = [
+    'South Cairo Electricity',
+    'North Cairo Electricity',
+    'North Delta Electricity',
+  ];
+  void OnChangeItem(String? newValue){
+    dropdownvalue = newValue!;
+    emit(OnChangeItemState());
+  }
+//-------------------------------------
   void isBankTransferEmpty({
     required String text,
   }){
@@ -205,6 +219,8 @@ void isBankAccountEmpty({
   var transferResult = '';
   var addTransferRecipientResult = '';
   var withdrawelResult = '';
+  var electricityMeterNumber ='';
+  var phoneNumber='';
 void addTextToBankAccount({
   required String num,
   required String amount,
@@ -234,17 +250,15 @@ void addTextToBankAccount({
     case 4:
       withdrawelResult = amount;
       break;
+    case 5:
+      electricityMeterNumber = amount;
+      break;
+    case 6:
+      phoneNumber = amount;
+      break;
   }
 }
 
-  String dropdownvalue = 'USD';
-  late String newValue ;
-  void dropDownValue(
-    newValue
-    ){
-  dropdownvalue = newValue;
-  emit(AddDropDownValueState());
-}
 
 //-------------------------------------------------
 
@@ -459,25 +473,34 @@ bool isMaxLength({
       searchUser=allUsers;
     }
     else{
+
       searchUser = searchUser;
     }
     // emit(SearchUserToBankTransferState());
   }
 
   void runFilter(String enteredKeyword) {
-    List<Map<String, dynamic>> results = [];
+    List<Map<String, dynamic>> resultsName = [];
+    List<Map<String, dynamic>> resultsAccountNumber = [];
     if (enteredKeyword.isEmpty) {
-      results = allUsers;
+      resultsName = allUsers;
+      resultsAccountNumber=allUsers;
     }
     else
     {
-      results = allUsers
+      resultsName = allUsers
           .where((user) =>
           user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
+      resultsAccountNumber=allUsers
+          .where((user) =>
+          user["accountNumber"].toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .toList();
+
     }
-    searchUser=results;
-    emit(SearchUserToBankTransferState());
+
+    searchUser=resultsName+resultsAccountNumber;
+    emit(SearchUserNameToBankTransferState());
   }
 
 
@@ -525,7 +548,7 @@ bool isMaxLength({
     });
   }
 
-
+//-------------------------------------------------
 
 
 

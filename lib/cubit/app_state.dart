@@ -17,7 +17,8 @@ class AddDropDownValueState extends AppStates {}
 
 class AddTextToBankTransferState extends AppStates {}
 
-class SearchUserToBankTransferState extends AppStates {}
+class SearchUserNameToBankTransferState extends AppStates {}
+class SearchUserAccountNumberToBankTransferState extends AppStates {}
 
 class GetLayoutLoadingState extends AppStates {}
 
@@ -39,3 +40,6 @@ class WithdrawelSuccessState extends AppStates {}
 
 class WithdrawelErrorState extends AppStates {}
 
+class SearchUserToBankTransferState extends AppStates {}
+
+class OnChangeItemState extends AppStates{}
