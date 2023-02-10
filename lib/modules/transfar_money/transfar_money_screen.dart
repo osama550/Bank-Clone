@@ -70,7 +70,7 @@ class transfarScreen extends StatelessWidget {
                             thickness: 1.8,
                           ),
                         ),
-                        defaultTextFormNumber(text: '''EG${cubit.transferResult}''')
+                        defaultTextFormNumber(text: '''EG ${cubit.transferResult}''')
                       ],
                     ),
                   ),

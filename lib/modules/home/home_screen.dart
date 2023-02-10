@@ -134,21 +134,21 @@ class HomeScreen extends StatelessWidget {
                                           //       return  defaultLoading();
                                           //     },
                                           // );
-                                          navigateTo(context, WithdrawelScreen());
+                                          navigateTo(context, DepositeScreen());
                                         },
                                         icon:const Image(
-                                          image: AssetImage('images/icon1.png'),
+                                          image: AssetImage('images/deposit.png'),
                                         )
                                     ),
                                   ),
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.only(
-                                      left: 40,
-                                      top: 65
+                                      left: 60,
+                                      top: 63
                                   ),
                                   child: Text(
-                                    'withdrawel',
+                                    'Deposit',
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Colors.white,
@@ -179,7 +179,7 @@ class HomeScreen extends StatelessWidget {
                                           //       return  defaultLoading();
                                           //     },
                                           // );
-                                          navigateTo(context, DepositeScreen());
+                                          navigateTo(context, WithdrawelScreen());
                                         },
                                         icon:const Image(
                                       image: AssetImage('images/icon1.png'),
@@ -193,7 +193,7 @@ class HomeScreen extends StatelessWidget {
                                       top: 138
                                   ),
                                   child: Text(
-                                    'Deposit',
+                                    'withdrawel',
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Colors.white,
