@@ -183,6 +183,13 @@ void isBankAccountEmpty({
       case 4:
         withdrawelResult = text;
         break;
+      case 5:
+        electricityMeterNumber = text;
+        break;
+      case 6:
+        phoneNumber = text;
+        break;
+
     }
 
 }
