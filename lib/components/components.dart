@@ -38,6 +38,8 @@ void navigateAndReplacement(context, Widget screen) {
   );
 }
 
+
+
 // ---------------------------------------
 
 Widget buildAppBar({
@@ -129,34 +131,11 @@ Widget buildTransferAppBar({
 
           ],
         ),
-
-        // Container(
-        //   child: TextFormField(
-        //     decoration: InputDecoration(
-        //       enabledBorder: OutlineInputBorder(
-        //         borderRadius: BorderRadius.circular(20.0),
-        //         borderSide: BorderSide.none,
-        //       ),
-        //       focusedBorder: OutlineInputBorder(
-        //         borderRadius: BorderRadius.circular(20.0),
-        //         borderSide: BorderSide.none,
-        //       ),
-        //       contentPadding: const EdgeInsets.only(
-        //         bottom: 5.0,
-        //       ),
-        //       filled: true,
-        //       fillColor: HexColor('#D9D9D9').withOpacity(0.5,),
-        //       prefixIcon: Icon(
-        //         Icons.search,
-        //         color: HexColor('#292D32').withOpacity(0.8),
-        //         size: 30.0,
-        //       ),
-        //     ),
-        //   ),
-        // ),
-
       ],
     );
+//-----------------------------------------
+
+
 
 //-----------------------------------------
 
@@ -247,6 +226,32 @@ Widget paymentBill({
             thickness: 1.8,
           ),
         ),
+
+        // Container(
+        //   child: TextFormField(
+        //     decoration: InputDecoration(
+        //       enabledBorder: OutlineInputBorder(
+        //         borderRadius: BorderRadius.circular(20.0),
+        //         borderSide: BorderSide.none,
+        //       ),
+        //       focusedBorder: OutlineInputBorder(
+        //         borderRadius: BorderRadius.circular(20.0),
+        //         borderSide: BorderSide.none,
+        //       ),
+        //       contentPadding: const EdgeInsets.only(
+        //         bottom: 5.0,
+        //       ),
+        //       filled: true,
+        //       fillColor: HexColor('#D9D9D9').withOpacity(0.5,),
+        //       prefixIcon: Icon(
+        //         Icons.search,
+        //         color: HexColor('#292D32').withOpacity(0.8),
+        //         size: 30.0,
+        //       ),
+        //     ),
+        //   ),
+        // ),
+
       ],
     );
 
@@ -284,7 +289,8 @@ Widget paymentData({
     );
 
 //----------------------------------------------------
-
+//required VoidCallback onPressed,
+//onPressed: onPressed,
 Widget paymentButton({
   required BuildContext context,
   String text = 'Confirm Payment',
@@ -305,7 +311,7 @@ Widget paymentButton({
         child: MaterialButton(
           onPressed: onPressed,
           child: Text(
-            text,
+            'Confirm Payment',
             style: TextStyle(
               color: Colors.white,
               fontSize: 15.sp,
@@ -879,7 +885,7 @@ Widget defaultBackgroundImage(){
   return Container(
     height: double.infinity,
     child: Image.asset(
-      'images/shape.jpg',
+      'images/shape.png',
       // fit: BoxFit.fill,
     ),
   );
@@ -987,3 +993,4 @@ Widget defaultTextFormNumber(
 }
 
 //'''EG${cubit.transferResult}'''
+
