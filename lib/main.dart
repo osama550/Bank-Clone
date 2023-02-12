@@ -6,6 +6,7 @@ import 'package:project/cubit/app_cubit.dart';
 import 'package:project/modules/home/home_screen.dart';
 import 'package:project/modules/in_out_payment/in_out_layout.dart';
 import 'package:project/modules/login_screen/login_screen.dart';
+import 'package:project/modules/payment/select_electricity.dart';
 import 'package:project/modules/spalsh_screen/splash_screen.dart';
 import 'package:project/modules/transfar_money/transfar_money_screen.dart';
 import 'package:project/network/local/cashe_helper.dart';
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.white,
             ),
             debugShowCheckedModeBanner: false,
-            home: LoginScreen() ,
+            home:SelectElectricity() ,
           );
         },
       ),
