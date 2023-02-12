@@ -217,9 +217,13 @@ void isBankAccountEmpty({
       case 3:
         addTransferRecipientResult = text;
         break;
-      case 4:
-        withdrawelResult = text;
+      case 5:
+        electricityMeterNumber =  text;
         break;
+      case 6:
+        phoneNumber =  text;
+        break;
+
     }
 
 }
@@ -242,6 +246,8 @@ void isBankAccountEmpty({
   var transferResult = '';
   var addTransferRecipientResult = '';
   var withdrawelResult = '';
+  var electricityMeterNumber='';
+  var phoneNumber='';
 void addTextToBankAccount({
   required String num,
   required String amount,
@@ -271,18 +277,31 @@ void addTextToBankAccount({
     case 4:
       withdrawelResult = amount;
       break;
+    case 5:
+      electricityMeterNumber = amount;
+      break;
+    case 6:
+      phoneNumber = amount;
+      break;
   }
 }
+//-------------------------------------------------
+  // Initial Selected Value
+  String dropdownvalue = 'Item 1';
 
-  String dropdownvalue = 'USD';
-  late String newValue ;
-  void dropDownValue(
-    newValue
-    ){
-  dropdownvalue = newValue;
-  emit(AddDropDownValueState());
-}
-
+  // List of items in our dropdown menu
+  var items = [
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4',
+    'Item 5',
+  ];
+  void OnChangeItem(String? newValue){
+    dropdownvalue = newValue!;
+    emit(AddDropDownValueState());
+  }
+//
 //-------------------------------------------------
 
 //  this function used to limit the amount of money that can transfer or payment.
@@ -308,6 +327,12 @@ bool isMaxLength({
         break;
       case 4:
         withdrawelResult = '';
+        break;
+      case 5:
+        electricityMeterNumber = '';
+        break;
+      case 6:
+        phoneNumber = '';
         break;
     }
   }
