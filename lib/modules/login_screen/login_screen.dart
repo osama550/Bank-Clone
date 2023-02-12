@@ -5,6 +5,7 @@ import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
 import 'package:project/layout/layout_screen.dart';
+import 'package:project/network/local/cashe_helper.dart';
 import 'package:sizer/sizer.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -31,6 +32,11 @@ class LoginScreen extends StatelessWidget {
       },
       builder: (context, state) {
         var cubit = AppCubit.get(context);
+        // cubit.speaker = CacheHelper.getBoolean()!;
+        if(cubit.speaker) {
+          cubit.speak(text: 'اهلاً بك فى هيكس بانك'
+              '\n \n الرجاء إدخال البصما');
+        }
         return SafeArea(
           child: Scaffold(
             body: Stack(
@@ -41,6 +47,30 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12.0,
+                        ),
+                        child: Row(
+                          children: [
+                            const Spacer(),
+                            IconButton(
+                              onPressed: (){
+                                cubit.changeSpeak();
+                                },
+                              icon: cubit.speaker? const Icon(
+                                Icons.volume_up,
+                                size: 40.0,
+                                color: Colors.black,
+                              ) : const Icon(
+                                Icons.volume_off,
+                                size: 40.0,
+                                color: Colors.grey,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                       Text(
                         'login to',
                         style: TextStyle(
@@ -92,9 +122,15 @@ class LoginScreen extends StatelessWidget {
                           await cubit.checkBiometrics().then((value){
                             print(cubit.canCheckBiometrics);
                             if(cubit.canCheckBiometrics!){
+                              if(cubit.speaker){
+                                cubit.speak(text: 'جاري إدخال البصما');
+                              }
                               cubit.authenticate(context: context).then((value){
                                 if(cubit.layoutModel == null){
                                   if(cubit.isAuthenticating!){
+                                    if(cubit.speaker){
+                                      cubit.speak(text: 'تم تأكيد البصما بنجاح');
+                                    }
                                     print('isAuthenticating =====> ${cubit.isAuthenticating}');
                                     showDialog(
                                       context: context,
@@ -103,6 +139,12 @@ class LoginScreen extends StatelessWidget {
                                         return  defaultLoading();
                                       },
                                     );
+                                  }
+                                  else{
+                                    if(cubit.speaker){
+                                      cubit.speak(text: '\n \n \n البصما غير صحيحا'
+                                          '\n \n \n \nالرجاء إدخال البصما');
+                                    }
                                   }
                                 }
                                 // else{

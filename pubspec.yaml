@@ -51,8 +51,10 @@ dependencies:
   animate_do: ^3.0.2
   syncfusion_flutter_charts: ^20.3.60
   filter_list: ^1.0.2
+  flutter_tts: ^3.6.3
+  flutter_barcode_scanner: any
+  shared_preferences: ^2.0.17
 
-#  qr_code_scanner: ^1.0.1
 
 dev_dependencies:
   flutter_test:

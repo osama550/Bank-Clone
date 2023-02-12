@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -10,12 +12,12 @@ import 'package:project/modules/choose_bill/choose_bill.dart';
 import 'package:project/modules/deposite/deposite_screen.dart';
 import 'package:project/modules/in_out_payment/in_out_layout.dart';
 import 'package:project/modules/qr/qr_screen.dart';
-import 'package:project/modules/transfar_money/favorite_screen.dart';
+import 'package:project/modules/transfar_money/transfer_layout_screen.dart';
 import 'package:project/modules/withdrawel/withdrawel_screen.dart';
 import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,21 @@ class HomeScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         var cubit = AppCubit.get(context);
+        if(cubit.speaker){
+          Timer(
+            const Duration(seconds: 1),
+                (){
+              cubit.homeSpeaker();
+            },
+          );
+          Timer(
+            const Duration(seconds: 4),
+                (){
+              cubit.speak(text: 'الرجاء إختيار الخدمة');
+            },
+          );
+        }
+
         return SafeArea(
           child: Scaffold(
             body: SingleChildScrollView(
@@ -217,7 +234,7 @@ class HomeScreen extends StatelessWidget {
                                         iconSize:35 ,
                                         onPressed: (){
                                           cubit.searchuser();
-                                          navigateTo(context, FavoriteScreen());
+                                          navigateTo(context, TransferLayoutScreen());
                                         },
                                         icon:const Image(
                                           image: AssetImage('images/icon2.png'),

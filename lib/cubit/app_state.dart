@@ -3,11 +3,19 @@ abstract class AppStates {}
 
 class AppInitialState extends AppStates {}
 
+class ChangeSpeakerState extends AppStates {}
+
 class ChangePaymentBillScreenState extends AppStates {}
 
 class ChangeInOutPaymentScreenState extends AppStates {}
 
 class ChangeFavoriteIconState extends AppStates {}
+
+class ChangeFavoriteIconErrorState extends AppStates {}
+
+class ChangeFavoriteIconSuccessState extends AppStates {}
+
+class SpeakState extends AppStates {}
 
 class ChangeIsBankAccountEmptyState extends AppStates {}
 
@@ -38,4 +46,13 @@ class WithdrawelLoadingState extends AppStates {}
 class WithdrawelSuccessState extends AppStates {}
 
 class WithdrawelErrorState extends AppStates {}
+
+class GetAllTransferUsersLoadingState extends AppStates {}
+
+class GetAllTransferUsersSuccessState extends AppStates {}
+
+class GetAllTransferUsersErrorState extends AppStates {}
+
+class ChangeTabBarState extends AppStates {}
+
 

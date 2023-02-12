@@ -3,19 +3,37 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:project/cubit/app_state.dart';
+import 'package:project/models/all_transfer.dart';
 import 'package:project/models/layout_model.dart';
 import 'package:project/models/withdrawel_model.dart';
 import 'package:project/modules/in_out_payment/history.dart';
 import 'package:project/modules/in_out_payment/requested.dart';
 import 'package:project/modules/in_out_payment/scheduled.dart';
+import 'package:project/modules/transfar_money/all_users.dart';
+import 'package:project/modules/transfar_money/bank_screen.dart';
+import 'package:project/modules/transfar_money/ewallet_screen.dart';
+import 'package:project/modules/transfar_money/favorite_screen.dart';
+import 'package:project/network/local/cashe_helper.dart';
 import 'package:project/network/remote/dio_helper.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
 
   static AppCubit get(context) => BlocProvider.of(context);
+
+  bool speaker = true;
+
+  void changeSpeak(){
+    speaker = !speaker;
+    // CacheHelper.putBoolean(value: speaker).then((value) {
+    //   print(value);
+    // });
+    emit(ChangeSpeakerState());
+  }
+
 
   int billIndex = 0;
 
@@ -83,6 +101,13 @@ class AppCubit extends Cubit<AppStates> {
     RequestedScreen(),
   ];
 
+  List<Widget> transferScreens = [
+    AllUsersScreen(),
+    FavoriteScreen(),
+    BankScreen(),
+    EWalletScreen(),
+  ];
+
   int numberOfInOutScreen = 0;
 
   void selectInOutPayment({
@@ -135,19 +160,31 @@ class AppCubit extends Cubit<AppStates> {
   ];
 
   void changeFavoriteIcon({
-  required int index,
-}){
-    isFavorite[index] = !isFavorite[index];
-    if(isFavorite[index]){
-      favoriteIcon[index] = Icons.star_rounded;
-      favoriteColor[index] = Colors.amber;
-    }
-    else{
-      favoriteIcon[index] = Icons.star_border_outlined;
-      favoriteColor[index] = Colors.grey;
-    }
+    required bool isFavorite,
+    required String type,
+    required String id,
+    required String favorite_state,
+  }) async{
     emit(ChangeFavoriteIconState());
+    isFavorite = !isFavorite;
+    await DioHelper.postData(
+      path: 'atm/favorite.php',
+      data: {
+        'account_type' : 'current',
+        'type' : type,
+        'account_no' : id,
+        'favorite' : isFavorite.toString(),
+      },
+    ).then((value) {
+      getAllTransferUsers();
+      emit(ChangeFavoriteIconSuccessState());
+    }).catchError((error){
+      print('Error When Edit Favorite User Transfer ====> ${error.toString()}');
+      emit(ChangeFavoriteIconErrorState());
+    });
   }
+  
+  
 
 
 
@@ -304,6 +341,21 @@ bool isMaxLength({
   }){
     emit(ChangeUserAccountState());
     userAccountIndex = index;
+  }
+
+  void homeSpeaker(){
+    if(userAccountIndex == 0){
+      speak(text: 'تم إختيار الحساب الموفر');
+    }
+    else if(userAccountIndex == 1){
+      speak(text: 'تم إختيار الحساب الحالي');
+    }
+    else if(userAccountIndex == 2){
+      speak(text: 'تم إختيار بطاقة الأئتمان');
+    }
+    else{
+      speak(text: 'تم إختيار الراتب');
+    }
   }
 
 
@@ -525,7 +577,75 @@ bool isMaxLength({
     });
   }
 
+  FlutterTts flutterTts = FlutterTts();
+  void speak({
+  required String text,
+}) async{
+    await flutterTts.speak(text);
 
+  }
+
+
+  void stop() async{
+    await flutterTts.stop();
+  }
+
+
+  var tabIndex = 0;
+  void changeTabBarIndex(int index){
+    tabIndex = index;
+    emit(ChangeTabBarState());
+  }
+
+
+  List transferUsers = [];
+  List transferFavoriteUsers = [];
+  List transferBankUsers = [];
+  List transferWalletUsers = [];
+
+  void getAllTransferUsers(
+    // required String transfer_to,
+    // required int id,
+    // required String type,
+    // required bool favorite,
+) async{
+    emit(GetAllTransferUsersLoadingState());
+    await DioHelper.postData(
+      path: 'atm/alltransfer.php',
+      data: {
+        'account_type': 'current',
+      },
+    ).then((value) {
+      transferUsers = [];
+      transferFavoriteUsers = [];
+      transferBankUsers = [];
+      transferWalletUsers = [];
+
+      // transferModel = transferModel.add(TransferUsersModel.fromJson(jsonDecode(value.data)));
+      transferUsers.addAll(jsonDecode(value.data));
+      for(int i=0; i<transferUsers.length; i++){
+        if(transferUsers[i]['Favourit']){
+          transferFavoriteUsers.add(transferUsers[i]);
+        }
+        if(transferUsers[i]['Type'] == 'bank'){
+          transferBankUsers.add(transferUsers[i]);
+        }
+        else{
+          transferWalletUsers.add(transferUsers[i]);
+        }
+      }
+
+      print(transferUsers.length);
+      print(transferFavoriteUsers.length);
+
+      print('Get All Transfer Users...');
+      emit(GetAllTransferUsersSuccessState());
+
+    }).catchError((error){
+      emit(GetAllTransferUsersErrorState());
+      print('Error When Get Transfer Users ${error.toString()}');
+    });
+  }
 
 
 
