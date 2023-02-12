@@ -23,6 +23,7 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   await CacheHelper.init();
+
   // bool? isSpeak = CacheHelper.getBoolean();
 
 
