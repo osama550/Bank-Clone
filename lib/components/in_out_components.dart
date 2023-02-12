@@ -430,15 +430,14 @@ Widget buildFavoriteItem( {
   required String accountNumber,
   required IconData favoriteIcon,
   required VoidCallback favoriteIconPressed,
-  Color color = Colors.white,
-  Color iconColor = Colors.amber,
-  required int index,
+  // Color color = Colors.white,
+  // Color iconColor = Colors.amber,
+  // required int index,
 }) => Padding(
   padding: const EdgeInsets.symmetric(
     horizontal: 13.0,
   ),
   child: Container(
-
     height: 70.0,
     decoration: BoxDecoration(
       borderRadius: BorderRadiusDirectional.circular(20.0,),
@@ -453,7 +452,7 @@ Widget buildFavoriteItem( {
         children: [
           CircleAvatar(
             radius: 25.0,
-            backgroundImage: AssetImage(image),
+            backgroundImage: NetworkImage(image),
           ),
           const SizedBox(
             width: 10.0,
@@ -509,7 +508,7 @@ Widget buildFavoriteItem( {
             icon: Icon(
               favoriteIcon,
               size: 30.0,
-              color: iconColor,
+              color: Colors.amber,
             ),
           ),
         ],

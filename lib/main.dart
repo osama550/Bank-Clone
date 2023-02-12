@@ -6,17 +6,15 @@ import 'package:project/cubit/app_cubit.dart';
 import 'package:project/modules/home/home_screen.dart';
 import 'package:project/modules/in_out_payment/in_out_layout.dart';
 import 'package:project/modules/login_screen/login_screen.dart';
-import 'package:project/modules/payment/addphone_screen.dart';
-import 'package:project/modules/payment/electricity_screen.dart';
-import 'package:project/modules/payment/select_electricity.dart';
-import 'package:project/modules/transfar_money/favorite_screen.dart';
+import 'package:project/modules/spalsh_screen/splash_screen.dart';
 import 'package:project/modules/transfar_money/transfar_money_screen.dart';
+import 'package:project/network/local/cashe_helper.dart';
 import 'package:project/network/remote/dio_helper.dart';
 import 'package:sizer/sizer.dart';
 
 
 //
-void main() {
+void main() async{
   // disabledCapture();
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
@@ -24,6 +22,10 @@ void main() {
   ]);
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
+  await CacheHelper.init();
+
+  // bool? isSpeak = CacheHelper.getBoolean();
+
 
   //  to change status bar and icon color
 //SystemChrome.setSystemUIOverlayStyle(
@@ -51,13 +53,13 @@ class MyApp extends StatelessWidget {
       create: (context) => AppCubit(),
       child: Sizer(
         builder: (BuildContext context, Orientation orientation,
-            DeviceType deviceType) {
+          DeviceType deviceType) {
           return MaterialApp(
             theme: ThemeData(
               scaffoldBackgroundColor: Colors.white,
             ),
             debugShowCheckedModeBanner: false,
-            home: AddPhoneScreen() ,
+            home: LoginScreen() ,
           );
         },
       ),
