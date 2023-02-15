@@ -8,14 +8,19 @@ class CacheHelper{
   }
 
   static Future<bool> putBoolean({
+    required String key,
     required bool value,
 }) async{
-    return await sheredPrefrences!.setBool('isSpeak', value);
+    return await sheredPrefrences!.setBool(key, value);
   }
 
 
-  static bool? getBoolean(){
-    return sheredPrefrences!.getBool('isSpeak');
+  static bool? getBoolean(
+  {
+  required String key
+}
+      ){
+    return sheredPrefrences!.getBool(key);
   }
 
 }

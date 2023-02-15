@@ -883,10 +883,18 @@ Widget defaultLoading(){
 
 Widget defaultBackgroundImage(){
   return Container(
+    alignment: AlignmentDirectional.bottomEnd
+    ,
     height: double.infinity,
-    child: Image.asset(
-      'images/shape.png',
-      // fit: BoxFit.fill,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Image.asset(
+          'images/shape.png',
+          width: 50.w,
+          fit:BoxFit.cover,
+        ),
+      ],
     ),
   );
 }

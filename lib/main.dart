@@ -7,8 +7,11 @@ import 'package:project/modules/home/home_screen.dart';
 import 'package:project/modules/in_out_payment/in_out_layout.dart';
 import 'package:project/modules/login_screen/login_screen.dart';
 import 'package:project/modules/payment/select_electricity.dart';
+import 'package:project/modules/qr/qr_screen.dart';
 import 'package:project/modules/spalsh_screen/splash_screen.dart';
+
 import 'package:project/modules/transfar_money/transfar_money_screen.dart';
+import 'package:project/modules/transfar_money/transfer_layout_screen.dart';
 import 'package:project/network/local/cashe_helper.dart';
 import 'package:project/network/remote/dio_helper.dart';
 import 'package:sizer/sizer.dart';
@@ -21,9 +24,9 @@ void main() async{
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp
   ]);
-  WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   await CacheHelper.init();
+  bool? speaker=CacheHelper.getBoolean(key: 'speaker');
 
   // bool? isSpeak = CacheHelper.getBoolean();
 
@@ -36,7 +39,7 @@ void main() async{
 //     ),
 //   );
 
-  runApp(const MyApp());
+  runApp( MyApp(speaker!));
   Bloc.observer = MyBlocObserver();
 
 }
@@ -45,13 +48,14 @@ void main() async{
 // }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
 
+  final bool speaker;
+  MyApp(this.speaker);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppCubit(),
+      create: (context) => AppCubit()..changeSpeak(isSpeaker:speaker ),
       child: Sizer(
         builder: (BuildContext context, Orientation orientation,
           DeviceType deviceType) {
@@ -60,7 +64,7 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.white,
             ),
             debugShowCheckedModeBanner: false,
-            home:SelectElectricity() ,
+            home: LoginScreen() ,
           );
         },
       ),

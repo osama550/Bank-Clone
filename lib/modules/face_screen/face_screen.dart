@@ -40,7 +40,7 @@ class FaceScreen extends StatelessWidget {
                      width: 60.w,
                     height: 30.h,
                    child: Image.asset(
-                     'images/face.jpg',
+                     'images/face.png',
                     fit: BoxFit.contain,
                    ),
                    ),

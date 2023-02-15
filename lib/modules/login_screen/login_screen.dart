@@ -43,6 +43,7 @@ class LoginScreen extends StatelessWidget {
               children: [
                 defaultBackgroundImage(),
                 defaultBankImage(),
+
                 Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

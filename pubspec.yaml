@@ -53,8 +53,10 @@ dependencies:
   filter_list: ^1.0.2
   flutter_tts: ^3.6.3
   flutter_barcode_scanner: any
+  barcode_widget:
   shared_preferences: ^2.0.17
   dropdown_button2:
+
 
 dev_dependencies:
   flutter_test:
