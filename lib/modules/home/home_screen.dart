@@ -132,7 +132,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 105,
+                                      left: 100,
                                       top: 13
                                   ),
                                   child: Container(
@@ -161,7 +161,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.only(
-                                      left: 60,
+                                      left: 90,
                                       top: 63
                                   ),
                                   child: Text(
@@ -177,7 +177,7 @@ class HomeScreen extends StatelessWidget {
 
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 60,
+                                      left: 55,
                                       top: 87
                                   ),
                                   child: Container(
@@ -206,7 +206,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.only(
-                                      left: 27,
+                                      left: 30,
                                       top: 138
                                   ),
                                   child: Text(
@@ -244,7 +244,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.only(
-                                      left: 27,
+                                      left: 45,
                                       top: 220
                                   ),
                                   child: Text(
@@ -259,8 +259,8 @@ class HomeScreen extends StatelessWidget {
 /////////////////////////////////////////////////////////////////////////////////////////////////////
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 85,
-                                      top: 238
+                                      left: 70,
+                                      top: 242
                                   ),
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -311,7 +311,7 @@ class HomeScreen extends StatelessWidget {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 170,
+                                      left: 160,
                                       top: 275
                                   ),
                                   child: Container(

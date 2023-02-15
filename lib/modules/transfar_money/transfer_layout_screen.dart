@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project/components/colors/colors.dart';
@@ -7,7 +8,6 @@ import 'package:project/components/in_out_components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
 import 'package:project/modules/add%20new%20recipient/add%20new%20recipient_screen.dart';
-import 'package:project/modules/transfar_money/scan_qr.dart';
 import 'package:sizer/sizer.dart';
 
 class TransferLayoutScreen extends StatelessWidget {
@@ -73,19 +73,14 @@ class TransferLayoutScreen extends StatelessWidget {
                               size: 30.0,
                             ),
                             suffixIcon: IconButton(
-                                onPressed: () {
-                                  navigateTo(context, ScanScreen());
-                                },
+                                onPressed:scanQr,
                                 icon: Image(
                                   image: AssetImage(
                                     'images/qr.png',
-
                                   ),
                                   height: 20,
                                   width: 20,
-                                )
-                            )
-                        ),
+                                ))),
                       ),
                     ),
                   ),
@@ -104,7 +99,7 @@ class TransferLayoutScreen extends StatelessWidget {
                         text: 'E-wallet',
                       )
                     ],
-                    onTap: (int index){
+                    onTap: (int index) {
                       cubit.changeTabBarIndex(index);
                       print(cubit.tabIndex);
                     },
@@ -129,9 +124,7 @@ class TransferLayoutScreen extends StatelessWidget {
                   elevation: 0,
                 ),
               ),
-
               body: cubit.transferScreens[cubit.tabIndex],
-
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
                   navigateTo(context, AddNewRecipientScreen());
@@ -147,7 +140,25 @@ class TransferLayoutScreen extends StatelessWidget {
             ),
           ),
         );
+
       },
+
     );
   }
+  Future<void> scanQr({context}) async {
+    try {
+      FlutterBarcodeScanner.scanBarcode(
+          '#2A99CF',
+          'cancel',
+          true,
+          ScanMode.QR)
+          .then((value) {
+        AppCubit.get(context).SaveQr(value);
+
+      });
+    } catch (e) {
+      AppCubit.get(context).ErrorQr();
+    }
+  }
+
 }
