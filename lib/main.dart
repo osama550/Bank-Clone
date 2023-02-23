@@ -10,10 +10,12 @@ import 'package:project/modules/payment/select_electricity.dart';
 import 'package:project/modules/qr/qr_screen.dart';
 import 'package:project/modules/spalsh_screen/splash_screen.dart';
 
+
 import 'package:project/modules/transfar_money/transfar_money_screen.dart';
 import 'package:project/modules/transfar_money/transfer_layout_screen.dart';
 import 'package:project/network/local/cashe_helper.dart';
 import 'package:project/network/remote/dio_helper.dart';
+
 import 'package:sizer/sizer.dart';
 
 
@@ -26,9 +28,9 @@ void main() async{
   ]);
   DioHelper.init();
   await CacheHelper.init();
-  bool? speaker=CacheHelper.getBoolean(key: 'speaker');
+  bool? speaker=CacheHelper.getBoolean(key: 'speaker') == null ? true  : CacheHelper.getBoolean(key: 'speaker');
 
-  // bool? isSpeak = CacheHelper.getBoolean();
+  // bool? isSpeak = CacheHelper.getBoolean(key: 'speaker');
 
 
   //  to change status bar and icon color
@@ -39,7 +41,7 @@ void main() async{
 //     ),
 //   );
 
-  runApp( MyApp(speaker!));
+  runApp(MyApp(speaker!));
   Bloc.observer = MyBlocObserver();
 
 }

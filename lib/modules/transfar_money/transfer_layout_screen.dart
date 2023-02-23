@@ -72,8 +72,10 @@ class TransferLayoutScreen extends StatelessWidget {
                               color: HexColor('#292D32').withOpacity(0.8),
                               size: 30.0,
                             ),
-                            suffixIcon: IconButton(
+                            suffixIcon:
+                            IconButton(
                                 onPressed:scanQr,
+
                                 icon: Image(
                                   image: AssetImage(
                                     'images/qr.png',
@@ -145,6 +147,21 @@ class TransferLayoutScreen extends StatelessWidget {
 
     );
   }
+  // Future<void> scanQr({context}) async {
+  //   try {
+  //     FlutterBarcodeScanner.scanBarcode(
+  //         '#2A99CF',
+  //         'cancel',
+  //         true,
+  //         ScanMode.QR)
+  //         .then((value) {
+  //       AppCubit.get(context).SaveQr(value);
+  //
+  //     });
+  //   } catch (e) {
+  //     AppCubit.get(context).ErrorQr();
+  //   }
+  // }
   Future<void> scanQr({context}) async {
     try {
       FlutterBarcodeScanner.scanBarcode(

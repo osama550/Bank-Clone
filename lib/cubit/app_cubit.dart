@@ -226,6 +226,9 @@ class AppCubit extends Cubit<AppStates> {
       case 3:
         addTransferRecipientResult = text;
         break;
+      case 4:
+        withdrawelResult = text;
+        break;
       case 5:
         electricityMeterNumber = text;
         break;
