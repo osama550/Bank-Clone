@@ -18,8 +18,7 @@ class CacheHelper{
   static bool? getBoolean(
   {
   required String key
-}
-      ){
+}){
     return sheredPrefrences!.getBool(key);
   }
 
