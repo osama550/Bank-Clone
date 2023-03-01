@@ -7,10 +7,10 @@ class LayoutModel {
   LayoutModel.fromJson(Map<dynamic, dynamic> json) {
     clientName = json['Client_Name'];
     clientPhoto = json['Client_Photo'];
-    totalBalance = json['Total_balance'];
+    totalBalance = json['Total_Balance'];
 
-    if (json['Client_accounts'] != null) {
-      json['Client_accounts'].forEach((item) {
+    if (json['Client_Accounts'] != null) {
+      json['Client_Accounts'].forEach((item) {
         clientAccounts.add(LayoutDataModel.fromJson(item));
       });
     }

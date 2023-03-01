@@ -20,7 +20,6 @@ import 'package:project/modules/transfar_money/bank_screen.dart';
 import 'package:project/modules/transfar_money/ewallet_screen.dart';
 import 'package:project/modules/transfar_money/favorite_screen.dart';
 import 'package:project/modules/withdrawel/withdrawel_Payment_screen.dart';
-import 'package:project/modules/withdrawel/withdrawel_screen.dart';
 import 'package:project/network/local/cashe_helper.dart';
 import 'package:project/network/remote/dio_helper.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
@@ -31,14 +30,20 @@ class AppCubit extends Cubit<AppStates> {
 
   static AppCubit get(context) => BlocProvider.of(context);
 
+
   bool speaker = true;
 
-  void changeSpeak(){
-    speaker = !speaker;
-    // CacheHelper.putBoolean(value: speaker).then((value) {
-    //   print(value);
-    // });
-    emit(ChangeSpeakerState());
+  void changeSpeak({bool? isSpeaker}) {
+    if (isSpeaker != null) {
+      speaker = isSpeaker;
+      emit(ChangeSpeakerState());
+    } else {
+      speaker = !speaker;
+      CacheHelper.putBoolean(key: 'speaker', value: speaker).then((value) {
+        print(value);
+        emit(ChangeSpeakerState());
+      });
+    }
   }
 
 
@@ -216,13 +221,16 @@ void isBankAccountEmpty({
 
     switch(id){
       case 1:
-        result = text;
+        billResult = text;
         break;
       case 2:
         transferResult = text;
         break;
       case 3:
         addTransferRecipientResult = text;
+        break;
+      case 4:
+        withdrawelResult = text;
         break;
       case 5:
         electricityMeterNumber =  text;
@@ -250,6 +258,7 @@ void isBankAccountEmpty({
 //-------------------------------------------------
 
   var result ='';
+  var billResult ='';
   var transferResult = '';
   var addTransferRecipientResult = '';
   var withdrawelResult = '';
@@ -273,7 +282,7 @@ void addTextToBankAccount({
     emit(AddTextToBankAccountState());
   switch(id){
     case 1:
-      result = amount;
+      billResult = amount;
       break;
     case 2:
       transferResult = amount;
@@ -324,7 +333,7 @@ bool isMaxLength({
   }){
     switch(id){
       case 1:
-        result = '';
+        billResult = '';
         break;
       case 2:
         transferResult = '';
@@ -797,6 +806,7 @@ bool isMaxLength({
       else if(message.contains('ايداع')){
         navigateTo(context, ConfirmDepositScreen());
       }
+      text = '';
       print(text);
     }catch(error){
       print('Error In Robot Helper ======> ${error.toString()}');

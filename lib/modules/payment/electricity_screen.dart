@@ -68,7 +68,7 @@ class ServiseScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20.0),
                             ),
                             child: Text(
-                              cubit.result,
+                              cubit.billResult,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 20.sp,
@@ -82,7 +82,7 @@ class ServiseScreen extends StatelessWidget {
                   ),
                 ),
                 defaultNumbers(
-                  amount: cubit.result,
+                  amount: cubit.billResult,
                   context: context,
                   id: 1,
                   onPressed: (){

@@ -755,10 +755,10 @@ Widget defaultNumbers({
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children:<Widget> [
           defaultIconKeyboard(
-              icon:Icon(
+              icon: const Icon(
                 Icons.backspace_outlined,
                 color: Colors.white,
-      ),
+              ),
           onPressed: () {
             AppCubit.get(context).isBankAccountEmpty(
               text: amount,

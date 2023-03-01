@@ -51,47 +51,52 @@ class LoginScreen extends StatelessWidget {
               ()async{
             if(userSpeak){
               userSpeak = !userSpeak;
-              cubit.listen(userSpeak: userSpeak);
+              cubit.listen(userSpeak: true);
             }
-            if (cubit.text.contains('بصمه')) {
-              cubit.text = '';
-              await cubit.checkBiometrics().then((value){
-                print(cubit.canCheckBiometrics);
-                if(cubit.canCheckBiometrics!){
-                  if(cubit.speaker){
-                    cubit.speak(text: 'جاري إدخال البصما');
+            Timer(
+              const Duration(seconds: 4),
+                () async{
+                  if (cubit.text.contains('بصمه')) {
+                    cubit.text = '';
+                    await cubit.checkBiometrics().then((value){
+                      print(cubit.canCheckBiometrics);
+                      if(cubit.canCheckBiometrics!){
+                        if(cubit.speaker){
+                          cubit.speak(text: 'جاري إدخال البصما');
+                        }
+                        cubit.authenticate(context: context).then((value){
+                          if(cubit.layoutModel == null){
+                            if(cubit.isAuthenticating!){
+                              if(cubit.speaker){
+                                cubit.speak(text: 'تم تأكيد البصما بنجاح');
+                              }
+                              print('isAuthenticating =====> ${cubit.isAuthenticating}');
+                              showDialog(
+                                context: context,
+                                builder:(BuildContext context){
+                                  context=context;
+                                  return  defaultLoading();
+                                },
+                              );
+                            }
+                            else{
+                              if(cubit.speaker){
+                                cubit.speak(text: '\n \n \n البصما غير صحيحا'
+                                    '\n \n \n \nالرجاء إدخال البصما');
+                              }
+                            }
+                          }
+                          // else{
+                          //   navigateAndFinish(context, LayoutScreen());
+                          // }
+                        }).catchError((onError){
+                          print('Error When Authenticated =====> ${onError.toString()}');
+                        });
+                      }
+                    });
                   }
-                  cubit.authenticate(context: context).then((value){
-                    if(cubit.layoutModel == null){
-                      if(cubit.isAuthenticating!){
-                        if(cubit.speaker){
-                          cubit.speak(text: 'تم تأكيد البصما بنجاح');
-                        }
-                        print('isAuthenticating =====> ${cubit.isAuthenticating}');
-                        showDialog(
-                          context: context,
-                          builder:(BuildContext context){
-                            context=context;
-                            return  defaultLoading();
-                          },
-                        );
-                      }
-                      else{
-                        if(cubit.speaker){
-                          cubit.speak(text: '\n \n \n البصما غير صحيحا'
-                              '\n \n \n \nالرجاء إدخال البصما');
-                        }
-                      }
-                    }
-                    // else{
-                    //   navigateAndFinish(context, LayoutScreen());
-                    // }
-                  }).catchError((onError){
-                    print('Error When Authenticated =====> ${onError.toString()}');
-                  });
                 }
-              });
-            }
+            );
           },
         );
 
