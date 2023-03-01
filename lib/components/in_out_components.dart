@@ -6,6 +6,7 @@ import 'package:project/components/colors/colors.dart';
 import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/modules/e_Receipt/e-receipt_screen.dart';
+import 'package:project/modules/transfar_money/transfar_money_screen.dart';
 import 'package:sizer/sizer.dart';
 
 Widget inOutButton({
@@ -436,85 +437,90 @@ Widget buildFavoriteItem( {
   // Color color = Colors.white,
   // Color iconColor = Colors.amber,
   // required int index,
-}) => Padding(
-  padding: const EdgeInsets.symmetric(
-    horizontal: 13.0,
-  ),
-  child: Container(
-    height: 70.0,
-    decoration: BoxDecoration(
-      borderRadius: BorderRadiusDirectional.circular(20.0,),
-      color: Colors.white,
+}) => GestureDetector(
+  onTap: (){
+    navigateTo(context, transfarScreen());
+  },
+  child: Padding(
+    padding: const EdgeInsets.symmetric(
+      horizontal: 13.0,
     ),
-    clipBehavior: Clip.antiAliasWithSaveLayer,
-    child: Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 12.0,
+    child: Container(
+      height: 70.0,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadiusDirectional.circular(20.0,),
+        color: Colors.white,
       ),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 25.0,
-            backgroundImage: NetworkImage(image),
-          ),
-          const SizedBox(
-            width: 10.0,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                name,
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15.0.sp,
-                ),
-              ),
-              const SizedBox(
-                height: 5.0,
-              ),
-              Row(
-                children: [
-                  Text(
-                    type,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 10.sp,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 5.0,
-                  ),
-                  Container(
-                    height: 8.0,
-                    width: 1.0,
-                    color: Colors.grey,
-                  ),
-                  const SizedBox(
-                    width: 5.0,
-                  ),
-                  Text(
-                    accountNumber,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 10.sp,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          const Spacer(),
-          IconButton(
-            onPressed: favoriteIconPressed,
-            icon: Icon(
-              favoriteIcon,
-              size: 30.0,
-              color: Colors.amber,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 12.0,
+        ),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 25.0,
+              backgroundImage: NetworkImage(image),
             ),
-          ),
-        ],
+            const SizedBox(
+              width: 10.0,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15.0.sp,
+                  ),
+                ),
+                const SizedBox(
+                  height: 5.0,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      type,
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 10.sp,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 5.0,
+                    ),
+                    Container(
+                      height: 8.0,
+                      width: 1.0,
+                      color: Colors.grey,
+                    ),
+                    const SizedBox(
+                      width: 5.0,
+                    ),
+                    Text(
+                      accountNumber,
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 10.sp,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const Spacer(),
+            IconButton(
+              onPressed: favoriteIconPressed,
+              icon: Icon(
+                favoriteIcon,
+                size: 30.0,
+                color: Colors.amber,
+              ),
+            ),
+          ],
+        ),
       ),
     ),
   ),

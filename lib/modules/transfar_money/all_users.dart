@@ -26,34 +26,34 @@ class AllUsersScreen extends StatelessWidget {
             Expanded(
               child: cubit.searchUser.isNotEmpty
                   ? ListView.separated(
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) =>buildFavoriteItem(
-                  context: context,
-                  image: cubit.transferUsers[index]['Client_Photo'].toString(),
-                  name: cubit.transferUsers[index]['Transfer_To'],
-                  type: cubit.transferUsers[index]['Type'],
-                  accountNumber: cubit.transferUsers[index]['id'],
-                  favoriteIcon: cubit.transferUsers[index]['Favourit'] ? Icons.star_rate_rounded : Icons.star_border_rounded,
-                  favoriteIconPressed: () {
-                    print('Index Which CLicked Here ============> ${index}');
-                    cubit.changeFavoriteIcon(
-                      isFavorite: cubit.transferUsers[index]['Favourit'],
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) =>buildFavoriteItem(
+                      context: context,
+                      image: cubit.transferUsers[index]['Client_Photo'].toString(),
+                      name: cubit.transferUsers[index]['Transfer_To'],
                       type: cubit.transferUsers[index]['Type'],
-                      id: cubit.transferUsers[index]['id'],
-                      favorite_state: cubit.transferUsers[index]['Favourit'].toString(),
-                    );
-                  },
-                ),
-                  separatorBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 25.0,
+                      accountNumber: cubit.transferUsers[index]['id'],
+                      favoriteIcon: cubit.transferUsers[index]['Favourit'] ? Icons.star_rate_rounded : Icons.star_border_rounded,
+                      favoriteIconPressed: () {
+                        print('Index Which CLicked Here ============> ${index}');
+                        cubit.changeFavoriteIcon(
+                          isFavorite: cubit.transferUsers[index]['Favourit'],
+                          type: cubit.transferUsers[index]['Type'],
+                          id: cubit.transferUsers[index]['id'],
+                          favorite_state: cubit.transferUsers[index]['Favourit'].toString(),
+                        );
+                      },
                     ),
-                  child: Divider(
-                    color: Colors.grey.shade200,
-                    thickness: 1,
-                  ),
-                ),
-                itemCount: cubit.transferUsers.length,
+                    separatorBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 25.0,
+                        ),
+                      child: Divider(
+                        color: Colors.grey.shade200,
+                        thickness: 1,
+                      ),
+                    ),
+                    itemCount: cubit.transferUsers.length,
               )
                   : const Center(
                       child: Text(

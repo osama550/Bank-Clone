@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/components/components.dart';
 import 'package:project/modules/face_screen/face_screen.dart';
+import 'package:project/modules/login_screen/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,8 +15,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 3000),(){});
-    navigateAndFinish(context, FaceScreen());
+    Future.delayed(const Duration(milliseconds: 3000),(){
+      navigateAndFinish(context, LoginScreen());
+    });
   }
 
   @override

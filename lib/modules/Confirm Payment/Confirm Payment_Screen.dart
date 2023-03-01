@@ -4,6 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
+import 'package:project/network/remote/dio_helper.dart';
 import 'package:sizer/sizer.dart';
 
 class ConfirmPaymentScreen extends StatelessWidget {
@@ -79,7 +80,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                             ),
                             paymentData(
                               title: 'Amount(USD)',
-                              answer: '\$5000',
+                              answer: '\$${cubit.transferResult}',
                             ),
                             const SizedBox(
                               height: 20.0,
@@ -133,7 +134,13 @@ class ConfirmPaymentScreen extends StatelessWidget {
                   ),
                   paymentButton(
                     context: context,
-                    onPressed: (){
+                    onPressed: () async{
+                       cubit.transferMoney(
+                        account_type: cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountType!,
+                        type: 'bank',
+                        transfer_to: 5,
+                        amount: 1000,
+                      );
                       showDialog(
                         context: context,
                         builder: (context) => defaultErrorDialog(

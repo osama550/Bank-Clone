@@ -829,6 +829,8 @@ Widget defaultTextKeyboard({
   );
 }
 //------------------------------------------------------------
+
+
 Widget defaultIconKeyboard( {
   required VoidCallback onPressed,
   required Icon icon,
@@ -855,6 +857,7 @@ Widget defaultIconKeyboard( {
 }
 
 //------------------------------------------------------------
+
 Widget defaultLoading(){
   return AnimatedContainer(
     duration:const Duration(milliseconds: 800) ,
@@ -865,7 +868,7 @@ Widget defaultLoading(){
       ),
       elevation: 200,
       backgroundColor: Colors.transparent,
-      child: Center(
+      child: const Center(
         child: SpinKitThreeBounce(
           color:Colors.white,
               // HexColor('#D8A616'),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/components/colors/colors.dart';
@@ -7,8 +9,14 @@ import 'package:project/cubit/app_state.dart';
 import 'package:project/layout/layout_screen.dart';
 import 'package:project/network/local/cashe_helper.dart';
 import 'package:sizer/sizer.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+
 
 class LoginScreen extends StatelessWidget {
+
+  bool isSpeak = true;
+  bool userSpeak = true;
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +41,60 @@ class LoginScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit = AppCubit.get(context);
         // cubit.speaker = CacheHelper.getBoolean()!;
-        if(cubit.speaker) {
+        if(isSpeak) {
+          isSpeak = !isSpeak;
           cubit.speak(text: 'اهلاً بك فى هيكس بانك'
               '\n \n الرجاء إدخال البصما');
         }
+        Timer(
+          const Duration(seconds: 5),
+              ()async{
+            if(userSpeak){
+              userSpeak = !userSpeak;
+              cubit.listen(userSpeak: userSpeak);
+            }
+            if (cubit.text.contains('بصمه')) {
+              cubit.text = '';
+              await cubit.checkBiometrics().then((value){
+                print(cubit.canCheckBiometrics);
+                if(cubit.canCheckBiometrics!){
+                  if(cubit.speaker){
+                    cubit.speak(text: 'جاري إدخال البصما');
+                  }
+                  cubit.authenticate(context: context).then((value){
+                    if(cubit.layoutModel == null){
+                      if(cubit.isAuthenticating!){
+                        if(cubit.speaker){
+                          cubit.speak(text: 'تم تأكيد البصما بنجاح');
+                        }
+                        print('isAuthenticating =====> ${cubit.isAuthenticating}');
+                        showDialog(
+                          context: context,
+                          builder:(BuildContext context){
+                            context=context;
+                            return  defaultLoading();
+                          },
+                        );
+                      }
+                      else{
+                        if(cubit.speaker){
+                          cubit.speak(text: '\n \n \n البصما غير صحيحا'
+                              '\n \n \n \nالرجاء إدخال البصما');
+                        }
+                      }
+                    }
+                    // else{
+                    //   navigateAndFinish(context, LayoutScreen());
+                    // }
+                  }).catchError((onError){
+                    print('Error When Authenticated =====> ${onError.toString()}');
+                  });
+                }
+              });
+            }
+          },
+        );
+
         return SafeArea(
           child: Scaffold(
             body: Stack(
@@ -79,10 +137,10 @@ class LoginScreen extends StatelessWidget {
                             fontSize: 15
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
-                      Text(
+                      const Text(
                         'BANQUE MISR ',
                         style: TextStyle(
                             color: Colors.black,
@@ -90,7 +148,7 @@ class LoginScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 35,
                       ),
                       Container(
@@ -120,6 +178,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: ()async{
+                          userSpeak = false;
                           await cubit.checkBiometrics().then((value){
                             print(cubit.canCheckBiometrics);
                             if(cubit.canCheckBiometrics!){
@@ -156,7 +215,6 @@ class LoginScreen extends StatelessWidget {
                               });
                             }
                           });
-
                           defaultShowButtomSheet(context: context,
                             icon: const Icon(
                                 Icons.fingerprint_outlined,

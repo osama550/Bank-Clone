@@ -54,7 +54,5 @@ class GetAllTransferUsersSuccessState extends AppStates {}
 class GetAllTransferUsersErrorState extends AppStates {}
 
 class ChangeTabBarState extends AppStates {}
-class SaveQrState extends AppStates {}
-class ErrorQrState extends AppStates {}
-class EmitAnimate extends AppStates {}
+
 

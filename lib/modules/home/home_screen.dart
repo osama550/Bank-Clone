@@ -19,27 +19,68 @@ import 'package:sizer/sizer.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
+  bool isSpeak = true;
+  bool userSpeak = true;
+
   @override
   Widget build(BuildContext context) {
+
+    var cubit = AppCubit.get(context);
+    if (isSpeak) {
+      isSpeak = !isSpeak;
+      Timer(
+        const Duration(seconds: 1),
+            (){
+          cubit.homeSpeaker();
+          Timer(
+              const Duration(seconds: 3),
+                  () {
+                cubit.speak(text: 'الرجاء إختيار الخدمة');
+                print('home screen text 1  ==> ${cubit.text}');
+                Timer(
+                  const Duration(seconds: 3),
+                      (){
+                    cubit.listen(userSpeak: userSpeak);
+                    Timer(
+                      const Duration(seconds: 4),
+                          (){
+                        if (cubit.text.contains('إيداع')) {
+                          navigateTo(context, DepositeScreen());
+                        }
+                        else if (cubit.text.contains('سحب')) {
+                          navigateTo(context, WithdrawelScreen());
+                        }
+                        else if (cubit.text.contains('تحويل')) {
+                          cubit.searchuser();
+                          navigateTo(context, TransferLayoutScreen());
+                        }
+                        else if (cubit.text.contains('دفع')) {
+                          navigateTo(context, QRScreen());
+                        }
+                        else if (cubit.text.contains('فواتير')) {
+                          navigateTo(context, ChoosingBill());
+                        }
+                        else if (cubit.text.contains('history')) {
+                          navigateTo(context, InOutLayoutScreen());
+                        }
+                        print('home screen text 2  ==> ${cubit.text}');
+                        isSpeak = !isSpeak;
+                        print('isSpeak ==== ${isSpeak}');
+
+                      },
+                    );
+                  },
+                );
+              }
+          );
+        },
+      );
+    }
+
+
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        var cubit = AppCubit.get(context);
-        if(cubit.speaker){
-          Timer(
-            const Duration(seconds: 1),
-                (){
-              cubit.homeSpeaker();
-            },
-          );
-          Timer(
-            const Duration(seconds: 4),
-                (){
-              cubit.speak(text: 'الرجاء إختيار الخدمة');
-            },
-          );
-        }
-
         return SafeArea(
           child: Scaffold(
             body: SingleChildScrollView(
@@ -128,9 +169,9 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-
                                 ),
-                                Padding(
+                                if(cubit.userAccountIndex != 3)
+                                  Padding(
                                   padding: const EdgeInsets.only(
                                       left: 100,
                                       top: 13
@@ -159,7 +200,8 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                const Padding(
+                                if(cubit.userAccountIndex != 3)
+                                  const Padding(
                                   padding: EdgeInsets.only(
                                       left: 90,
                                       top: 63

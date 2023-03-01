@@ -14,34 +14,58 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 class LayoutScreen extends StatelessWidget {
   LayoutScreen({Key? key}) : super(key: key);
 
+  bool isSpeak = true;
+  bool userSpeak = true;
+
 
   @override
   Widget build(BuildContext context) {
+
+    var cubit = AppCubit.get(context);
+      Timer(
+        const Duration(seconds: 1),
+            (){
+          cubit.speak(text: 'الرجاء إختيار نوع الحساب');
+          Timer(
+            const Duration(seconds: 2),
+                () async{
+              print('userSpeak ======> ${userSpeak}');
+              cubit.listen(userSpeak: userSpeak);
+              print('Here cubit text  1 ===========> ${cubit.text}');
+
+              Timer(
+                const Duration(seconds: 4),
+                    (){
+                  if (cubit.text.contains('الموفر')) {
+                    cubit.userAccount(index: 0);
+                    navigateTo(context, HomeScreen());
+                  }
+                  else if (cubit.text.contains('الحالي')) {
+                    cubit.userAccountIndex = 1;
+                    cubit.getAllTransferUsers();
+                    navigateTo(context, HomeScreen());
+                  }
+                  else if(cubit.text.contains('ائتمان')){
+                    cubit.userAccountIndex = 2;
+                    navigateTo(context, HomeScreen());
+                  }
+                  else if(cubit.text.contains('الراتب') || cubit.text.contains('المرتب')){
+                    cubit.userAccountIndex = 3;
+                    navigateTo(context, HomeScreen());
+                  }
+                  print('index ==========> ${cubit.userAccountIndex}');
+                  print('Here cubit text  2  ===========> ${cubit.text}');
+                },
+              );
+
+            },
+          );
+        },
+      );
+
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {
-        // if(AppCubit.get(context).layoutModel == null) {
-        //   showDialog(
-        //     context: context,
-        //     builder:(BuildContext context){
-        //       context=context;
-        //       return  defaultLoading();
-        //     },
-        //   );
-        // }
-        // if(state is GetLayoutLoadingState){
-        //   print('Yeeeeeeeeeeeeeeeeeeeeeeeeeees');
-        // }
-      },
-    builder: (context, state) {
-      var cubit = AppCubit.get(context);
-      if(cubit.speaker){
-        Timer(
-          const Duration(seconds: 1),
-              (){
-                cubit.speak(text: 'الرجاء إختيار نوع الحساب');
-              },
-        );
-      }
+      listener: (context, state) {},
+      builder: (context, state) {
       return AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(
           statusBarIconBrightness: Brightness.light,
@@ -60,20 +84,57 @@ class LayoutScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Row(
-                          children: const [
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            Text(
-                              'Home',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18.0,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Home',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.0,
+                                ),
                               ),
-                            ),
-                          ],
+                              InkWell(
+                                onTap: (){
+                                  print('Robot Helper Here How Can I Help You Sir,');
+                                  cubit.speechToText!.stop();
+                                  cubit.speak(
+                                    text: 'هنا المساعد الآلي'
+                                        ' \n \n'
+                                        '  كيف يمكنني مساعدتك',
+                                  );
+                                  Timer(
+                                    const Duration(seconds: 3),
+                                      (){
+                                        cubit.listen(userSpeak: true);
+                                        Timer(
+                                          const Duration(seconds: 5),
+                                              (){
+                                                cubit.robotHelper(
+                                                  context: context,
+                                                  message: cubit.text,
+                                                );
+                                          },
+                                        );
+                                      },
+                                  );
+                                },
+                                child: CircleAvatar(
+                                  radius: 25.0,
+                                  backgroundColor: Colors.white,
+                                  child: Image.asset(
+                                    'images/robot.png',
+                                    width: 45.0,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 10.0,
@@ -185,6 +246,8 @@ class LayoutScreen extends StatelessWidget {
                                         // print(pointInteractionDetails.pointIndex);
                                         // AppCubit.get(context).getLayoutData();
                                         // cubit.userAccount(index:pointInteractionDetails.pointIndex!);
+                                        cubit.stop();
+                                        userSpeak = !userSpeak;
                                         cubit.userAccountIndex = pointInteractionDetails.pointIndex!;
                                         if(pointInteractionDetails.pointIndex! == 1){
                                           cubit.getAllTransferUsers();

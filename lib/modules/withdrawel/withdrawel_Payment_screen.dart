@@ -12,7 +12,11 @@ class WithdrawelPaymentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is WithdrawelLoadingState) {
+          defaultLoading();
+        }
+      },
       builder: (context, state) {
         var cubit = AppCubit.get(context);
         return SafeArea(
@@ -142,7 +146,6 @@ class WithdrawelPaymentScreen extends StatelessWidget {
                         amount: int.parse(cubit.withdrawelResult),
                         atm_id: 1,
                       );
-
                       if(cubit.isWithdrawal!){
                         showDialog(
                           context: context,
