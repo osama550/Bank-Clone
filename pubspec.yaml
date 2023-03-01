@@ -56,6 +56,7 @@ dependencies:
   barcode_widget:
   shared_preferences: ^2.0.17
   dropdown_button2:
+  show_up_animation: ^2.0.0
 
 
 dev_dependencies:
