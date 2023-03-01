@@ -55,4 +55,19 @@ class GetAllTransferUsersErrorState extends AppStates {}
 
 class ChangeTabBarState extends AppStates {}
 
+class UserSpeakState extends AppStates {}
+
+class UserStopState extends AppStates {}
+
+class TransferMoneyLoadingState extends AppStates {}
+
+class TransferMoneySuccessState extends AppStates {}
+
+class TransferMoneyErrorState extends AppStates {}
+
+class SaveQrState extends AppStates {}
+
+class ErrorQrState extends AppStates {}
+
+
 

@@ -805,5 +805,17 @@ bool isMaxLength({
   }
 
 
+  var qrstr = "let's Scan it";
+  void SaveQr(value) {
+    qrstr = value;
+    emit(SaveQrState());
+  }
+
+  void ErrorQr() {
+    qrstr = 'unable to read this';
+    emit(ErrorQrState());
+  }
+
+
 }
 

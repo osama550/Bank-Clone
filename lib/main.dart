@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.white,
             ),
             debugShowCheckedModeBanner: false,
-            home: Test1(),
+            home: LoginScreen(),
           );
         },
       ),
