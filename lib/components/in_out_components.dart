@@ -53,6 +53,9 @@ Widget buildHistoryItem({
   },
   child:Container(
     height: 80.0,
+    margin: EdgeInsets.only(
+      bottom: 10,
+    ),
     decoration: BoxDecoration(
 
       borderRadius: BorderRadiusDirectional.circular(20.0,),

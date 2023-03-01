@@ -40,6 +40,7 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
+
   int billIndex = 0;
 
   List<Map> bills = [
@@ -623,4 +624,5 @@ class AppCubit extends Cubit<AppStates> {
       print('Error When Get Transfer Users ${error.toString()}');
     });
   }
+
 }

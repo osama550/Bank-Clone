@@ -8,13 +8,37 @@ import 'package:project/cubit/app_state.dart';
 import 'package:project/modules/in_out_payment/history.dart';
 import 'package:project/modules/in_out_payment/scheduled.dart';
 
-class RequestedScreen extends StatelessWidget {
+class RequestedScreen extends StatefulWidget {
   RequestedScreen({Key? key}) : super(key: key);
 
+  @override
+  State<RequestedScreen> createState() => _RequestedScreenState();
+}
+
+class _RequestedScreenState extends State<RequestedScreen> {
   var searchController = TextEditingController();
+  double screenHeight = 0;
+
+  double screenWidth = 0;
+
+  bool startAnimation = false;
+
+  int lengthOfItem = 5;
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      setState(() {
+        startAnimation = true;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    screenHeight = MediaQuery.of(context).size.height;
+    screenWidth = MediaQuery.of(context).size.width;
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -26,7 +50,9 @@ class RequestedScreen extends StatelessWidget {
               children: [
                 inOutButton(
                   onPressed: () {
-                    cubit.selectInOutPayment(index: 0,);
+                    cubit.selectInOutPayment(
+                      index: 0,
+                    );
                   },
                   text: 'History',
                   textColor: primaryColor,
@@ -37,7 +63,9 @@ class RequestedScreen extends StatelessWidget {
                 ),
                 inOutButton(
                   onPressed: () {
-                    cubit.selectInOutPayment(index: 1,);
+                    cubit.selectInOutPayment(
+                      index: 1,
+                    );
                   },
                   text: 'Scheduled',
                   textColor: primaryColor,
@@ -48,7 +76,9 @@ class RequestedScreen extends StatelessWidget {
                 ),
                 inOutButton(
                   onPressed: () {
-                    cubit.selectInOutPayment(index: 2,);
+                    cubit.selectInOutPayment(
+                      index: 2,
+                    );
                   },
                   text: 'Requested',
                 ),
@@ -60,18 +90,27 @@ class RequestedScreen extends StatelessWidget {
             Expanded(
               child: ListView.separated(
                 physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) => buildHistoryItem(
-                  context: context,
-                  image: 'images/${index+1}.jpg',
-                  name: 'Anime World',
-                  date: 'Dec 24,2024',
-                  time: '12.30 PM',
-                  price: '\$25',
+                primary: false,
+                shrinkWrap: true,
+                itemBuilder: (context, index) => AnimatedContainer(
+                  width: screenWidth,
+                  curve: Curves.easeInOut,
+                  duration: Duration(milliseconds: 300 + (index * 500)),
+                  transform: Matrix4.translationValues(
+                      startAnimation ? 0 : screenWidth, 0, 0),
+                  child: buildHistoryItem(
+                    context: context,
+                    image: 'images/${index + 1}.jpg',
+                    name: 'Anime World',
+                    date: 'Dec 24,2024',
+                    time: '12.30 PM',
+                    price: '\$25',
+                  ),
                 ),
                 separatorBuilder: (context, index) => const SizedBox(
                   height: 10.0,
                 ),
-                itemCount: 10,
+                itemCount: lengthOfItem,
               ),
             ),
           ],
