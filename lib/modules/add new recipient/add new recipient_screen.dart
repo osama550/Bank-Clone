@@ -16,8 +16,6 @@ class AddNewRecipientScreen extends StatelessWidget {
   List listItem = [
     'bank',
     'Atm',
-    'osama',
-    'islam',
   ];
 
   @override
@@ -43,6 +41,9 @@ class AddNewRecipientScreen extends StatelessWidget {
                     buildAppBar(
                       context: context,
                       screenTitle: 'Add New Recipient',
+                      onPressed: (){
+                        Navigator.pop(context,true,);
+                      },
                     ),
                     SizedBox(
                       height: 5.h,

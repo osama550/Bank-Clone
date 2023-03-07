@@ -29,6 +29,10 @@ class InOutLayoutScreen extends StatelessWidget {
                 buildAppBar(
                   context: context,
                   screenTitle: 'In & Out Payment',
+                  onPressed: (){
+                    cubit.listen(userSpeak: false,);
+                    Navigator.pop(context,true,);
+                  },
                 ),
                 const SizedBox(
                   height: 25.0,

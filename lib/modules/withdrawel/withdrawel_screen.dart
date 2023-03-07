@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/components/components.dart';
@@ -7,12 +9,86 @@ import 'package:project/modules/withdrawel/withdrawel_Payment_screen.dart';
 import 'package:sizer/sizer.dart';
 
 class WithdrawelScreen extends StatelessWidget {
+
+  bool back = true;
+
+
   @override
   Widget build(BuildContext context) {
+    var cubit = AppCubit.get(context);
+    if(cubit.speaker) {
+      Timer(
+        const Duration(seconds: 1),
+            (){
+          cubit.speak(text: 'تم إختيار عملية السَحب '
+              '\n \n \n الرجاء وضع المبلغ');
+          Timer(
+            const Duration(seconds: 4),
+                () async{
+              cubit.listen(userSpeak: true);
+              print('Here cubit text  1 ===========> ${cubit.text}');
+
+              Timer(
+                const Duration(seconds: 6),
+                    (){
+                  cubit.getWithdrawal(
+                    context: context,
+                    message: cubit.text,
+                    value: back,
+                  );
+                  // navigateTo(context, WithdrawelPaymentScreen());
+                  print('index ==========> ${cubit.userAccountIndex}');
+                  print('Here cubit text  2  ===========> ${cubit.text}');
+                },
+              );
+            },
+          );
+        },
+      );
+    }
+
     return  BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state){},
+      listener: (context, state){
+        print(back);
+      },
       builder: (context, state){
-        var cubit = AppCubit.get(context);
+        if (back) {
+          back = false;
+          if(cubit.speaker) {
+            Timer(
+              const Duration(seconds: 1),
+                  (){
+                cubit.speak(text: 'تم إختيار عملية السَحب '
+                    '\n \n \n الرجاء وضع المبلغ');
+                Timer(
+                  const Duration(seconds: 4),
+                      () async{
+                    cubit.listen(userSpeak: true);
+                    print('Here cubit text  1 ===========> ${cubit.text}');
+
+                    Timer(
+                      const Duration(seconds: 6),
+                          ()async{
+                        cubit.getWithdrawal(
+                          context: context,
+                          message: cubit.text,
+                          value: back,
+                        );
+                        if (cubit.withdrawelResult != '') {
+                          back = await navigateTo(context, WithdrawelPaymentScreen());
+
+                        }
+                        // navigateTo(context, WithdrawelPaymentScreen());
+                        print('index ==========> ${cubit.userAccountIndex}');
+                        print('Here cubit text  2  ===========> ${cubit.text}');
+                      },
+                    );
+                  },
+                );
+              },
+            );
+          }
+        }
         return SafeArea(
           child: Scaffold(
             backgroundColor: Colors.white,
@@ -28,6 +104,10 @@ class WithdrawelScreen extends StatelessWidget {
                           context: context,
                           screenTitle: 'Withdrawal',
                           id: 4,
+                          onPressed: (){
+                            cubit.listen(userSpeak: false,);
+                            Navigator.pop(context,true,);
+                          },
                         ),
                         const SizedBox(
                           height: 40.0,
@@ -50,7 +130,7 @@ class WithdrawelScreen extends StatelessWidget {
                           height: 5.0,
                         ),
                         Text(
-                          'Bank : 123456',
+                          'Bank : ${cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountId}',
                           style: TextStyle(
                               fontSize: 10.sp, fontWeight: FontWeight.normal),
                         ),
@@ -78,14 +158,15 @@ class WithdrawelScreen extends StatelessWidget {
                   context: context,
                   id: 4,
                   onPressed: (){
-                    navigateTo(context, WithdrawelPaymentScreen());
-                    // cubit.userWithdrawal(
-                    //   context: context,
-                    //   transaction: 'withdrawal',
-                    //   accountType: cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountType.toString(),
-                    //   amount: int.parse(cubit.withdrawelResult),
-                    //   atm_id: int.parse(cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountId.toString()),
-                    // );
+                    if (cubit.withdrawelResult != '') {
+                      navigateTo(context, WithdrawelPaymentScreen());
+                    }
+                    else{
+                      defaultErrorDialog(
+                        context: context,
+                        errorText: 'Sorry, you have to enter the amount you want to withdraw first',
+                      );
+                    }
                   },
                 ),
               ],

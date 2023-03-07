@@ -8,64 +8,29 @@ import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
 import 'package:project/modules/home/home_screen.dart';
+import 'package:project/modules/login_screen/login_screen.dart';
 import 'package:sizer/sizer.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class LayoutScreen extends StatelessWidget {
   LayoutScreen({Key? key}) : super(key: key);
 
-  bool isSpeak = true;
-  bool userSpeak = true;
 
 
   @override
   Widget build(BuildContext context) {
 
     var cubit = AppCubit.get(context);
-      Timer(
-        const Duration(seconds: 1),
-            (){
-          cubit.speak(text: 'الرجاء إختيار نوع الحساب');
-          Timer(
-            const Duration(seconds: 2),
-                () async{
-              print('userSpeak ======> ${userSpeak}');
-              cubit.listen(userSpeak: userSpeak);
-              print('Here cubit text  1 ===========> ${cubit.text}');
+    cubit.layoutSpeaker(context: context,);
 
-              Timer(
-                const Duration(seconds: 4),
-                    (){
-                  if (cubit.text.contains('الموفر')) {
-                    cubit.userAccount(index: 0);
-                    navigateTo(context, HomeScreen());
-                  }
-                  else if (cubit.text.contains('الحالي')) {
-                    cubit.userAccountIndex = 1;
-                    cubit.getAllTransferUsers();
-                    navigateTo(context, HomeScreen());
-                  }
-                  else if(cubit.text.contains('ائتمان')){
-                    cubit.userAccountIndex = 2;
-                    navigateTo(context, HomeScreen());
-                  }
-                  else if(cubit.text.contains('الراتب') || cubit.text.contains('المرتب')){
-                    cubit.userAccountIndex = 3;
-                    navigateTo(context, HomeScreen());
-                  }
-                  print('index ==========> ${cubit.userAccountIndex}');
-                  print('Here cubit text  2  ===========> ${cubit.text}');
-                },
-              );
-
-            },
-          );
-        },
-      );
 
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
+        if(cubit.back){
+          cubit.back = false;
+          cubit.layoutSpeaker(context: context,);
+        }
       return AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(
           statusBarIconBrightness: Brightness.light,
@@ -246,8 +211,7 @@ class LayoutScreen extends StatelessWidget {
                                         // print(pointInteractionDetails.pointIndex);
                                         // AppCubit.get(context).getLayoutData();
                                         // cubit.userAccount(index:pointInteractionDetails.pointIndex!);
-                                        cubit.stop();
-                                        userSpeak = !userSpeak;
+                                        cubit.listen(userSpeak: false,);
                                         cubit.userAccountIndex = pointInteractionDetails.pointIndex!;
                                         cubit.getUserAccountType(
                                           account_type: cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountType.toString(),
@@ -256,7 +220,7 @@ class LayoutScreen extends StatelessWidget {
                                           cubit.getAllTransferUsers();
                                         }
                                         navigateTo(context, HomeScreen());
-                                        },
+                                      },
                                       dataSource:[
                                         AccountTypes(cubit.layoutModel!.clientAccounts[0].accountType!, int.parse(cubit.layoutModel!.clientAccounts[0].accountBalance!), const Color.fromRGBO(215, 80, 20, 1)),
                                         AccountTypes(cubit.layoutModel!.clientAccounts[1].accountType!, int.parse(cubit.layoutModel!.clientAccounts[1].accountBalance!), const Color.fromRGBO(216, 110, 20, 1)),
@@ -310,9 +274,66 @@ class LayoutScreen extends StatelessWidget {
     );
   },
 );
+
   }
 }
 
+// void layoutSpeaker(){
+//   if(cubit.speaker) {
+//     Timer(
+//       const Duration(seconds: 1),
+//           (){
+//         cubit.speak(text: 'الرجاء إختيار نوع الحساب');
+//         Timer(
+//           const Duration(seconds: 2),
+//               () async{
+//             print('userSpeak ======> ${userSpeak}');
+//             cubit.listen(userSpeak: userSpeak);
+//             print('Here cubit text  1 ===========> ${cubit.text}');
+//
+//             Timer(
+//               const Duration(seconds: 4),
+//                   (){
+//                 if (cubit.text.contains('الموفر')) {
+//                   cubit.userAccount(index: 0);
+//                   navigateTo(context, HomeScreen());
+//                 }
+//                 else if (cubit.text.contains('الحالي')) {
+//                   cubit.userAccountIndex = 1;
+//                   cubit.getAllTransferUsers();
+//                   navigateTo(context, HomeScreen());
+//                 }
+//                 else if(cubit.text.contains('ائتمان')){
+//                   cubit.userAccountIndex = 2;
+//                   navigateTo(context, HomeScreen());
+//                 }
+//                 else if(cubit.text.contains('الراتب') || cubit.text.contains('المرتب')){
+//                   cubit.userAccountIndex = 3;
+//                   navigateTo(context, HomeScreen());
+//                 }
+//                 else if(cubit.text.contains('خروج') || cubit.text.contains('اخرج') || cubit.text.contains('اطلع')){
+//                   navigateAndFinish(context, LoginScreen());
+//                 }
+//                 else{
+//                   cubit.speak(text: 'الرجاء التأكد من نوع الحساب');
+//                   Timer(
+//                     const Duration(seconds: 3),
+//                         () async{
+//                       cubit.listen(userSpeak: true,);
+//                     },
+//                   );
+//                 }
+//                 print('index ==========> ${cubit.userAccountIndex}');
+//                 print('Here cubit text  2  ===========> ${cubit.text}');
+//               },
+//             );
+//
+//           },
+//         );
+//       },
+//     );
+//   }
+// }
 
 
 class AccountTypes {

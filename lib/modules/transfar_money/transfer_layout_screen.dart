@@ -14,11 +14,15 @@ class TransferLayoutScreen extends StatelessWidget {
   TransferLayoutScreen({Key? key}) : super(key: key);
   final item = [];
   void addItem() {}
+  bool back = false;
 
   var searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    var cubit = AppCubit.get(context);
+    cubit.speak(text: 'تم اختيار عملية التحويل');
+
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {
         // AppCubit.get(context).searchuser();
@@ -76,7 +80,7 @@ class TransferLayoutScreen extends StatelessWidget {
                             IconButton(
                                 onPressed:scanQr,
 
-                                icon: Image(
+                                icon: const Image(
                                   image: AssetImage(
                                     'images/qr.png',
                                   ),
@@ -87,7 +91,7 @@ class TransferLayoutScreen extends StatelessWidget {
                     ),
                   ),
                   bottom: TabBar(
-                    tabs: [
+                    tabs: const [
                       Tab(
                         text: 'All',
                       ),
@@ -118,7 +122,7 @@ class TransferLayoutScreen extends StatelessWidget {
                         width: 5,
                         color: primaryColor,
                       ),
-                      insets: EdgeInsets.symmetric(
+                      insets: const EdgeInsets.symmetric(
                         horizontal: 10.0,
                       ),
                     ),
@@ -128,8 +132,8 @@ class TransferLayoutScreen extends StatelessWidget {
               ),
               body: cubit.transferScreens[cubit.tabIndex],
               floatingActionButton: FloatingActionButton(
-                onPressed: () {
-                  navigateTo(context, AddNewRecipientScreen());
+                onPressed: () async{
+                  back = await navigateTo(context, AddNewRecipientScreen());
                 },
                 backgroundColor: primaryColor,
                 child: const Icon(

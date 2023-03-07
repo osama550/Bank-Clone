@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -15,72 +16,40 @@ import 'package:project/modules/qr/qr_screen.dart';
 import 'package:project/modules/transfar_money/transfer_layout_screen.dart';
 import 'package:project/modules/withdrawel/withdrawel_screen.dart';
 import 'package:sizer/sizer.dart';
+import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
-
-  bool isSpeak = true;
-  bool userSpeak = true;
 
   @override
   Widget build(BuildContext context) {
 
     var cubit = AppCubit.get(context);
-    if (isSpeak) {
-      isSpeak = !isSpeak;
+    if (cubit.speaker) {
       Timer(
         const Duration(seconds: 1),
             (){
-          cubit.homeSpeaker();
+          cubit.homeSpeaker(context: context);
           Timer(
-              const Duration(seconds: 3),
-                  () {
-                cubit.speak(text: 'الرجاء إختيار الخدمة');
-                print('home screen text 1  ==> ${cubit.text}');
-                Timer(
-                  const Duration(seconds: 3),
-                      (){
-                    cubit.listen(userSpeak: userSpeak);
-                    Timer(
-                      const Duration(seconds: 4),
-                          (){
-                        if (cubit.text.contains('إيداع')) {
-                          navigateTo(context, DepositeScreen());
-                        }
-                        else if (cubit.text.contains('سحب')) {
-                          navigateTo(context, WithdrawelScreen());
-                        }
-                        else if (cubit.text.contains('تحويل')) {
-                          cubit.search();
-                          navigateTo(context, TransferLayoutScreen());
-                        }
-                        else if (cubit.text.contains('دفع')) {
-                          navigateTo(context, QRScreen());
-                        }
-                        else if (cubit.text.contains('فواتير')) {
-                          navigateTo(context, ChoosingBill());
-                        }
-                        else if (cubit.text.contains('history')) {
-                          navigateTo(context, InOutLayoutScreen());
-                        }
-                        print('home screen text 2  ==> ${cubit.text}');
-                        isSpeak = !isSpeak;
-                        print('isSpeak ==== ${isSpeak}');
-
-                      },
-                    );
-                  },
-                );
+            const Duration(seconds: 3),
+              (){
+                cubit.secondHomeSpeaker(context: context,);
               }
           );
         },
       );
     }
 
-
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
+        print('Value Of Back Variable In Cubit When Back From Deposit ${cubit.back2}');
+        if(cubit.back2) {
+          cubit.back2 = false;
+          if (cubit.speaker) {
+            cubit.secondHomeSpeaker(context: context,);
+          }
+        }
         return SafeArea(
           child: Scaffold(
             body: SingleChildScrollView(
@@ -88,7 +57,19 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   // appBar
-                  buildLogo(context: context),
+                  buildLogo(
+                    context: context,
+                    onPressed: () async{
+                      cubit.listen(userSpeak: false,);
+                      Navigator.pop(context,true);
+                      // Timer(
+                      //   const Duration(seconds: 1),
+                      //     (){
+                      //       cubit.layoutSpeaker(context: context,);
+                      //     },
+                      // );
+                    },
+                  ),
                   // Screen Body
                   SingleChildScrollView(
                     primary: true,
@@ -122,24 +103,6 @@ class HomeScreen extends StatelessWidget {
                                     top: 60,
                                     left: 125,
                                   ) ,
-
-                                  // child: SleekCircularSlider(
-                                  //   initialValue:100,
-                                  //   max: 100,
-                                  //   appearance: CircularSliderAppearance(
-                                  //     infoProperties: InfoProperties(
-                                  //     ),
-                                  //     angleRange: 800,
-                                  //     size: 180,customWidths: CustomSliderWidths(
-                                  //       progressBarWidth: 10
-                                  //   ),
-                                  //     customColors: CustomSliderColors(
-                                  //       dotColor: Colors.yellow,
-                                  //       progressBarColor: Colors.yellow,
-                                  //       trackColor: HexColor('#6F223675'),
-                                  //     ),
-                                  //   ),
-                                  // ),
 
                                   child: CircularPercentIndicator(
                                     radius: 90.0,
@@ -184,15 +147,9 @@ class HomeScreen extends StatelessWidget {
 
                                     child: IconButton(
                                         iconSize:35 ,
-                                        onPressed: (){
-                                          // showDialog(
-                                          //     context: context,
-                                          //     builder:(BuildContext context){
-                                          //       context=context;
-                                          //       return  defaultLoading();
-                                          //     },
-                                          // );
-                                          navigateTo(context, DepositeScreen());
+                                        onPressed: ()async{
+                                          cubit.listen(userSpeak: false,);
+                                          cubit.back2 = await navigateTo(context, const DepositScreen());
                                         },
                                         icon:const Image(
                                           image: AssetImage('images/deposit.png'),
@@ -230,15 +187,9 @@ class HomeScreen extends StatelessWidget {
 
                                     child: IconButton(
                                         iconSize:35 ,
-                                        onPressed: (){
-                                          // showDialog(
-                                          //     context: context,
-                                          //     builder:(BuildContext context){
-                                          //       context=context;
-                                          //       return  defaultLoading();
-                                          //     },
-                                          // );
-                                          navigateTo(context, WithdrawelScreen());
+                                        onPressed: () async{
+                                          cubit.listen(userSpeak: false,);
+                                          cubit.back2 = await navigateTo(context, WithdrawelScreen());
                                         },
                                         icon:const Image(
                                       image: AssetImage('images/icon1.png'),
@@ -252,7 +203,7 @@ class HomeScreen extends StatelessWidget {
                                       top: 138
                                   ),
                                   child: Text(
-                                    'withdrawel',
+                                    'withdrawal',
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Colors.white,
@@ -274,9 +225,10 @@ class HomeScreen extends StatelessWidget {
 
                                     child: IconButton(
                                         iconSize:35 ,
-                                        onPressed: (){
-                                          cubit.search();
-                                          navigateTo(context, TransferLayoutScreen());
+                                        onPressed: () async{
+                                          cubit.listen(userSpeak: false,);
+                                          cubit.searchuser();
+                                          cubit.back2 = await navigateTo(context, TransferLayoutScreen());
                                         },
                                         icon:const Image(
                                           image: AssetImage('images/icon2.png'),
@@ -313,8 +265,9 @@ class HomeScreen extends StatelessWidget {
 
                                     child: IconButton(
                                         iconSize:30 ,
-                                        onPressed: (){
-                                          navigateTo(context, QRScreen());
+                                        onPressed: () async {
+                                          cubit.listen(userSpeak: false,);
+                                          cubit.back2 = await navigateTo(context, const QRScreen());
                                         },
                                         icon:const Image(
                                           image: AssetImage('images/icon3.png'),
@@ -365,8 +318,9 @@ class HomeScreen extends StatelessWidget {
 
                                     child: IconButton(
                                         iconSize:30 ,
-                                        onPressed: (){
-                                          navigateTo(context, ChoosingBill());
+                                        onPressed: () async{
+                                          cubit.listen(userSpeak: false,);
+                                          cubit.back2 = await navigateTo(context, ChoosingBill());
                                         },
                                         icon:const Image(
                                           image: AssetImage('images/icon4.png'),
@@ -419,8 +373,9 @@ class HomeScreen extends StatelessWidget {
 
                                     child: IconButton(
                                       iconSize:25 ,
-                                      onPressed: (){
-                                        navigateTo(context, InOutLayoutScreen());
+                                      onPressed: () async{
+                                        cubit.listen(userSpeak: false,);
+                                        cubit.back2 = await navigateTo(context, InOutLayoutScreen());
                                       },
                                       icon:const Image(
                                         image: AssetImage('images/switch.png'),
@@ -461,13 +416,15 @@ class HomeScreen extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-
                             top: 320,
                             right: 10
                           ),
                           child: FloatingActionButton(
                             backgroundColor: primaryColor,
-                            onPressed: (){},
+                            onPressed: () async{
+                              cubit.listen(userSpeak: false,);
+                              await cubit.launchPhoneDialer();
+                            },
                             child: const Icon(
                               Icons.phone,
                               color: Colors.white,

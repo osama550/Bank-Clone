@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -6,11 +8,72 @@ import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
 import 'package:sizer/sizer.dart';
 
+
 class WithdrawelPaymentScreen extends StatelessWidget {
 
 
   @override
   Widget build(BuildContext context) {
+
+    var cubit = AppCubit.get(context);
+    if(cubit.speaker) {
+      Timer(
+        const Duration(seconds: 1),
+            (){
+          cubit.speak(text: 'سيتم سحب مبلغ قدره ${cubit.withdrawelResult} جنيه '
+              '\n \n \n الرجاء تأكيد العملية');
+          Timer(
+            const Duration(seconds: 6),
+                (){
+              cubit.listen(userSpeak: true);
+              Timer(
+                const Duration(seconds: 8),
+                    () async{
+                  if (cubit.text.contains('تاكيد') || cubit.text.contains('تمام')) {
+                    await cubit.userWithdrawal(
+                      context: context,
+                      transaction: 'withdrawal',
+                      accountType: cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountType.toString(),
+                      amount: int.parse(cubit.withdrawelResult),
+                      atm_id: 1,
+                    );
+                    if(cubit.isWithdrawal!){
+                      showDialog(
+                        context: context,
+                        builder: (context) => defaultSuccessDialog(context),
+                      );
+                      if (cubit.speaker) {
+                        cubit.speak(text: 'العملية تمت بنجاح');
+                      }
+                    }
+                    else{
+                      if (cubit.speaker) {
+                        cubit.speak(text: 'عذراً فشلت علملية السحب');
+                      }
+                      showDialog(
+                        context: context,
+                        builder: (context) => defaultErrorDialog(
+                          context: context,
+                          errorText: cubit.withdrawalErrorMessage,
+                        ),
+                      );
+                    }
+                    cubit.getLayoutData();
+                  }
+                  else if(cubit.text.contains('ارجع') || cubit.text.contains('رجوع')){
+                    cubit.listen(userSpeak: false,);
+                    cubit.clearAmount(id: 4,);
+                    Navigator.pop(context,true);
+                  }
+                  print('home screen text 2  ==> ${cubit.text}');
+                },
+              );
+            },
+          );
+        },
+      );
+    }
+
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {
         if (state is WithdrawelLoadingState) {
@@ -33,6 +96,11 @@ class WithdrawelPaymentScreen extends StatelessWidget {
                       buildAppBar(
                         context: context,
                         screenTitle: 'Confirm Payment',
+                        onPressed: (){
+                          cubit.listen(userSpeak: false,);
+                          cubit.clearAmount(id: 4,);
+                          Navigator.pop(context,true);
+                        },
                       ),
                     ],
                   ),
@@ -151,8 +219,14 @@ class WithdrawelPaymentScreen extends StatelessWidget {
                           context: context,
                           builder: (context) => defaultSuccessDialog(context),
                         );
+                        if (cubit.speaker) {
+                          cubit.speak(text: 'العملية تمت بنجاح');
+                        }
                       }
                       else{
+                        if (cubit.speaker) {
+                          cubit.speak(text: 'عذراً فشلت علملية السحب');
+                        }
                         showDialog(
                           context: context,
                           builder: (context) => defaultErrorDialog(

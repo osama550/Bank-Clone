@@ -1,4 +1,3 @@
-import 'package:project/cubit/app_cubit.dart';
 
 abstract class AppStates {}
 
@@ -27,8 +26,6 @@ class AddDropDownValueState extends AppStates {}
 class AddTextToBankTransferState extends AppStates {}
 
 class SearchUserToBankTransferState extends AppStates {}
-
-class SearchToBankTransferState extends AppStates {}
 
 class GetLayoutLoadingState extends AppStates {}
 
@@ -72,6 +69,8 @@ class SaveQrState extends AppStates {}
 
 class ErrorQrState extends AppStates {}
 
+class ChangeState extends AppStates {}
+
 class GetLodingUserAccountType extends AppStates {}
 
 class GetSucessUserAccountType extends AppStates {}
@@ -89,3 +88,4 @@ class GetLodingNumberOfElectricity extends AppStates {}
 class GetSucessNumberOfElectricity extends AppStates {}
 
 class GetErrorNumberOfElectricity extends AppStates {}
+

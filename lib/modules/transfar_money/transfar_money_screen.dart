@@ -9,21 +9,15 @@ import 'package:project/modules/Confirm%20Payment/Confirm%20Payment_Screen.dart'
 import 'package:sizer/sizer.dart';
 
 class transfarScreen extends StatelessWidget {
-  String? image;
-  String? name;
-  String? type;
-  String? accountNumber;
-  transfarScreen({
-    this.image,
-    this.name,
-    this.type,
-    this.accountNumber,
-  });
+
+  bool back = false;
+
   @override
   Widget build(BuildContext context) {
+    var cubit = AppCubit.get(context);
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
-      builder: (context, state) {
+      listener: (context, state){},
+      builder: (context, state){
         var cubit = AppCubit.get(context);
         return SafeArea(
           child: Scaffold(
@@ -39,21 +33,24 @@ class transfarScreen extends StatelessWidget {
                         buildAppBar(
                           context: context,
                           screenTitle: 'Transfer Money',
+                          onPressed: (){
+                            Navigator.pop(context,true,);
+                          },
                         ),
                         const SizedBox(
                           height: 40.0,
                         ),
                         CircleAvatar(
                           radius: 40,
-                          backgroundImage: NetworkImage(
-                            '$image'
+                          backgroundImage: AssetImage(
+                            'images/4.jpg',
                           ),
                         ),
                         const SizedBox(
                           height: 8.0,
                         ),
                         Text(
-                          '$name',
+                          'Osama Kamel',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15.sp,
@@ -63,7 +60,7 @@ class transfarScreen extends StatelessWidget {
                           height: 5.0,
                         ),
                         Text(
-                          '${type} : ${accountNumber}',
+                          'Bank : 123456',
                           style: TextStyle(
                               fontSize: 10.sp, fontWeight: FontWeight.normal),
                         ),
@@ -79,8 +76,7 @@ class transfarScreen extends StatelessWidget {
                             thickness: 1.8,
                           ),
                         ),
-                        defaultTextFormNumber(
-                            text: '''EG ${cubit.transferResult}''')
+                        defaultTextFormNumber(text: '''EG ${cubit.transferResult}''')
                       ],
                     ),
                   ),
@@ -89,13 +85,8 @@ class transfarScreen extends StatelessWidget {
                   amount: cubit.transferResult,
                   context: context,
                   id: 2,
-                  onPressed: () {
-                    navigateTo(context, ConfirmPaymentScreen(
-                      image: image,
-                      name: name,
-                      accountNumber: accountNumber,
-                      result:cubit.transferResult ,
-                    ));
+                  onPressed: () async{
+                    back = await navigateTo(context, ConfirmPaymentScreen());
                   },
                 ),
               ],
@@ -106,5 +97,7 @@ class transfarScreen extends StatelessWidget {
     );
   }
 }
+
+
 
 //'''\$${cubit.transferResult}''',
