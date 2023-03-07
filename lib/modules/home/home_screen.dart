@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                           navigateTo(context, WithdrawelScreen());
                         }
                         else if (cubit.text.contains('تحويل')) {
-                          cubit.searchuser();
+                          cubit.search();
                           navigateTo(context, TransferLayoutScreen());
                         }
                         else if (cubit.text.contains('دفع')) {
@@ -275,7 +275,7 @@ class HomeScreen extends StatelessWidget {
                                     child: IconButton(
                                         iconSize:35 ,
                                         onPressed: (){
-                                          cubit.searchuser();
+                                          cubit.search();
                                           navigateTo(context, TransferLayoutScreen());
                                         },
                                         icon:const Image(

@@ -14,7 +14,14 @@ class SelectElectricity extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if(state is GetLodingNumberOfElectricity){
+          defaultLoading();
+        }
+        else if(state is GetSucessNumberOfElectricity){
+          navigateTo(context, ElectricityBillScreen());
+        }
+      },
       builder: (context, state) {
         var cubit = AppCubit.get(context);
         return SafeArea(
@@ -38,13 +45,13 @@ class SelectElectricity extends StatelessWidget {
                         ),
                         DropdownButton(
                           // Initial Value
-                          value: cubit.dropdownvalue,
+                          value: cubit.dropdownvalueOfElectricity,
                           iconSize: 40,
 
                           // Down Arrow Icon
                           icon: const Icon(Icons.keyboard_arrow_down),
                           // Array list of items
-                          items:cubit.items.map((String items) {
+                          items:cubit.itemsOfElectricity.map((String items) {
                             return DropdownMenuItem(
                               value: items,
                               child: Text(items),
@@ -53,7 +60,7 @@ class SelectElectricity extends StatelessWidget {
                           // After selecting the desired option,it will
                           // change button value to selected value
                           onChanged: (String? newValue) {
-                            return cubit.OnChangeItem(newValue);
+                            return cubit.OnChangeItemElectricity(newValue);
                           },
                         ),
                         SizedBox(
@@ -109,7 +116,18 @@ class SelectElectricity extends StatelessWidget {
                   amount: cubit.electricityMeterNumber,
                   context: context,
                   id: 5,
-                  onPressed: () {},
+                  onPressed: () {
+                    if (cubit.electricityMeterNumber == "444666" ||
+                        cubit.electricityMeterNumber == "444776"){
+                      cubit.CheckElectricity(
+                         company: cubit.dropdownvalueOfElectricity,
+                        number: cubit.electricityMeterNumber
+                      );
+                      // if(state is GetSucesspayInternet){
+                      //   navigateTo(context, ElectricityBillScreen());
+                      // }
+                    }
+                  },
                 ),
 //
               ],

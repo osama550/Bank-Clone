@@ -239,7 +239,9 @@ class LoginScreen extends StatelessWidget {
 
                       ),
                       GestureDetector(
-                        onTap: () {
+                        onTap: (){
+                          cubit.getLayoutData();
+                          navigateAndFinish(context, LayoutScreen());
                           showModalBottomSheet(
                               backgroundColor: primaryColor.withOpacity(1.0),
                               context: context,
