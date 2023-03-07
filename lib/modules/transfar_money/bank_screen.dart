@@ -74,7 +74,7 @@ class _BankScreenState extends State<BankScreen> {
                               type: cubit.transferBankUsers[index]['Type'],
                               id: cubit.transferBankUsers[index]['id'],
                               favorite_state: cubit.transferBankUsers[index]['Favourit'].toString(),
-                            );
+                            );////////////
                           },
                         ),
                       ),
