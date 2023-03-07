@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project/components/components.dart';
 import 'package:project/components/in_out_components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
+import 'package:project/modules/transfar_money/transfar_money_screen.dart';
 
 class AllUsersScreen extends StatelessWidget {
-   const AllUsersScreen({Key? key}) : super(key: key);
+  AllUsersScreen({Key? key}) : super(key: key);
+
+  bool back = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +33,9 @@ class AllUsersScreen extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) =>buildFavoriteItem(
                       context: context,
+                      onPressed: () async{
+                        back = await navigateTo(context, transfarScreen());
+                      },
                       image: cubit.transferUsers[index]['Client_Photo'].toString(),
                       name: cubit.transferUsers[index]['Transfer_To'],
                       type: cubit.transferUsers[index]['Type'],

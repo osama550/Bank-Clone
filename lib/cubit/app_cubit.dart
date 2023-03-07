@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -7,22 +8,29 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:project/components/components.dart';
 import 'package:project/cubit/app_state.dart';
-import 'package:project/models/all_transfer.dart';
 import 'package:project/models/layout_model.dart';
 import 'package:project/models/withdrawel_model.dart';
+import 'package:project/modules/choose_bill/choose_bill.dart';
 import 'package:project/modules/deposite/confirm_deposite_screen.dart';
 import 'package:project/modules/deposite/deposite_screen.dart';
+import 'package:project/modules/home/home_screen.dart';
 import 'package:project/modules/in_out_payment/history.dart';
+import 'package:project/modules/in_out_payment/in_out_layout.dart';
 import 'package:project/modules/in_out_payment/requested.dart';
 import 'package:project/modules/in_out_payment/scheduled.dart';
+import 'package:project/modules/login_screen/login_screen.dart';
+import 'package:project/modules/qr/qr_screen.dart';
 import 'package:project/modules/transfar_money/all_users.dart';
 import 'package:project/modules/transfar_money/bank_screen.dart';
 import 'package:project/modules/transfar_money/ewallet_screen.dart';
 import 'package:project/modules/transfar_money/favorite_screen.dart';
+import 'package:project/modules/transfar_money/transfer_layout_screen.dart';
 import 'package:project/modules/withdrawel/withdrawel_Payment_screen.dart';
+import 'package:project/modules/withdrawel/withdrawel_screen.dart';
 import 'package:project/network/local/cashe_helper.dart';
 import 'package:project/network/remote/dio_helper.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:url_launcher/url_launcher.dart';
 
 
 class AppCubit extends Cubit<AppStates> {
@@ -384,7 +392,10 @@ bool isMaxLength({
     userAccountIndex = index;
   }
 
-  void homeSpeaker(){
+  void homeSpeaker({
+    required BuildContext context,
+}){
+    text = '';
     if(userAccountIndex == 0){
       speak(text: 'تم إختيار الحساب الموفر');
     }
@@ -397,7 +408,58 @@ bool isMaxLength({
     else{
       speak(text: 'تم إختيار الراتب');
     }
+
+    // secondHomeSpeaker(context: context,);
   }
+
+
+
+//---------------------------------------------------
+
+  void secondHomeSpeaker({
+    required BuildContext context,
+}){
+    speak(text: 'الرجاء إختيار العملية');
+    print('home screen text 1  ==> $text');
+    Timer(
+      const Duration(seconds: 3),
+          (){
+        listen(userSpeak: true);
+        Timer(
+          const Duration(seconds: 4),
+              () async{
+            if (text.contains('ايداع')&& userAccountIndex != 3) {
+              back2 = await navigateTo(context, const DepositScreen());
+            }
+            else if (text.contains('سحب')) {
+              back2 = await navigateTo(context, WithdrawelScreen());
+            }
+            else if (text.contains('تحويل')) {
+              searchuser();
+              back2 = await navigateTo(context, TransferLayoutScreen());
+            }
+            else if (text.contains('دفع')) {
+              back2 = await navigateTo(context, const QRScreen());
+            }
+            else if (text.contains('فواتير')) {
+              back2 = await navigateTo(context, ChoosingBill());
+            }
+            else if (text.contains('سجل') || text.contains('تاريخ')) {
+              back2 = await navigateTo(context, InOutLayoutScreen());
+            }
+            else if (text.contains('رجوع') ||
+                text.contains('ارجع')) {
+              listen(userSpeak: false,);
+              Navigator.pop(context,true);
+            }
+            print('home screen text 2  ==> $text');
+          },
+        );
+      },
+    );
+  }
+
+
 
 
 
@@ -451,8 +513,6 @@ bool isMaxLength({
           biometricOnly: true,
         ),
       );
-      BiometricType.fingerprint;
-      BiometricType.fingerprint;
       isAuthenticating = false;
       emit(AuthenticateUserSuccessState());
     } on PlatformException catch (e) {
@@ -596,8 +656,10 @@ bool isMaxLength({
   void speak({
   required String text,
 }) async{
-    await flutterTts.speak(text);
+    if (speaker) {
+      await flutterTts.speak(text);
 
+    }
   }
 
 
@@ -704,6 +766,7 @@ bool isMaxLength({
   void listen({
     required bool userSpeak,
 }) async{
+    text = '';
     speechToText = stt.SpeechToText();
     bool available = await speechToText!.initialize(
       // onStatus: (value) => print('onStatus: ====> $value'),
@@ -824,6 +887,124 @@ bool isMaxLength({
   void ErrorQr() {
     qrstr = 'unable to read this';
     emit(ErrorQrState());
+  }
+
+
+
+  void getWithdrawal({
+    required BuildContext context,
+    required String message,
+    required bool value,
+  }) async{
+    try{
+      List words = message.split(' ');
+      for(int i=0; i<words.length; i++){
+        if (isNumeric(words[i])) {
+          if(i != words.length-1){
+            if(words[i+1] == 'الف'){
+              withdrawelResult = words[i] + '000';
+            }
+            else{
+              withdrawelResult = words[i];
+            }
+          }
+          else{
+            withdrawelResult = words[i];
+          }
+          print('Yesssssssss There Are a Number In Text ======> ${withdrawelResult}');
+          print(withdrawelResult);
+          // value = await navigateTo(context, WithdrawelPaymentScreen());
+        }
+      }
+      text = '';
+      print(text);
+    }catch(error){
+      print('Error In get withdrawal result ======> ${error.toString()}');
+    }
+
+  }
+
+
+  bool back = false;
+  bool back2 = false;
+  bool back3 = false;
+  bool back4 = false;
+  bool back5 = false;
+  void layoutSpeaker({
+    required BuildContext context,
+}){
+    if(speaker) {
+      Timer(
+        const Duration(seconds: 1),
+        () {
+          speak(text: 'الرجاء إختيار نوع الحساب');
+          Timer(
+            const Duration(seconds: 2),
+            () async {
+              listen(userSpeak: true);
+              print('Here Layout text when start listen  ===========> $text');
+              try{
+                Timer(
+                  const Duration(seconds: 4),
+                      () async{
+                    print('Taaaamaaaaaam Da5l El Timer To Choose Screen');
+                    print('Here Layout text In Middle listen  ===========> $text');
+                    if (text.contains('الموفر')) {
+                      userAccountIndex = 0;
+                      back = await navigateTo(context, HomeScreen());
+                      print(' Result Of Back To Layout ====> $back');
+                    } else if (text.contains('الحالي')) {
+                      userAccountIndex = 1;
+                      getAllTransferUsers();
+                      back = await navigateTo(context, HomeScreen());
+                    } else if (text.contains('ائتمان')) {
+                      userAccountIndex = 2;
+                      back = await navigateTo(context, HomeScreen());
+                    } else if (text.contains('الراتب') ||
+                        text.contains('المرتب')) {
+                      userAccountIndex = 3;
+                      back = await navigateTo(context, HomeScreen());
+                    }
+                    else if (text.contains('خروج') ||
+                        text.contains('اخرج') ||
+                        text.contains('اطلع')) {
+                      isAuthenticating = false;
+                      authorized = 'Not Authorized';
+                      navigateAndFinish(context, LoginScreen());
+                    }
+                    // else {
+                    //   speak(text: 'الرجاء التأكد من نوع الحساب');
+                    // }
+                    print('Here Layout text when finish listen ===========> $text');
+                  },
+                );
+              }catch(error){
+                print('Error In Layout Screen ${error.toString()}');
+              }
+            },
+          );
+        },
+      );
+    }
+  }
+
+
+
+  Future<void> launchPhoneDialer() async {
+    final Uri lanuchUri = Uri(
+      scheme: 'tel',
+      path: '01007629384',
+    );
+    if (await canLaunch(lanuchUri.toString())) {
+      await launch(lanuchUri.toString());
+      
+    }  
+  }
+
+
+
+  void changeState(){
+    emit(ChangeState());
   }
 
 

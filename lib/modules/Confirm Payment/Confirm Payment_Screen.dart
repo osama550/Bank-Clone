@@ -10,6 +10,10 @@ import 'package:sizer/sizer.dart';
 class ConfirmPaymentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    var cubit = AppCubit.get(context);
+
+
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -28,6 +32,9 @@ class ConfirmPaymentScreen extends StatelessWidget {
                       buildAppBar(
                         context: context,
                         screenTitle: 'Confirm Payment',
+                        onPressed: (){
+                          Navigator.pop(context,true,);
+                        },
                       ),
                     ],
                   ),

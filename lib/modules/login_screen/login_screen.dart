@@ -7,99 +7,87 @@ import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
 import 'package:project/layout/layout_screen.dart';
-import 'package:project/network/local/cashe_helper.dart';
 import 'package:sizer/sizer.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 
 class LoginScreen extends StatelessWidget {
 
-  bool isSpeak = true;
-  bool userSpeak = true;
 
 
   @override
   Widget build(BuildContext context) {
+
+    var cubit = AppCubit.get(context);
+    if(cubit.speaker) {
+      cubit.speak(text: 'اهلاً بك فى هيكس بانك'
+          '\n \n الرجاء إدخال البصما');
+      Timer(
+        const Duration(seconds: 4),
+            ()async{
+          cubit.listen(userSpeak: true);
+          Timer(
+              const Duration(seconds: 5),
+                  () async{
+                if (cubit.text.contains('بصمه')) {
+                  cubit.text = '';
+                  await cubit.checkBiometrics().then((value){
+                    print(cubit.canCheckBiometrics);
+                    if(cubit.canCheckBiometrics!){
+                      if(cubit.speaker){
+                        cubit.speak(text: 'جاري إدخال البصما');
+                      }
+                      cubit.authenticate(context: context).then((value){
+                        if(cubit.layoutModel == null){
+                          if(cubit.isAuthenticating!){
+                            if(cubit.speaker){
+                              cubit.speak(text: 'تم تأكيد البصما بنجاح');
+                            }
+                            print('isAuthenticating =====> ${cubit.isAuthenticating}');
+                            showDialog(
+                              context: context,
+                              builder:(BuildContext context){
+                                context=context;
+                                return  defaultLoading();
+                              },
+                            );
+                          }
+                          else{
+                            if(cubit.speaker){
+                              cubit.speak(text: '\n \n \n البصما غير صحيحا'
+                                  '\n \n \n \nالرجاء إدخال البصما');
+                              Timer(
+                                const Duration(seconds: 4),
+                                    () async{
+                                  cubit.listen(userSpeak: true);
+                                },
+                              );
+                            }
+                          }
+                        }
+                        // else{
+                        //   navigateAndFinish(context, LayoutScreen());
+                        // }
+                      }).catchError((onError){
+                        print('Error When Authenticated =====> ${onError.toString()}');
+                      });
+                    }
+                  });
+                }
+              }
+          );
+        },
+      );
+
+    }
+
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {
-        // if(AppCubit.get(context).layoutModel == null){
-        //   showDialog(
-        //     context: context,
-        //     builder:(BuildContext context){
-        //       context=context;
-        //       return  defaultLoading();
-        //     },
-        //   );
-        // }
-        // else{
-        //   navigateAndFinish(context, LayoutScreen());
-        // }
-        if(AppCubit.get(context).layoutModel != null){
+        if(AppCubit.get(context).layoutModel != null && cubit.authorized == 'Authorized'){
           navigateAndFinish(context, LayoutScreen());
         }
       },
       builder: (context, state) {
-        var cubit = AppCubit.get(context);
-        // cubit.speaker = CacheHelper.getBoolean()!;
-        if(isSpeak) {
-          isSpeak = !isSpeak;
-          cubit.speak(text: 'اهلاً بك فى هيكس بانك'
-              '\n \n الرجاء إدخال البصما');
-        }
-        Timer(
-          const Duration(seconds: 5),
-              ()async{
-            if(userSpeak){
-              userSpeak = !userSpeak;
-              cubit.listen(userSpeak: true);
-            }
-            Timer(
-              const Duration(seconds: 4),
-                () async{
-                  if (cubit.text.contains('بصمه')) {
-                    cubit.text = '';
-                    await cubit.checkBiometrics().then((value){
-                      print(cubit.canCheckBiometrics);
-                      if(cubit.canCheckBiometrics!){
-                        if(cubit.speaker){
-                          cubit.speak(text: 'جاري إدخال البصما');
-                        }
-                        cubit.authenticate(context: context).then((value){
-                          if(cubit.layoutModel == null){
-                            if(cubit.isAuthenticating!){
-                              if(cubit.speaker){
-                                cubit.speak(text: 'تم تأكيد البصما بنجاح');
-                              }
-                              print('isAuthenticating =====> ${cubit.isAuthenticating}');
-                              showDialog(
-                                context: context,
-                                builder:(BuildContext context){
-                                  context=context;
-                                  return  defaultLoading();
-                                },
-                              );
-                            }
-                            else{
-                              if(cubit.speaker){
-                                cubit.speak(text: '\n \n \n البصما غير صحيحا'
-                                    '\n \n \n \nالرجاء إدخال البصما');
-                              }
-                            }
-                          }
-                          // else{
-                          //   navigateAndFinish(context, LayoutScreen());
-                          // }
-                        }).catchError((onError){
-                          print('Error When Authenticated =====> ${onError.toString()}');
-                        });
-                      }
-                    });
-                  }
-                }
-            );
-          },
-        );
-
         return SafeArea(
           child: Scaffold(
             body: Stack(
@@ -183,7 +171,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: ()async{
-                          userSpeak = false;
+                          cubit.listen(userSpeak: false);
                           await cubit.checkBiometrics().then((value){
                             print(cubit.canCheckBiometrics);
                             if(cubit.canCheckBiometrics!){
@@ -209,6 +197,13 @@ class LoginScreen extends StatelessWidget {
                                     if(cubit.speaker){
                                       cubit.speak(text: '\n \n \n البصما غير صحيحا'
                                           '\n \n \n \nالرجاء إدخال البصما');
+                                      Timer(
+                                        const Duration(seconds: 4),
+                                          () async{
+                                          cubit.listen(userSpeak: true);
+                                          },
+                                      );
+
                                     }
                                   }
                                 }

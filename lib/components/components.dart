@@ -8,11 +8,12 @@ import 'package:project/modules/home/home_screen.dart';
 import 'package:project/modules/payment/electricity_screen.dart';
 import 'package:sizer/sizer.dart';
 
-void navigateTo(context, Widget screen) {
-  Navigator.push(
+Future<bool> navigateTo(context, Widget screen) async{
+  final result = await Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => screen),
   );
+  return result;
 }
 
 // void navigateReplacement(context, Widget screen) {
@@ -45,6 +46,7 @@ void navigateAndReplacement(context, Widget screen) {
 Widget buildAppBar({
   required BuildContext context,
   required String screenTitle,
+  required VoidCallback onPressed,
   int id = 0,
 }) =>
     Row(
@@ -54,7 +56,8 @@ Widget buildAppBar({
             AppCubit.get(context).clearAmount(
               id: id,
             );
-            Navigator.pop(context);
+            // Navigator.pop(context);
+            onPressed();
           },
           icon: Icon(
             Icons.arrow_back_ios_rounded,
@@ -86,6 +89,54 @@ Widget buildAppBar({
         ),
       ],
     );
+//-----------------------------------------
+
+
+
+Widget buildAppBar2({
+  required BuildContext context,
+  required String screenTitle,
+  required VoidCallback onPressed,
+  int id = 0,
+}) =>
+    Row(
+      children: [
+        IconButton(
+          onPressed: onPressed,
+          icon: Icon(
+            Icons.arrow_back_ios_rounded,
+            color: primaryColor,
+          ),
+        ),
+        const SizedBox(
+          width: 5.0,
+        ),
+        Text(
+          screenTitle,
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15.sp,
+              color: Colors.black
+          ),
+        ),
+        const Spacer(),
+        Padding(
+          padding: const EdgeInsets.only(
+            right: 10.0,
+          ),
+          child: Image.asset(
+            'images/Picture14.png',
+            width: 18.w,
+            height: 7.h,
+            fit: BoxFit.fill,
+          ),
+        ),
+      ],
+    );
+
+
+
+
 //-----------------------------------------
 
 Widget buildTransferAppBar({
@@ -621,6 +672,7 @@ Widget buildBillType({
 
 Widget buildLogo({
   required BuildContext context,
+  required VoidCallback onPressed,
 }) => Stack(
       alignment: AlignmentDirectional.topEnd,
       children: [
@@ -638,18 +690,16 @@ Widget buildLogo({
             defaultIconButton(
               context: context,
               color: Colors.white,
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              onPressed: onPressed,
             ),
           ],
         ),
-        defaultIconButton(
-          context: context,
-          color: Colors.white,
-          icon: Icons.menu_rounded,
-          onPressed: () {},
-        ),
+        // defaultIconButton(
+        //   context: context,
+        //   color: Colors.white,
+        //   icon: Icons.menu_rounded,
+        //   onPressed: () {},
+        // ),
       ],
     );
 

@@ -434,13 +434,13 @@ Widget buildFavoriteItem( {
   required String accountNumber,
   required IconData favoriteIcon,
   required VoidCallback favoriteIconPressed,
+  required VoidCallback onPressed,
+
   // Color color = Colors.white,
   // Color iconColor = Colors.amber,
   // required int index,
 }) => GestureDetector(
-  onTap: (){
-    navigateTo(context, transfarScreen());
-  },
+  onTap: onPressed,
   child: Padding(
     padding: const EdgeInsets.symmetric(
       horizontal: 13.0,

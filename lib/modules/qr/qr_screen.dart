@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project/components/components.dart';
+import 'package:project/cubit/app_cubit.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:sizer/sizer.dart';
 
@@ -18,7 +19,8 @@ class QRScreen extends StatelessWidget {
         leading: defaultIconButton(
           context: context,
           onPressed: (){
-            Navigator.pop(context);
+            Navigator.pop(context,true);
+            AppCubit.get(context).changeState();
           },
           color: Colors.white,
         ),

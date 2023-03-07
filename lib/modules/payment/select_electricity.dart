@@ -13,6 +13,10 @@ class SelectElectricity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    var cubit = AppCubit.get(context);
+    cubit.speak(text: 'تم اختيار خدمة الكهرباء');
+
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -27,7 +31,14 @@ class SelectElectricity extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     child: Column(
                       children: [
-                        buildAppBar(context: context, screenTitle: "Electricity"),
+                        buildAppBar(
+                          context: context,
+                          screenTitle: "Electricity",
+                          onPressed: (){
+                            Navigator.pop(context,true,);
+                            cubit.changeState();
+                          },
+                        ),
                         SizedBox(
                           height: 5.h,
                         ),

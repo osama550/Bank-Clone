@@ -12,6 +12,10 @@ class AddPhoneScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    var cubit = AppCubit.get(context);
+    cubit.speak(text: 'تم اختيار خدمة الانترنت');
+
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -23,17 +27,24 @@ class AddPhoneScreen extends StatelessWidget {
               children: [
                 Expanded(
                     child: SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       child: Column(
                         children: [
-                          buildAppBar(context: context, screenTitle: "Internet"),
-                          SizedBox(
+                          buildAppBar(
+                            context: context,
+                            screenTitle: "Internet",
+                            onPressed: (){
+                              Navigator.pop(context,true,);
+                              cubit.changeState();
+                            },
+                          ),
+                          const SizedBox(
                             height: 50,
                           ),
                           Image.asset('images/telephone.png',
                             height:100 ,
                             width:100 ,),
-                          SizedBox(
+                          const SizedBox(
                             height: 50,
                           ),
                           Container(

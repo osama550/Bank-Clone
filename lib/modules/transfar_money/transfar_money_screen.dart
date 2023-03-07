@@ -10,8 +10,11 @@ import 'package:sizer/sizer.dart';
 
 class transfarScreen extends StatelessWidget {
 
+  bool back = false;
+
   @override
   Widget build(BuildContext context) {
+    var cubit = AppCubit.get(context);
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state){},
       builder: (context, state){
@@ -30,6 +33,9 @@ class transfarScreen extends StatelessWidget {
                         buildAppBar(
                           context: context,
                           screenTitle: 'Transfer Money',
+                          onPressed: (){
+                            Navigator.pop(context,true,);
+                          },
                         ),
                         const SizedBox(
                           height: 40.0,
@@ -79,8 +85,8 @@ class transfarScreen extends StatelessWidget {
                   amount: cubit.transferResult,
                   context: context,
                   id: 2,
-                  onPressed: (){
-                    navigateTo(context, ConfirmPaymentScreen());
+                  onPressed: () async{
+                    back = await navigateTo(context, ConfirmPaymentScreen());
                   },
                 ),
               ],

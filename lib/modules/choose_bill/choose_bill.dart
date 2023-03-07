@@ -1,20 +1,69 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/components/colors/colors.dart';
 import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
+import 'package:project/modules/payment/addphone_screen.dart';
+import 'package:project/modules/payment/select_electricity.dart';
 import 'package:sizer/sizer.dart';
 
 class ChoosingBill extends StatelessWidget {
-  const ChoosingBill({Key? key}) : super(key: key);
+   ChoosingBill({Key? key}) : super(key: key);
+
+   bool back = false;
 
   @override
   Widget build(BuildContext context) {
+
+    var cubit = AppCubit.get(context);
+
+    void chooseBillSpeaker({
+      required String message,
+      int time = 4,
+    }){
+      cubit.speak(text: message);
+      Timer(
+        Duration(seconds: time),
+            (){
+          cubit.listen(userSpeak: true,);
+          Timer(
+              const Duration(seconds: 4),
+                  () async{
+                print('Bill is >>>>>> ${cubit.text}');
+                if(cubit.text.contains('نت')) {
+                  back = await navigateTo(context, AddPhoneScreen());
+                }
+                else if(cubit.text.contains('كهربا') || cubit.text.contains('نور')) {
+                  back = await navigateTo(context, SelectElectricity());
+                }
+              }
+          );
+        },
+      );
+    }
+
+
+    if (cubit.speaker){
+      chooseBillSpeaker(message: 'تم اختيار الفواتير'
+          '\n \n \n الرجاء اختيار نوع الخدمة');
+
+    }
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        var cubit = AppCubit.get(context);
+        if (cubit.speaker) {
+          if (back) {
+            back = false;
+            chooseBillSpeaker(
+              message: 'الرجاء اختيار نوع الخدمة',
+              time: 2,
+            );
+          }
+        }
+
         return SafeArea(
           child: Scaffold(
             body: SingleChildScrollView(
@@ -22,7 +71,14 @@ class ChoosingBill extends StatelessWidget {
               child: Column(
                 children: [
                   // appBar
-                  buildLogo(context: context),
+                  buildLogo(
+                    context: context,
+                    onPressed: (){
+                      cubit.listen(userSpeak: false,);
+                      Navigator.pop(context,true);
+                    },
+                  ),
+
                   // Screen Body
                   SingleChildScrollView(
                     primary: true,

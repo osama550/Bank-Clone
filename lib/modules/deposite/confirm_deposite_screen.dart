@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -7,9 +9,49 @@ import 'package:project/cubit/app_state.dart';
 import 'package:sizer/sizer.dart';
 
 class ConfirmDepositScreen extends StatelessWidget {
+  const ConfirmDepositScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
+    var cubit = AppCubit.get(context);
+    if(cubit.speaker) {
+      Timer(
+        const Duration(seconds: 1),
+            (){
+          cubit.speak(text: 'سيتم إيداع مبلغ قدره 5000 جنيه '
+              '\n \n \n الرجاء تأكيد العملية');
+          Timer(
+            const Duration(seconds: 6),
+                (){
+              cubit.listen(userSpeak: true);
+              Timer(
+                const Duration(seconds: 3),
+                    () async{
+                  print('==========> ${cubit.text}');
+                  if (cubit.text.contains('تاكيد') || cubit.text.contains('تمام')) {
+                    await cubit.userWithdrawal(
+                      context: context,
+                      transaction: 'deposit',
+                      accountType: cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountType.toString(),
+                      amount: 5000,
+                      atm_id: 1,
+                    );
+                    cubit.getLayoutData();
+                    showDialog(
+                      context: context,
+                      builder: (context) => defaultSuccessDialog(context),
+                    );
+                  }
+                  print('home screen text 2  ==> ${cubit.text}');
+                },
+              );
+            },
+          );
+        },
+      );
+    }
+
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {
 
@@ -30,6 +72,11 @@ class ConfirmDepositScreen extends StatelessWidget {
                       buildAppBar(
                         context: context,
                         screenTitle: 'Confirm Deposit',
+                        onPressed: (){
+                          cubit.listen(userSpeak: false,);
+                          cubit.changeState();
+                          Navigator.pop(context,true);
+                        },
                       ),
                     ],
                   ),
@@ -116,11 +163,11 @@ class ConfirmDepositScreen extends StatelessWidget {
                   paymentButton(
                     context: context,
                     onPressed: ()async{
+                      defaultLoading();
                       await cubit.userWithdrawal(
                         context: context,
                         transaction: 'deposit',
                         accountType: cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountType.toString(),
-                        // amount: int.parse(cubit.withdrawelResult),
                         amount: 5000,
                         atm_id: 1,
                       );

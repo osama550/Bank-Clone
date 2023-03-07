@@ -3,16 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/bloc_observer.dart';
 import 'package:project/cubit/app_cubit.dart';
-import 'package:project/modules/home/home_screen.dart';
-import 'package:project/modules/in_out_payment/in_out_layout.dart';
 import 'package:project/modules/login_screen/login_screen.dart';
-import 'package:project/modules/payment/select_electricity.dart';
-import 'package:project/modules/qr/qr_screen.dart';
-import 'package:project/modules/spalsh_screen/splash_screen.dart';
-
-
-import 'package:project/modules/transfar_money/transfar_money_screen.dart';
-import 'package:project/modules/transfar_money/transfer_layout_screen.dart';
 import 'package:project/network/local/cashe_helper.dart';
 import 'package:project/network/remote/dio_helper.dart';
 

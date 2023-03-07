@@ -69,5 +69,7 @@ class SaveQrState extends AppStates {}
 
 class ErrorQrState extends AppStates {}
 
+class ChangeState extends AppStates {}
+
 
 
