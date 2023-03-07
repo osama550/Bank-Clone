@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/components/colors/colors.dart';
@@ -7,13 +9,38 @@ import 'package:project/cubit/app_state.dart';
 import 'package:project/modules/deposite/confirm_deposite_screen.dart';
 import 'package:sizer/sizer.dart';
 
-class DepositeScreen extends StatelessWidget {
+class DepositScreen extends StatelessWidget {
+  const DepositScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
+    var cubit = AppCubit.get(context);
+    if(cubit.speaker) {
+      Timer(
+        const Duration(seconds: 1),
+            (){
+          cubit.speak(text: 'تم إختيار عملية الإيداع '
+              '\n \n \n الرجاء وضع المبلغ');
+        },
+      );
+    }
+
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
         var cubit = AppCubit.get(context);
+        if (cubit.back3) {
+          cubit.back3 = false;
+          if(cubit.speaker) {
+            Timer(
+              const Duration(seconds: 1),
+                  (){
+                cubit.speak(text: 'تم إختيار عملية الإيداع '
+                    '\n \n \n الرجاء وضع المبلغ');
+              },
+            );
+          }
+        }
         return SafeArea(
           child: Scaffold(
             backgroundColor: Colors.white,
@@ -31,7 +58,11 @@ class DepositeScreen extends StatelessWidget {
                           ),
                           buildAppBar(
                             context: context,
-                            screenTitle: 'Deposite',
+                            screenTitle: 'Deposit',
+                            onPressed: (){
+                              cubit.changeState();
+                              Navigator.pop(context,true);
+                            }
                           ),
                           const SizedBox(
                             height: 40.0,
@@ -102,7 +133,7 @@ class DepositeScreen extends StatelessWidget {
                                     const SizedBox(
                                       height: 40.0,
                                     ),
-                                    Center(
+                                    const Center(
                                       child: Text(
                                         'Please,put your cash',
                                         style: TextStyle(
@@ -125,8 +156,8 @@ class DepositeScreen extends StatelessWidget {
                   paymentButton(
                     context: context,
                     text: 'Continue',
-                    onPressed: () {
-                      navigateTo(context, ConfirmDepositScreen());
+                    onPressed: () async{
+                      cubit.back3 = await navigateTo(context, const ConfirmDepositScreen());
                       // showDialog(
                       //   context: context,
                       //   builder: (context) => defaultErrorDialog(
