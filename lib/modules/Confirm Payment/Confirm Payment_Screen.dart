@@ -8,6 +8,16 @@ import 'package:project/network/remote/dio_helper.dart';
 import 'package:sizer/sizer.dart';
 
 class ConfirmPaymentScreen extends StatelessWidget {
+  String? image;
+  String? result;
+  String? name;
+  String? accountNumber;
+  ConfirmPaymentScreen({
+    this.image,
+    this.result,
+    this.name,
+    this.accountNumber,
+  });
   @override
   Widget build(BuildContext context) {
 
@@ -65,12 +75,10 @@ class ConfirmPaymentScreen extends StatelessWidget {
                               child: CircleAvatar(
                                 backgroundColor: HexColor('#DCDDE1'),
                                 radius: 40.0,
-                                child: const Center(
+                                child:  Center(
                                   child: CircleAvatar(
                                     radius: 40,
-                                    backgroundImage: AssetImage(
-                                      'images/4.jpg',
-                                    ),
+                                    backgroundImage: NetworkImage('$image'),
                                   ),
                                 ),
                               ),
@@ -87,21 +95,21 @@ class ConfirmPaymentScreen extends StatelessWidget {
                             ),
                             paymentData(
                               title: 'Amount(USD)',
-                              answer: '\$${cubit.transferResult}',
+                              answer: '\$${result}',
                             ),
                             const SizedBox(
                               height: 20.0,
                             ),
                             paymentData(
                               title: 'Name',
-                              answer: 'Osama Kamel',
+                              answer: '$name',
                             ),
                             const SizedBox(
                               height: 20.0,
                             ),
                             paymentData(
                               title: 'Bank Account',
-                              answer: '45798',
+                              answer: '$accountNumber',
                             ),
                             const SizedBox(
                               height: 20.0,
@@ -122,7 +130,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                             ),
                             paymentData(
                               title: 'Category',
-                              answer: '45798',
+                              answer: '${cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountType!}',
                             ),
                             const SizedBox(
                               height: 20.0,
@@ -141,9 +149,12 @@ class ConfirmPaymentScreen extends StatelessWidget {
                   ),
                   paymentButton(
                     context: context,
-                    onPressed: () async{
-                       cubit.transferMoney(
-                        account_type: cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountType!,
+                    onPressed: () async {
+                      cubit.transferMoney(
+                        account_type: cubit
+                            .layoutModel!
+                            .clientAccounts[cubit.userAccountIndex]
+                            .accountType!,
                         type: 'bank',
                         transfer_to: 5,
                         amount: 1000,

@@ -213,6 +213,9 @@ class LayoutScreen extends StatelessWidget {
                                         // cubit.userAccount(index:pointInteractionDetails.pointIndex!);
                                         cubit.listen(userSpeak: false,);
                                         cubit.userAccountIndex = pointInteractionDetails.pointIndex!;
+                                        cubit.getUserAccountType(
+                                          account_type: cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountType.toString(),
+                                        );
                                         if(pointInteractionDetails.pointIndex! == 1){
                                           cubit.getAllTransferUsers();
                                         }

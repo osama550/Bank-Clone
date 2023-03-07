@@ -101,12 +101,18 @@ class ChoosingBill extends StatelessWidget {
                             buildBillType(
                               context: context,
                               index: 0,
+                              onPressed: (){
+                                navigateTo(context, SelectElectricity());
+                              },
                               image: cubit.bills[0]['image'],
                               title: cubit.bills[0]['title'],
                             ),
                             buildBillType(
                               context: context,
                               index: 1,
+                              onPressed: (){
+                                navigateTo(context, AddPhoneScreen());
+                              },
                               image: cubit.bills[1]['image'],
                               title: cubit.bills[1]['title'],
                             ),

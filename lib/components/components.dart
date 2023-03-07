@@ -343,6 +343,7 @@ Widget paymentData({
 //required VoidCallback onPressed,
 //onPressed: onPressed,
 Widget paymentButton({
+  bool disabled = false,
   required BuildContext context,
   String text = 'Confirm Payment',
   HexColor? color,
@@ -356,11 +357,13 @@ Widget paymentButton({
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadiusDirectional.circular(30.0),
-          color: color ?? primaryColor,
+          color: disabled ? Colors.grey :  color ?? primaryColor,
         ),
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: MaterialButton(
-          onPressed: onPressed,
+          onPressed: disabled ? null : onPressed,
+          disabledColor: Colors.grey,
+
           child: Text(
             'Confirm Payment',
             style: TextStyle(
@@ -510,6 +513,8 @@ Widget bill({
   required String price,
   required String name,
   required String bankAccount,
+  required String status,
+  // required Map<String,dynamic> model,
 }) =>
     Padding(
       padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 5.h),
@@ -588,18 +593,18 @@ Widget bill({
                   const Spacer(),
                   Container(
                     decoration: BoxDecoration(
-                      color: Colors.red,
+                      color : status == 'paid' ? Colors.green : Colors.red,
                       borderRadius: BorderRadiusDirectional.circular(10.0),
                     ),
                     clipBehavior: Clip.antiAliasWithSaveLayer,
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 20.0,
                         vertical: 5.0,
                       ),
                       child: Text(
-                        'unpaid',
-                        style: TextStyle(
+                        status,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w400,
                           fontSize: 20.0,
@@ -637,13 +642,20 @@ Widget buildBillType({
   required int index,
   required String image,
   required String title,
+  VoidCallback? onPressed,
+
   // required VoidCallback onpPressed,
 }) =>
     Expanded(
       child: InkWell(
         onTap: () {
           AppCubit.get(context).selectBillScreen(index);
-          navigateTo(context, ServiseScreen());
+          if(index == 0 || index == 1){
+            onPressed!();
+          }
+          else{
+            navigateTo(context, ServiseScreen());
+          }
         },
         child: Container(
           child: Column(
@@ -750,7 +762,7 @@ Widget defaultNumbers({
           defaultTextKeyboard(num: '2',
               amount: amount,
               context: context,
-            id: id,
+              id: id,
           ),
           defaultTextKeyboard(num: '3',
               amount: amount,

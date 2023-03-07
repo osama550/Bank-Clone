@@ -71,5 +71,21 @@ class ErrorQrState extends AppStates {}
 
 class ChangeState extends AppStates {}
 
+class GetLodingUserAccountType extends AppStates {}
 
+class GetSucessUserAccountType extends AppStates {}
+
+class GetErrorUserAccountType extends AppStates {}
+
+class GetLodingpayInternet extends AppStates {}
+
+class GetSucesspayInternet extends AppStates {}
+
+class GetErrorpayInternet extends AppStates {}
+
+class GetLodingNumberOfElectricity extends AppStates {}
+
+class GetSucessNumberOfElectricity extends AppStates {}
+
+class GetErrorNumberOfElectricity extends AppStates {}
 

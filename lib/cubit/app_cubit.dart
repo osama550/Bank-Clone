@@ -8,6 +8,8 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:project/components/components.dart';
 import 'package:project/cubit/app_state.dart';
+import 'package:project/models/electricity_model.dart';
+import 'package:project/models/internet_model.dart';
 import 'package:project/models/layout_model.dart';
 import 'package:project/models/withdrawel_model.dart';
 import 'package:project/modules/choose_bill/choose_bill.dart';
@@ -928,8 +930,6 @@ bool isMaxLength({
   bool back = false;
   bool back2 = false;
   bool back3 = false;
-  bool back4 = false;
-  bool back5 = false;
   void layoutSpeaker({
     required BuildContext context,
 }){
@@ -1007,6 +1007,89 @@ bool isMaxLength({
     emit(ChangeState());
   }
 
+
+  void getUserAccountType({
+    required String account_type,
+  }) {
+    emit(GetLodingUserAccountType());
+    DioHelper.postData(path: 'atm/type.php', data: {
+      // "account_type" : layoutModel!.clientAccounts[userAccountIndex].accountType
+      "account_type": account_type
+    }).then((value) {
+      emit(GetSucessUserAccountType());
+      print('Know User Account Type Done : ${value.data}');
+    }).catchError((error) {
+      emit(GetErrorUserAccountType());
+      print('Error When getUserAccountType =====> ${error.toString()}');
+    });
+  }
+
+
+//  ------------------------------------------------------------
+
+
+  ElectricityModel? electricityModel;
+  void CheckElectricity({
+    required String company,
+    required String number,
+  }) {
+    emit(GetLodingNumberOfElectricity());
+    DioHelper.postData(path: 'atm/electricity.php',
+        data: {
+          "company": company,
+          "num": number,
+        }).then((value) {
+      print('Know Number Of Electricity : ${value.data}');
+      electricityModel = ElectricityModel.fromJson(jsonDecode(value.data));
+      print('Electricity Data =====> ${electricityModel!.amount}');
+      emit(GetSucessNumberOfElectricity());
+    }).catchError((error) {
+      emit(GetErrorUserAccountType());
+      print('Error When getNumber Of Electricity =====> ${error.toString()}');
+      emit(GetErrorNumberOfElectricity());
+    });
+  }
+// -------------------------------------------------
+
+  InternetModel? internetModel;
+  void payInternet({
+    required String number,
+  }) {
+    emit(GetLodingpayInternet());
+    DioHelper.postData(path: 'atm/internet.php', data: {
+      "company": "WE",
+      "num": number,
+    }).then((value){
+      internetModel = InternetModel.fromJson(jsonDecode(value.data));
+      print('Payment Internet Success : ${value.data}');
+      print('Internet Data =====> ${internetModel!.amount}');
+      emit(GetSucesspayInternet());
+    }).catchError((error) {
+      emit(GetErrorpayInternet());
+      print('Error When Pay Internet =====> ${error.toString()}');
+    });
+  }
+
+
+//-------------------------------------------------
+
+
+  // Initial Selected Value
+  String dropdownvalueOfElectricity = 'Cairo Electricity Production';
+
+  // List of items in our dropdown menu
+  var itemsOfElectricity = [
+    'Cairo Electricity Production',
+    'Company Alexandria Electricity',
+    'Canal Electricity Distribution',
+    'South Delta Electricity ',
+  ];
+  void OnChangeItemElectricity(String? newValue) {
+    dropdownvalueOfElectricity = newValue!;
+    emit(AddDropDownValueState());
+  }
+
+//-------------------------------------------------
 
 }
 
