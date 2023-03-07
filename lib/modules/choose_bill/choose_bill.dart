@@ -4,6 +4,8 @@ import 'package:project/components/colors/colors.dart';
 import 'package:project/components/components.dart';
 import 'package:project/cubit/app_cubit.dart';
 import 'package:project/cubit/app_state.dart';
+import 'package:project/modules/payment/addphone_screen.dart';
+import 'package:project/modules/payment/select_electricity.dart';
 import 'package:sizer/sizer.dart';
 
 class ChoosingBill extends StatelessWidget {
@@ -45,12 +47,18 @@ class ChoosingBill extends StatelessWidget {
                             buildBillType(
                               context: context,
                               index: 0,
+                              onPressed: (){
+                                navigateTo(context, SelectElectricity());
+                              },
                               image: cubit.bills[0]['image'],
                               title: cubit.bills[0]['title'],
                             ),
                             buildBillType(
                               context: context,
                               index: 1,
+                              onPressed: (){
+                                navigateTo(context, AddPhoneScreen());
+                              },
                               image: cubit.bills[1]['image'],
                               title: cubit.bills[1]['title'],
                             ),

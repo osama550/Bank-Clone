@@ -9,10 +9,19 @@ class ElectricityBillScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    var cubit = AppCubit.get(context);
+    var model;
+    if(cubit.billIndex == 0){
+      model = cubit.electricityModel;
+    }
+    else if(cubit.billIndex == 1){
+      model = cubit.internetModel;
+    }
+
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        var cubit = AppCubit.get(context);
         return SafeArea(
           child: Scaffold(
             backgroundColor: Colors.white,
@@ -29,12 +38,14 @@ class ElectricityBillScreen extends StatelessWidget {
                     payType: cubit.bills[cubit.billIndex]['title'].toString().toLowerCase(),
                   ),
                   bill(
-                    price: '\$500',
-                    name: 'Islam Ahmed',
-                    bankAccount: '0552841664',
+                    price: '\$${model.amount}',
+                    name: '${model.name}',
+                    status: '${model.status}',
+                    bankAccount: '${cubit.layoutModel!.clientAccounts[cubit.userAccountIndex].accountId}',
                   ),
                   paymentButton(
                     context: context,
+                    disabled: cubit.internetModel!.status == 'paid' ? true : false,
                     onPressed: (){
                       showDialog(
                         context: context,
